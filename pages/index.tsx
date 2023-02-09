@@ -2,10 +2,12 @@
 
 export default function Showcase({ response, response2 }: any) {
   return (
+    // <Wrapper>
     <>
       <h1>{response[1].userId}</h1>
       <h1>{response2[2].title}</h1>
     </>
+    //  </Wrapper>
   );
 }
 
@@ -22,5 +24,7 @@ export async function getStaticProps() {
 }
 
 // const Wrapper = styled.div`
-//   color: red;
+/* background-color: red; */
+/* max-width: var(--websiteWidth); */
+/* margin: auto; */
 // `;

@@ -1,3 +1,11 @@
+:root {
+  --websiteWidth: 1280px;
+  --mainFontColor: #303030;
+  --secondaryFontColor: #606060;
+  --backgroundColor: #ffffff;
+}
+/* background-color: var(--first-color); */
+
 *,
 :before,
 :after {
