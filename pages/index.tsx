@@ -1,13 +1,11 @@
 // import styled from 'styled-components';
+import { Hero } from '@/components/showcaseComponents';
 
-export default function Showcase({ response, response2 }: any) {
+export default function Showcase() {
   return (
-    // <Wrapper>
     <>
-      <h1>{response[1].userId}</h1>
-      <h1>{response2[2].title}</h1>
+      <Hero />
     </>
-    //  </Wrapper>
   );
 }
 
