@@ -1,17 +1,15 @@
 import styled from 'styled-components';
-import HomeButton from './HomeButton';
-// import LoginLogoutPanel from './LoginLogoutPanel';
-import ProfileControlPanel from './ProfileControlPanel';
-// import SearchField from './SearchField';
+import HomeButtonAndSearchField from './HomeButtonAndSearchField';
+import LoginLogoutPanel from './LoginLogoutPanel';
+// import ProfileControlPanel from './ProfileControlPanel';
 
 function SearchBar() {
   return (
     <Wrapper>
       <div className="search-container">
-        <HomeButton />
-        {/* <SearchField /> */}
-        <ProfileControlPanel />
-        {/* <LoginLogoutPanel /> */}
+        <HomeButtonAndSearchField />
+        {/* <ProfileControlPanel /> */}
+        <LoginLogoutPanel />
       </div>
     </Wrapper>
   );
@@ -29,5 +27,6 @@ const Wrapper = styled.div`
     height: 55px;
     display: flex;
     align-items: center;
+    justify-content: space-between;
   }
 `;

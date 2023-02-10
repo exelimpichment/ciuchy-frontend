@@ -1,8 +1,6 @@
 import styled from 'styled-components';
 
-// modify it and use in multiple places with props etc.
-
-function SellNowButton() {
+function LogInButton() {
   return (
     <Wrapper
       className="btn"
@@ -10,25 +8,26 @@ function SellNowButton() {
         console.log('sell now');
       }}
     >
-      Sell now
+      Log In
     </Wrapper>
   );
 }
 
-export default SellNowButton;
+export default LogInButton;
 
 const Wrapper = styled.button`
-  background-color: #c45f55;
+  background-color: #fff;
   margin-left: 20px;
   padding: 0 8px;
   cursor: pointer;
-  border: 1px solid black;
+  border: 1px solid #c45f55;
   border-radius: 4px;
-  color: white;
+  color: #c45f55;
   font-weight: 500;
   height: 29px;
+  width: 84px;
 
   &:hover {
-    background-color: #a7655f;
+    background-color: #e6e6e6;
   }
 `;

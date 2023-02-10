@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 // modify it and use in multiple places with props etc.
 
-function SellNowButton() {
+function SellNowButtonHero() {
   return (
     <Wrapper
       className="btn"
@@ -15,18 +15,18 @@ function SellNowButton() {
   );
 }
 
-export default SellNowButton;
+export default SellNowButtonHero;
 
 const Wrapper = styled.button`
   background-color: #c45f55;
-  margin-left: 20px;
-  padding: 0 8px;
+  font-size: 1.2rem;
   cursor: pointer;
   border: 1px solid black;
   border-radius: 4px;
   color: white;
   font-weight: 500;
-  height: 29px;
+  height: 42px;
+  width: 100%;
 
   &:hover {
     background-color: #a7655f;
