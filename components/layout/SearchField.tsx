@@ -15,7 +15,7 @@ export default SearchField;
 
 const InputWrapper = styled.input`
   all: unset;
-  margin-left: 40px;
+  margin: 0 40px;
   flex-grow: 1;
   background-color: #f2f2f2;
   padding: 8px;
