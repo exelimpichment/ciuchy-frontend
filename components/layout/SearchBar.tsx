@@ -1,11 +1,17 @@
 import styled from 'styled-components';
 import HomeButton from './HomeButton';
+// import LoginLogoutPanel from './LoginLogoutPanel';
+import ProfileControlPanel from './ProfileControlPanel';
+// import SearchField from './SearchField';
 
 function SearchBar() {
   return (
     <Wrapper>
       <div className="search-container">
         <HomeButton />
+        {/* <SearchField /> */}
+        <ProfileControlPanel />
+        {/* <LoginLogoutPanel /> */}
       </div>
     </Wrapper>
   );

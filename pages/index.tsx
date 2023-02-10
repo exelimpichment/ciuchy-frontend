@@ -1,11 +1,13 @@
 // import styled from 'styled-components';
 import { Hero } from '@/components/showcaseComponents';
+import Head from 'next/head';
 
 export default function Showcase() {
   return (
-    <>
+    <main>
+      <Head>{<title>ciuchy - dress for less</title>}</Head>
       <Hero />
-    </>
+    </main>
   );
 }
 
