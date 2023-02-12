@@ -28,6 +28,7 @@ export default NavigationBar;
 
 const Wrapper = styled.nav`
   padding: 0 20px 0 20px;
+  border-bottom: 1px #d6d6d6 solid;
 
   .navbar-container {
     max-width: var(--websiteWidth);

@@ -5,6 +5,7 @@ import styled from 'styled-components';
 function SellNowButton() {
   return (
     <Wrapper
+      type="button"
       className="btn"
       onClick={() => {
         console.log('sell now');

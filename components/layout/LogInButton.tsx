@@ -3,6 +3,7 @@ import styled from 'styled-components';
 function LogInButton() {
   return (
     <Wrapper
+      type="button"
       className="btn"
       onClick={() => {
         console.log('sell now');

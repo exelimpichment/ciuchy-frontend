@@ -5,6 +5,7 @@ import ciuchy from '../../public/ciuchy.jpg';
 function HomeButton() {
   return (
     <Wrapper
+      type="button"
       onClick={() => {
         console.log('go home, mate');
       }}

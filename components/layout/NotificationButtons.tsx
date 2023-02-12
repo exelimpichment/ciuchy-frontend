@@ -12,6 +12,7 @@ function NotificationButtons() {
   return (
     <Wrapper>
       <div
+        //  type='button'
         className="notification-btn"
         onClick={() => {
           console.log('envelope');
@@ -20,6 +21,7 @@ function NotificationButtons() {
         {newMessageReceived ? <RxEnvelopeClosed /> : <RxEnvelopeOpen />}
       </div>
       <div
+        // type="button"
         className="notification-btn"
         onClick={() => {
           console.log('bell');
@@ -28,6 +30,7 @@ function NotificationButtons() {
         {newNotificationReceived ? <VscBellDot /> : <VscBell />}
       </div>
       <div
+        // type="button"
         className="notification-btn"
         onClick={() => {
           console.log('like');

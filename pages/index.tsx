@@ -13,12 +13,6 @@ export default function Showcase() {
 }
 
 export async function getStaticProps() {
-  // const res = await fetch('https://jsonplaceholder.typicode.com/albums');
-  // const response = await res.json();
-
-  // const res2 = await fetch('https://jsonplaceholder.typicode.com/posts');
-  // const response2 = await res2.json();
-
   return {
     props: {}, // will be passed to the page component as props
   };

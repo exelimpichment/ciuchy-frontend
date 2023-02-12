@@ -1,0 +1,39 @@
+import styled from 'styled-components';
+
+// modify it and use in multiple places with props etc.
+// tem vars
+const isLoading = false;
+
+function ContinueButton() {
+  return (
+    <ConfirmButtonWrapper
+      type="submit"
+      disabled={isLoading}
+      className="btn"
+      onClick={() => {
+        console.log('confirm');
+      }}
+    >
+      Confirm
+    </ConfirmButtonWrapper>
+  );
+}
+
+export default ContinueButton;
+
+const ConfirmButtonWrapper = styled.button`
+  background-color: #c45f55;
+  font-size: 1.2rem;
+  cursor: pointer;
+  border: 1px solid black;
+  border-radius: 4px;
+  color: white;
+  font-weight: 500;
+  height: 42px;
+  width: 100%;
+  margin-bottom: 1.3rem;
+
+  &:hover {
+    background-color: #a7655f;
+  }
+`;
