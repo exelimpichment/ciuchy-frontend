@@ -12,6 +12,6 @@
   // if i am leaving some variables not used during creating new piece of code
   // i can temporarily  disable this not used variable rule
   "rules": {
-    "no-unused-vars": [1, { "args": "after-used", "argsIgnorePattern": "^_" }]
+    // "no-unused-vars": [1, { "args": "after-used", "argsIgnorePattern": "^_" }]
   }
 }

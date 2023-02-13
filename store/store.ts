@@ -6,6 +6,7 @@ interface NavBarState {
   isMember: boolean;
   isSignInWindowOpen: boolean;
   setIsMenuOpen: () => void;
+  setIsMember: () => void;
 }
 
 export const useNavBarStore = create<NavBarState>()(
@@ -13,10 +14,11 @@ export const useNavBarStore = create<NavBarState>()(
     persist(
       (set) => ({
         isMenuOpen: false,
-        isMember: true,
+        isMember: false,
         isSignInWindowOpen: true,
         setIsMenuOpen: () =>
           set((state) => ({ isMenuOpen: !state.isMenuOpen })),
+        setIsMember: () => set((state) => ({ isMember: !state.isMember })),
       }),
       {
         name: 'navBar-storage',

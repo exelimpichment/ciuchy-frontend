@@ -1,9 +1,9 @@
 import ContinueButton from '@/components/authenticationComponents/ContinueButton';
 import FormRow from '@/components/authenticationComponents/FormRow';
-// import { useNavBarStore } from '@/store/store';
+import { useNavBarStore } from '@/store/store';
 import styled from 'styled-components';
 
-const isMember = true;
+// const isMember = true;
 
 const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
   event.preventDefault();
@@ -15,10 +15,19 @@ function Auth() {
   //   email: '',
   //   password: '',
   // });
-  // const isMember = useNavBarStore((state) => state.isMember);
+  const isMember = useNavBarStore((state) => state.isMember);
+  const setIsMember = useNavBarStore((state) => state.setIsMember);
+
+  // useEffect = (() => {
+  //   setIsMemberLocal(isMember);
+  // }, []);
 
   return (
     <AuthWrapper>
+      {/* <button type="button" onClick={() => setIsMember(!isMember)}> */}
+      <button type="button" onClick={setIsMember}>
+        click me to test
+      </button>
       <div className="form-container">
         <form className="form" onSubmit={onSubmit}>
           <h3>{isMember ? 'Log in' : 'Sign Up'}</h3>
