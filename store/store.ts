@@ -4,9 +4,10 @@ import { devtools, persist } from 'zustand/middleware';
 interface NavBarState {
   isMenuOpen: boolean;
   isMember: boolean;
-  isSignInWindowOpen: boolean;
   setIsMenuOpen: () => void;
-  setIsMember: () => void;
+  setIsMember: (_payload: boolean) => void;
+
+  // increase: (by: number) => void;
 }
 
 export const useNavBarStore = create<NavBarState>()(
@@ -15,10 +16,9 @@ export const useNavBarStore = create<NavBarState>()(
       (set) => ({
         isMenuOpen: false,
         isMember: false,
-        isSignInWindowOpen: true,
         setIsMenuOpen: () =>
           set((state) => ({ isMenuOpen: !state.isMenuOpen })),
-        setIsMember: () => set((state) => ({ isMember: !state.isMember })),
+        setIsMember: (payload) => set((_state) => ({ isMember: payload })),
       }),
       {
         name: 'navBar-storage',

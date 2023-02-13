@@ -1,13 +1,24 @@
+import { useNavBarStore } from '@/store/store';
+import { useRouter } from 'next/router';
 import styled from 'styled-components';
 
 function LogInButton() {
+  const setIsMember = useNavBarStore((state) => state.setIsMember);
+  const isMember = useNavBarStore((state) => state.isMember);
+
+  const router = useRouter();
+  console.log(router);
+
+  const getButtonDisabledStatus = (pathname: string, member: boolean) => {
+    if (pathname === '/authentication' && member) return true;
+  };
+
   return (
     <Wrapper
       type="button"
       className="btn"
-      onClick={() => {
-        console.log('sell now');
-      }}
+      onClick={() => setIsMember(true)}
+      disabled={getButtonDisabledStatus(router.pathname, isMember)}
     >
       Log In
     </Wrapper>

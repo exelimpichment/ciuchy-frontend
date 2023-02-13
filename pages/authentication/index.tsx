@@ -1,7 +1,10 @@
 import ContinueButton from '@/components/authenticationComponents/ContinueButton';
 import FormRow from '@/components/authenticationComponents/FormRow';
 import { useNavBarStore } from '@/store/store';
+import NoSSRComponent from '@/utils/NoSSRComponent';
 import styled from 'styled-components';
+
+// import { RxCross2 } from 'react-icons/rx';
 
 // const isMember = true;
 
@@ -9,28 +12,17 @@ const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
   event.preventDefault();
 };
 
-function Auth() {
-  // const [credentials, setCredentials] = useState({
-  //   login: '',
-  //   email: '',
-  //   password: '',
-  // });
-  const isMember = useNavBarStore((state) => state.isMember);
-  const setIsMember = useNavBarStore((state) => state.setIsMember);
+const logIn = <h3>Log in</h3>;
+const signUp = <h3>Sign up</h3>;
 
-  // useEffect = (() => {
-  //   setIsMemberLocal(isMember);
-  // }, []);
+function Auth() {
+  const isMember = useNavBarStore((state) => state.isMember);
 
   return (
     <AuthWrapper>
-      {/* <button type="button" onClick={() => setIsMember(!isMember)}> */}
-      <button type="button" onClick={setIsMember}>
-        click me to test
-      </button>
       <div className="form-container">
         <form className="form" onSubmit={onSubmit}>
-          <h3>{isMember ? 'Log in' : 'Sign Up'}</h3>
+          <NoSSRComponent>{isMember ? logIn : signUp}</NoSSRComponent>
           <FormRow />
           <FormRow />
           <FormRow />
@@ -47,7 +39,6 @@ export default Auth;
 const AuthWrapper = styled.div`
   display: flex;
   justify-content: center;
-
   .form-container {
     padding: 2rem 1rem 2rem 1rem;
     margin-top: 3rem;
@@ -56,18 +47,15 @@ const AuthWrapper = styled.div`
     justify-content: center;
     border: 1px #d6d6d6 solid;
     border-radius: 4px;
-
     form {
       display: flex;
       flex-direction: column;
       align-items: center;
       width: 100%;
-
       h3 {
         font-size: 2rem;
         margin-bottom: 2rem;
       }
-
       p {
         cursor: pointer;
         font-size: 1rem;
