@@ -31,7 +31,7 @@ const ConfirmButtonWrapper = styled.button`
   font-weight: 500;
   height: 42px;
   width: 100%;
-  margin-bottom: 1.3rem;
+  margin: 1.3rem 0 1.3rem 0;
 
   &:hover {
     background-color: #a7655f;

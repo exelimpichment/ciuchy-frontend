@@ -15,7 +15,7 @@ export const useNavBarStore = create<NavBarState>()(
     persist(
       (set) => ({
         isMenuOpen: false,
-        isMember: false,
+        isMember: true,
         setIsMenuOpen: () =>
           set((state) => ({ isMenuOpen: !state.isMenuOpen })),
         setIsMember: (payload) => set((_state) => ({ isMember: payload })),
