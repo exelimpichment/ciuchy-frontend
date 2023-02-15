@@ -6,21 +6,37 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
 import styled from 'styled-components';
 
-// submit logic
 const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
   event.preventDefault();
 };
-// vars for rendering logic
+
 const logIn = <h3>Log in</h3>;
 const signUp = <h3>Sign up</h3>;
+
+export interface IInitialValues {
+  username: string;
+  email: string;
+  password: string;
+}
 
 function Auth() {
   const isMember = useNavBarStore((state) => state.isMember);
 
-  // from states (lifting states up)
-  const [username, setUsername] = useState<string>('');
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
+  const initialValues: IInitialValues = {
+    username: '',
+    email: '',
+    password: '',
+  };
+
+  const [values, setValues] = useState<IInitialValues>(initialValues);
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(event.target.name, event.target.value);
+
+    const name = event.target.name;
+    const value = event.target.value;
+    setValues({ ...values, [name]: value });
+  };
 
   return (
     <AuthWrapper>
@@ -38,22 +54,22 @@ function Auth() {
               {' '}
               {!isMember && (
                 <FormRow
-                  inputFor={username}
-                  setFormInformation={setUsername}
+                  value={values.username}
+                  handleChange={handleChange}
                   inputPlaceholder="Username"
                   inputType="text"
                 />
               )}
             </NoSSRComponent>
             <FormRow
-              inputFor={email}
-              setFormInformation={setEmail}
+              value={values.email}
+              handleChange={handleChange}
               inputPlaceholder="Email"
               inputType="email"
             />
             <FormRow
-              inputFor={password}
-              setFormInformation={setPassword}
+              value={values.password}
+              handleChange={handleChange}
               inputPlaceholder="Password"
               inputType="password"
             />

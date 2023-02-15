@@ -14,7 +14,7 @@ function ContinueButton() {
         console.log('confirm');
       }}
     >
-      Confirm
+      {isLoading ? 'loading...' : 'Continue'}
     </ConfirmButtonWrapper>
   );
 }

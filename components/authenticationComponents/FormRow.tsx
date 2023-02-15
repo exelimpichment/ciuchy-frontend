@@ -1,26 +1,21 @@
 import { useState } from 'react';
-import styled from 'styled-components';
-
 import { BiHide, BiShow } from 'react-icons/bi';
+import styled from 'styled-components';
 
 const name = '';
 const labelText = '';
 
 const FormRow = ({
-  inputFor,
-  setFormInformation,
+  value,
+  handleChange,
   inputPlaceholder,
   inputType,
 }: {
-  inputFor: string;
-  setFormInformation: (_newValue: string) => void;
+  value: string;
+  handleChange: (_event: React.ChangeEvent<HTMLInputElement>) => void;
   inputPlaceholder: string;
   inputType: string;
 }) => {
-  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setFormInformation(event.target.value);
-  };
-
   const [passwordShown, setPasswordShown] = useState<boolean>(false);
 
   const getType = (inputFor: string, passwordShown: boolean) => {
@@ -36,9 +31,9 @@ const FormRow = ({
       <input
         id={inputType}
         type={getType(inputType, passwordShown)}
-        name={name}
-        value={inputFor}
-        onChange={onChange}
+        name={inputPlaceholder.toLocaleLowerCase()}
+        value={value}
+        onChange={handleChange}
         className="form-input"
         placeholder={inputPlaceholder}
         maxLength={26}
