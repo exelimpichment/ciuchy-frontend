@@ -51,13 +51,16 @@ function Auth() {
       // );
       console.log(userRegistrationObject);
 
-      const res = await fetch(`http://localhost:5001/api/v1/auth/register`, {
-        body: JSON.stringify(userRegistrationObject),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        method: 'POST',
-      });
+      const res = await fetch(
+        `https://first-node-js-express-project.onrender.com/api/v1/auth/register`,
+        {
+          body: JSON.stringify(userRegistrationObject),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          method: 'POST',
+        }
+      );
       const result = await res.json();
       console.log(result);
     } catch (error) {

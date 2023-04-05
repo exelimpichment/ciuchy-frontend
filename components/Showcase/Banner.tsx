@@ -5,7 +5,7 @@ import SellNowButton from './SellNowButton';
 function Banner() {
   return (
     <Wrapper>
-      <h2>Ready to style your wardrobe!!!!</h2>
+      <h2>Ready to style your wardrobe?</h2>
       <SellNowButton />
       <Link href="/t&c" className="link">
         Read about T&C
