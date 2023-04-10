@@ -55,6 +55,7 @@ function Auth() {
         `https://first-node-js-express-project.onrender.com/api/v1/auth/register`,
         {
           body: JSON.stringify(userRegistrationObject),
+          credentials: 'include',
           headers: {
             'Content-Type': 'application/json',
           },
