@@ -16,9 +16,3 @@ export async function getStaticProps() {
     props: {}, // will be passed to the page component as props
   };
 }
-
-// const Wrapper = styled.div`
-/* background-color: red; */
-/* max-width: var(--websiteWidth); */
-/* margin: auto; */
-// `;
