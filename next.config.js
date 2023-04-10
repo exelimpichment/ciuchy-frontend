@@ -2,7 +2,6 @@
 const nextConfig = {
   reactStrictMode: true,
   distDir: 'out',
-  target: 'serverless',
   compiler: {
     styledComponents: true,
   },
