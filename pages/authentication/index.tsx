@@ -1,5 +1,5 @@
 import ContinueButton from '@/components/Authentication/ContinueButton';
-import FormRow from '@/components/Authentication/FormRow';
+import FormRow from '@/components/Common/FormRow';
 // import { useNavBarStore } from '@/store/store';
 import NoSSRComponent from '@/utils/NoSSRComponent';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -12,7 +12,7 @@ const logIn = <h3>Log in</h3>;
 const signUp = <h3>Sign up</h3>;
 
 export interface IInitialValues {
-  username: string;
+  name: string;
   email: string;
   password: string;
 }
@@ -23,49 +23,46 @@ function Auth() {
   );
 
   const initialValues: IInitialValues = {
-    username: '',
+    name: '',
     email: '',
     password: '',
   };
 
   const [values, setValues] = useState<IInitialValues>(initialValues);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     console.log(event.target.name, event.target.value);
 
-    const name = event.target.name;
+    const nameValue = event.target.name;
     const value = event.target.value;
-    setValues({ ...values, [name]: value });
+    setValues({ ...values, [nameValue]: value });
   };
 
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
-    const { username, email, password } = values;
-    const userRegistrationObject = { name: username, email, password };
+    setIsLoading(true);
+    // const url = 'http://localhost:5001/api/v1/auth/register';
+    const url =
+      'https://first-node-js-express-project.onrender.com/api/v1/auth/register';
 
     try {
-      // const { data } = await axios.post(
-      //   `http://localhost:5001/api/v1/auth/register`,
-      //   userRegistrationObject
-      // );
-      console.log(userRegistrationObject);
+      const response = await fetch(url, {
+        method: 'POST',
+        credentials: 'include',
+        mode: 'cors',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8',
+        },
+        body: JSON.stringify(values),
+      });
 
-      const res = await fetch(
-        `https://first-node-js-express-project.onrender.com/api/v1/auth/register`,
-        {
-          body: JSON.stringify(userRegistrationObject),
-          credentials: 'include',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          method: 'POST',
-        }
-      );
-      const result = await res.json();
-      console.log(result);
+      const user = await response.json();
+      console.log(user);
+      setIsLoading(false);
     } catch (error) {
       console.log(error);
+      // add toast here later
     }
   };
 
@@ -85,9 +82,9 @@ function Auth() {
               {' '}
               {!isMember && (
                 <FormRow
-                  value={values.username}
+                  value={values.name}
                   handleChange={handleChange}
-                  inputPlaceholder="Username"
+                  inputPlaceholder="name"
                   inputType="text"
                 />
               )}
@@ -104,7 +101,7 @@ function Auth() {
               inputPlaceholder="Password"
               inputType="password"
             />
-            <ContinueButton />
+            <ContinueButton isLoading={isLoading} />
             <p className="link">Forgotten your password?</p>
           </motion.form>
         </AnimatePresence>

@@ -2,9 +2,8 @@ import styled from 'styled-components';
 
 // modify it and use in multiple places with props etc.
 // tem vars
-const isLoading = false;
 
-function ContinueButton() {
+function ContinueButton({ isLoading }: { isLoading: boolean }) {
   return (
     <ConfirmButtonWrapper
       type="submit"
@@ -14,7 +13,7 @@ function ContinueButton() {
         console.log('confirm');
       }}
     >
-      {isLoading ? 'loading...' : 'Continue'}
+      {isLoading ? 'Loading...' : 'Continue'}
     </ConfirmButtonWrapper>
   );
 }
@@ -36,5 +35,9 @@ const ConfirmButtonWrapper = styled.button`
   &:hover {
     background-color: #a7655f;
     transition: all ease 0.5s;
+  }
+
+  &:disabled {
+    background-color: #763933;
   }
 `;
