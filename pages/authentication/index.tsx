@@ -43,7 +43,7 @@ function Auth() {
     event.preventDefault();
     setIsLoading(true);
     // const url = 'http://localhost:5001/api/v1/auth/register';
-    const url = 'https://apitest.ciuchy.store/api/v1/auth/logout';
+    const url = 'https://apitest.ciuchy.store/api/v1/auth/register';
 
     try {
       const response = await fetch(url, {
