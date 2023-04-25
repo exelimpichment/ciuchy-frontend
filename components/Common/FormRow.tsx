@@ -1,28 +1,26 @@
 import { useState } from 'react';
 import { BiHide, BiShow } from 'react-icons/bi';
 import styled from 'styled-components';
+import getType from '../../utils/getType';
 
 const name = '';
 const labelText = '';
 
-const FormRow = ({
-  value,
-  handleChange,
-  inputPlaceholder,
-  inputType,
-}: {
+interface IFormRow {
   value: string;
   handleChange: (_event: React.ChangeEvent<HTMLInputElement>) => void;
   inputPlaceholder: string;
   inputType: string;
+}
+
+const FormRow: React.FC<IFormRow> = ({
+  value,
+  handleChange,
+  inputPlaceholder,
+  inputType,
 }) => {
   const [passwordShown, setPasswordShown] = useState<boolean>(false);
 
-  const getType = (inputFor: string, passwordShown: boolean) => {
-    if (inputFor !== 'password') return;
-    const type = passwordShown ? 'text' : 'password';
-    return type;
-  };
   return (
     <FormRowWrapper className="form-row">
       <label htmlFor={name} className="form-label">
@@ -42,6 +40,7 @@ const FormRow = ({
       {inputPlaceholder === 'Password' && (
         <button
           className="btn"
+          type="button"
           onClick={() => setPasswordShown(!passwordShown)}
         >
           {passwordShown ? <BiHide /> : <BiShow />}
