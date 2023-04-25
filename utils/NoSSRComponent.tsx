@@ -8,7 +8,3 @@ const NoSSRComponent = dynamic(() => Promise.resolve(NonSSRWrapper), {
 });
 
 export default NoSSRComponent;
-
-// <NoSSRComponent>
-//   <h1>{isMember ? '11111' : '222222'}</h1>
-// </NoSSRComponent>;

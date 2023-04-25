@@ -34,17 +34,16 @@ function Auth() {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     console.log(event.target.name, event.target.value);
 
-    const nameValue = event.target.name;
+    const name = event.target.name;
     const value = event.target.value;
-    setValues({ ...values, [nameValue]: value });
+    setValues({ ...values, [name]: value });
   };
 
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setIsLoading(true);
     // const url = 'http://localhost:5001/api/v1/auth/register';
-    const url =
-      'https://first-node-js-express-project.onrender.com/api/v1/auth/register';
+    const url = 'https://apitest.ciuchy.store/api/v1/auth/logout';
 
     try {
       const response = await fetch(url, {
@@ -61,6 +60,7 @@ function Auth() {
       console.log(user);
       setIsLoading(false);
     } catch (error) {
+      setIsLoading(false);
       console.log(error);
       // add toast here later
     }
@@ -84,7 +84,7 @@ function Auth() {
                 <FormRow
                   value={values.name}
                   handleChange={handleChange}
-                  inputPlaceholder="name"
+                  inputPlaceholder="Name"
                   inputType="text"
                 />
               )}
