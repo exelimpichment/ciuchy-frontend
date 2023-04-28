@@ -5,7 +5,9 @@ import NoSSRComponent from '@/utils/NoSSRComponent';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 import styled from 'styled-components';
+import { axiosInstance } from '../../axios/axiosRequestConfig';
 import type { RootState } from '../../redux/store';
 
 const logIn = <h3>Log in</h3>;
@@ -42,27 +44,15 @@ function Auth() {
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setIsLoading(true);
-    // const url = 'http://localhost:5001/api/v1/auth/register';
-    const url = 'https://apitest.ciuchy.store/api/v1/auth/register';
 
     try {
-      const response = await fetch(url, {
-        method: 'POST',
-        credentials: 'include',
-        mode: 'cors',
-        headers: {
-          'Content-Type': 'application/json;charset=utf-8',
-        },
-        body: JSON.stringify(values),
-      });
-
-      const user = await response.json();
-      console.log(user);
+      let response = await axiosInstance.post('/register', values);
       setIsLoading(false);
-    } catch (error) {
+      toast.success(response?.data.msg);
+      setValues(initialValues);
+    } catch (error: any) {
       setIsLoading(false);
-      console.log(error);
-      // add toast here later
+      toast.error(error.response?.data.msg);
     }
   };
 
