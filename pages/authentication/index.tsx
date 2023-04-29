@@ -1,23 +1,17 @@
 import ContinueButton from '@/components/Authentication/ContinueButton';
 import FormRow from '@/components/Common/FormRow';
-// import { useNavBarStore } from '@/store/store';
+import { IInitialValues } from '@/types/authentication';
 import NoSSRComponent from '@/utils/NoSSRComponent';
+import { login, register } from '@/utils/authenticator';
 import { AnimatePresence, motion } from 'framer-motion';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { toast } from 'react-toastify';
 import styled from 'styled-components';
-import { axiosInstance } from '../../axios/axiosRequestConfig';
 import type { RootState } from '../../redux/store';
 
 const logIn = <h3>Log in</h3>;
 const signUp = <h3>Sign up</h3>;
-
-export interface IInitialValues {
-  name: string;
-  email: string;
-  password: string;
-}
 
 function Auth() {
   const isMember = useSelector(
@@ -32,10 +26,9 @@ function Auth() {
 
   const [values, setValues] = useState<IInitialValues>(initialValues);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const router = useRouter();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(event.target.name, event.target.value);
-
     const name = event.target.name;
     const value = event.target.value;
     setValues({ ...values, [name]: value });
@@ -45,15 +38,15 @@ function Auth() {
     event.preventDefault();
     setIsLoading(true);
 
-    try {
-      let response = await axiosInstance.post('/register', values);
-      setIsLoading(false);
-      toast.success(response?.data.msg);
-      setValues(initialValues);
-    } catch (error: any) {
-      setIsLoading(false);
-      toast.error(error.response?.data.msg);
-    }
+    !isMember
+      ? register({ setIsLoading, setValues, initialValues, values })
+      : login({
+          email: values.email,
+          password: values.password,
+          setIsLoading,
+          router,
+        });
+    // router.push('/about');
   };
 
   return (

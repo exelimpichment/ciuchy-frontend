@@ -35,6 +35,8 @@ const FormRow: React.FC<IFormRow> = ({
         className="form-input"
         placeholder={inputPlaceholder}
         maxLength={26}
+        minLength={6}
+        required
         autoComplete="off"
       />
       {inputPlaceholder === 'Password' && (
