@@ -1,5 +1,5 @@
 import { axiosInstance } from '@/axios/axiosRequestConfig';
-import { setIsMember } from '@/redux/features/authenticationSlice/authenticationSlice';
+import { setIsMember } from '@/redux/features/authentication/authenticationSlice';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';

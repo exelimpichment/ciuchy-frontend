@@ -24,7 +24,6 @@ export const register = async ({
     setValues(initialValues);
   } catch (error: any) {
     console.log(error);
-
     setIsLoading(false);
     toast.error(error.response?.data.msg);
   }
@@ -40,10 +39,10 @@ export const login = async ({
   password: string;
   setIsLoading: Dispatch<SetStateAction<boolean>>;
   router: NextRouter;
-  // router: any;
 }) => {
   try {
     let response = await axiosInstance.post('/login', { email, password });
+    console.log(response);
     setIsLoading(false);
     setTimeout(() => {
       router.push('/');

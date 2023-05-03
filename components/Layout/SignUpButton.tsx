@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import { setIsMember } from '../../redux/features/authenticationSlice/authenticationSlice';
+import { setIsMember } from '../../redux/features/authentication/authenticationSlice';
 
 function SignUpButton() {
   const dispatch = useDispatch();

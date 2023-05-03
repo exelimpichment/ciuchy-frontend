@@ -46,7 +46,6 @@ function Auth() {
           setIsLoading,
           router,
         });
-    // router.push('/about');
   };
 
   return (
@@ -85,7 +84,12 @@ function Auth() {
               inputType="password"
             />
             <ContinueButton isLoading={isLoading} />
-            <p className="link">Forgotten your password?</p>
+            <p
+              className="link"
+              onClick={() => router.push('/user/reset-password')}
+            >
+              Forgotten your password?
+            </p>
           </motion.form>
         </AnimatePresence>
       </div>
