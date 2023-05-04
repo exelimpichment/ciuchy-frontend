@@ -1,5 +1,5 @@
 import { axiosInstance } from '@/axios/axiosRequestConfig';
-import { IInitialValues } from '@/types/authentication';
+import { IInitialValues } from '@/types/authentication.types';
 import { NextRouter } from 'next/router';
 import { Dispatch, SetStateAction } from 'react';
 import { toast } from 'react-toastify';

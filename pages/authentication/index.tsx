@@ -1,6 +1,6 @@
 import ContinueButton from '@/components/Authentication/ContinueButton';
 import FormRow from '@/components/Common/FormRow';
-import { IInitialValues } from '@/types/authentication';
+import { IInitialValues } from '@/types/authentication.types';
 import NoSSRComponent from '@/utils/NoSSRComponent';
 import { login, register } from '@/utils/authenticator';
 import { AnimatePresence, motion } from 'framer-motion';
