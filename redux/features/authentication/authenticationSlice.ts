@@ -13,8 +13,8 @@ export interface IUser {
 }
 
 const initialState: ICounterState = {
-  isMember: false,
   user: { name: '', role: '', userId: '' },
+  isMember: false,
 };
 
 export const authenticationSlice = createSlice({
@@ -26,7 +26,7 @@ export const authenticationSlice = createSlice({
     },
 
     setUser: (state, action: PayloadAction<IUser>) => {
-      state.user = action.payload;
+      state.user = { ...action.payload };
     },
   },
 });

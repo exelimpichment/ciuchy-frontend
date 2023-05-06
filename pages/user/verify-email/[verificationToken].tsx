@@ -30,7 +30,7 @@ const VerifyEmail = () => {
   useEffect(() => {
     const verifyToken = async () => {
       try {
-        const response = await axiosInstance.post('/verify-email', {
+        const response = await axiosInstance.post('auth/verify-email', {
           verificationToken,
           email,
         });

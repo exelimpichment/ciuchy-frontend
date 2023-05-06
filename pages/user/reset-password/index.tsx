@@ -24,7 +24,7 @@ function ResetPassword() {
     setIsLoading(true);
 
     try {
-      let response = await axiosInstance.post('/forgot-password', {
+      let response = await axiosInstance.post('auth/forgot-password', {
         email,
       });
       setIsLoading(false);

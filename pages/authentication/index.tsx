@@ -6,7 +6,7 @@ import { login, register } from '@/utils/authenticator';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import type { RootState } from '../../redux/store';
 
@@ -27,6 +27,7 @@ function Auth() {
   const [values, setValues] = useState<IInitialValues>(initialValues);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const router = useRouter();
+  const dispatch = useDispatch();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const name = event.target.name;
@@ -45,6 +46,7 @@ function Auth() {
           password: values.password,
           setIsLoading,
           router,
+          dispatch,
         });
   };
 

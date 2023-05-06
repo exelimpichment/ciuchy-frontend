@@ -1,16 +1,10 @@
-// I did set little more linters to make linting little stricter
 {
   "extends": ["next", "next/core-web-vitals", "eslint:recommended"],
 
-  //starting from some 17 or so version we do not have to import react
-  // it is available globally. I found script that prevents linter complaint
   "globals": {
     "React": "readonly"
   },
 
-  // this section will allow me to turn of some rules
-  // if i am leaving some variables not used during creating new piece of code
-  // i can temporarily  disable this not used variable rule
   "rules": {
     "no-unused-vars": [1, { "args": "after-used", "argsIgnorePattern": "^_" }]
   }

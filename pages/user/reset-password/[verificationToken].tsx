@@ -22,7 +22,7 @@ function ResetPassword() {
     setIsLoading(true);
 
     try {
-      let response = await axiosInstance.post('/reset-password', {
+      let response = await axiosInstance.post('auth/reset-password', {
         password,
         verificationToken,
         email,

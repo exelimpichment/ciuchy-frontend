@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const developmentBaseUrl = 'http://localhost:5001/api/v1/auth';
+const developmentBaseUrl = 'http://localhost:5001/api/v1/';
 // const productionBaseUrl = 'https://apitest.ciuchy.store/api/v1/auth';
 
 export const axiosInstance = axios.create({
