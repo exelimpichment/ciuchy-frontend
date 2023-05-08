@@ -1,9 +1,11 @@
 import styled from 'styled-components';
+import DragAndDrop from './DragAndDrop';
 
 function PhotoSetter() {
   return (
     <PhotoSetterWrapper>
-      <h2>Add up to 20 photos.</h2>
+      <h2>Add up to 5 photos.</h2>
+      <DragAndDrop />
     </PhotoSetterWrapper>
   );
 }
@@ -12,10 +14,11 @@ export default PhotoSetter;
 
 const PhotoSetterWrapper = styled.div`
   background-color: #fff;
-  height: 400px;
   margin-bottom: 2rem;
-  padding: 0 1.5rem 0 1.5rem;
 
   h2 {
+    font-size: 1.2rem;
+    padding: 1.3rem 2rem 0 2rem;
+    color: rgb(117, 117, 117);
   }
 `;

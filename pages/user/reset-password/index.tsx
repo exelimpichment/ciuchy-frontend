@@ -1,6 +1,6 @@
 import { axiosInstance } from '@/axios/axiosRequestConfig';
+import MainButton from '@/components/Authentication/MainButton';
 import FormRow from '@/components/Common/FormRow';
-import MainButton from '@/components/Common/MainButton';
 import { setIsMember } from '@/redux/features/authentication/authenticationSlice';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useRouter } from 'next/router';
