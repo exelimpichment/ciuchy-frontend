@@ -13,13 +13,11 @@ function ImageThumbnail({
 }) {
   return (
     <ImageThumbnailContainer>
-      <div className="imageThumbnailContainer__inner">
-        <button type="button" onClick={() => deleteThumbnail(fileName)}>
-          <RiCloseFill />
-        </button>
-        <div className="imageThumbnailContainer__image">
-          <Image src={url} width={70} height={70} alt="thumbnail" />
-        </div>
+      <button type="button" onClick={() => deleteThumbnail(fileName)}>
+        <RiCloseFill />
+      </button>
+      <div className="imageThumbnailContainer__image">
+        <Image src={url} width={70} height={70} alt="thumbnail" />
       </div>
     </ImageThumbnailContainer>
   );
@@ -28,23 +26,25 @@ function ImageThumbnail({
 export default ImageThumbnail;
 
 const ImageThumbnailContainer = styled.div`
-  margin-left: 10px;
-  margin-bottom: 1rem;
+  margin-right: 15px;
+  padding-bottom: 2rem;
+  position: relative;
 
   .imageThumbnailContainer__image {
     display: flex;
     align-items: center;
-    position: relative;
+    overflow: hidden;
     height: 70px;
     width: 70px;
   }
 
   button {
+    top: -15px;
+    left: 0;
     position: absolute;
     font-size: 2.2rem;
     color: #c45f55;
     cursor: pointer;
-    z-index: 10;
     transform: translateX(-10px);
 
     &:hover {

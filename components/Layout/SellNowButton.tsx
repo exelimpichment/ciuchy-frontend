@@ -1,14 +1,16 @@
+import { useRouter } from 'next/router';
 import styled from 'styled-components';
 
 // modify it and use in multiple places with props etc.
 
 function SellNowButton() {
+  const router = useRouter();
   return (
     <Wrapper
       type="button"
       className="btn"
       onClick={() => {
-        console.log('sell now');
+        router.push('/item/new');
       }}
     >
       Sell now

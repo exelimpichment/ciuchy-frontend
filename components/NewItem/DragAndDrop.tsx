@@ -1,22 +1,54 @@
-import { DragEvent, useEffect, useState } from 'react';
+import {
+  Dispatch,
+  DragEvent,
+  SetStateAction,
+  useEffect,
+  useState,
+} from 'react';
+import { toast } from 'react-toastify';
 import styled from 'styled-components';
-import { v4 as uuidv4 } from 'uuid';
 import ImageThumbnail from './ImageThumbnail';
 import UploadPhotosButton from './UploadPhotosButton';
 
-function DragAndDrop() {
+function DragAndDrop({
+  selectedFiles,
+  setSelectedFiles,
+}: {
+  selectedFiles: File[];
+  setSelectedFiles: Dispatch<SetStateAction<File[]>>;
+}) {
   const maxFilesNumber = 5;
   const allowedFormats = ['image/jpeg', 'image/png'];
   const [drag, setDrag] = useState<boolean>(false);
-  const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
+
+  function areFilesUnique(arr: File[]) {
+    const names = new Set();
+    for (const obj of arr) {
+      if (names.has(obj.name)) {
+        return false;
+      }
+      names.add(obj.name);
+    }
+    return true;
+  }
 
   useEffect(() => {
     if (selectedFiles.length > maxFilesNumber) {
-      setSelectedFiles(selectedFiles.slice(0, maxFilesNumber)); // Truncate the selected files to the maximum limit
+      const fiveItemsList = selectedFiles.slice(0, maxFilesNumber);
+      toast.warning('More than 5 files are not allowed');
+      setSelectedFiles(fiveItemsList); // Truncate the selected files to the maximum limit
+    }
+
+    if (!areFilesUnique(selectedFiles)) {
+      const uniqueList = [
+        ...new Map(selectedFiles.map((list) => [list['name'], list])).values(),
+      ];
+      toast.warning('File already uploaded');
+      setSelectedFiles(uniqueList);
     }
 
     console.log(selectedFiles);
-  }, [selectedFiles]);
+  }, [selectedFiles, setSelectedFiles]);
 
   const dragStartHandler = (e: DragEvent<HTMLDivElement>) => {
     e.preventDefault();
@@ -84,7 +116,7 @@ function DragAndDrop() {
       <div className="dragAndDropWrapper__thumbnails">
         {selectedFiles.map((file) => (
           <ImageThumbnail
-            key={uuidv4()}
+            key={file.name}
             url={previewFile(file)}
             fileName={file.name}
             deleteThumbnail={deleteThumbnail}

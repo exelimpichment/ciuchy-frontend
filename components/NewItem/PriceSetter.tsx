@@ -1,14 +1,30 @@
-import { Input, InputAdornment } from '@mui/material';
+import { ISellItemForm } from '@/types/newItem.types';
+
 import styled from 'styled-components';
 
-function PriceSetter() {
+function PriceSetter({
+  sellItemFormData,
+  handleChange,
+}: {
+  sellItemFormData: ISellItemForm;
+  handleChange: (
+    _e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void;
+}) {
   return (
     <PriceSetterWrapper>
       <div className="priceSetterWrapper__amount">
         <p className="priceSetterWrapper__amount-text">Price</p>
-        <Input
-          className="priceSetterWrapper__amount-input"
-          startAdornment={<InputAdornment position="start">$</InputAdornment>}
+        <label htmlFor="price"></label>
+        <input
+          onChange={handleChange}
+          value={sellItemFormData.price}
+          type="number"
+          autoComplete="off"
+          min="1"
+          step="any"
+          name="price"
+          placeholder="$"
         />
       </div>
     </PriceSetterWrapper>
@@ -18,18 +34,35 @@ function PriceSetter() {
 export default PriceSetter;
 
 const PriceSetterWrapper = styled.div`
-  background-color: #fff;
-  font-size: 1.2rem;
   margin-bottom: 2rem;
+  font-size: 1.2rem;
+  background-color: #fff;
+
+  input {
+    all: unset;
+    border-bottom: #9e9e9e 1px solid;
+    min-width: 50%;
+    &::placeholder {
+      font-size: 1.2rem;
+      color: #acacac;
+    }
+
+    &:focus {
+      border-bottom: 1px #c45f55 solid;
+    }
+  }
+
+  input[type='number']::-webkit-inner-spin-button,
+  input[type='number']::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 
   .priceSetterWrapper__amount {
-    padding: 2rem;
     display: flex;
-    align-items: space-between;
     justify-content: space-between;
-
-    .priceSetterWrapper__amount-input {
-      width: 50%;
-    }
+    align-items: center;
+    padding: 2rem;
+    border-bottom: 1px #f3f3f3 solid;
   }
 `;

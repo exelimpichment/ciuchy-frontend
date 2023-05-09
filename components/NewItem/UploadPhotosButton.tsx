@@ -1,25 +1,30 @@
-import { FiPlus } from 'react-icons/fi';
+import { HiPlus } from 'react-icons/hi';
 import styled from 'styled-components';
 
 function UploadPhotosButton() {
   return (
-    <UploadPhotosButtonWrapper type="button" className="btn">
+    <UploadPhotosButtonWrapper>
+      <input type="file" />
       <span className="svg-container">
-        <FiPlus />
+        <HiPlus />
       </span>
-      <span> Upload photo</span>
+      <span>Custom Upload</span>
     </UploadPhotosButtonWrapper>
   );
 }
 
 export default UploadPhotosButton;
 
-const UploadPhotosButtonWrapper = styled.button`
+const UploadPhotosButtonWrapper = styled.label`
+  input[type='file'] {
+    display: none;
+  }
+
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: #fff;
-  font-size: 1.2rem;
+  font-size: 1.15rem;
   cursor: pointer;
   border: 1px solid #c45f55;
   border-radius: 4px;
@@ -33,6 +38,7 @@ const UploadPhotosButtonWrapper = styled.button`
     display: flex;
     align-items: center;
     padding-right: 4px;
+    font-size: 1.35rem;
   }
 
   &:hover {

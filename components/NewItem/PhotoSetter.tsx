@@ -1,11 +1,21 @@
+import { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 import DragAndDrop from './DragAndDrop';
 
-function PhotoSetter() {
+function PhotoSetter({
+  selectedFiles,
+  setSelectedFiles,
+}: {
+  selectedFiles: File[];
+  setSelectedFiles: Dispatch<SetStateAction<File[]>>;
+}) {
   return (
     <PhotoSetterWrapper>
       <h2>Add up to 5 photos.</h2>
-      <DragAndDrop />
+      <DragAndDrop
+        selectedFiles={selectedFiles}
+        setSelectedFiles={setSelectedFiles}
+      />
     </PhotoSetterWrapper>
   );
 }
