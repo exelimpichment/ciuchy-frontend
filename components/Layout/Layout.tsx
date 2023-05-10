@@ -7,6 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { showUser } from '../../utils/authenticator';
 import NavigationBar from './NavigationBar';
 import SearchBar from './SearchBar';
+
 const inter = Inter({ subsets: ['latin'] });
 
 export default function Layout({ children }: { children: ReactElement }) {
@@ -19,15 +20,19 @@ export default function Layout({ children }: { children: ReactElement }) {
 
   return (
     <>
-      {router.pathname !== '/_error' && (
-        <nav className={inter.className}>
-          <SearchBar />
-          <NavigationBar />
-          <ToastContainer position="bottom-right" />
-        </nav>
-      )}
-
-      <>{children}</>
+      <div className="hight-wrapper">
+        {router.pathname !== '/_error' && (
+          <nav
+            className={inter.className}
+            style={{ position: 'sticky', top: 0 }}
+          >
+            <SearchBar />
+            <NavigationBar />
+            <ToastContainer position="bottom-right" />
+          </nav>
+        )}
+        <>{children}</>
+      </div>
     </>
   );
 }

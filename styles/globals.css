@@ -22,6 +22,7 @@ html {
   -webkit-tap-highlight-color: transparent;
   -webkit-font-smoothing: antialiased;
   -webkit-text-size-adjust: 100%;
+  height: 100%;
 }
 /* Disable pinch zoom and other touch gestures, disable pull to refresh, rubber banding and scroll chaining features, set max-width on body as 100 viewport width, reset default margin, set default line-height and Systen Font Stack */
 
@@ -34,8 +35,23 @@ body {
   font-family: sans-serif;
   font-weight: 400;
   color: var(--mainFontColor);
+  height: 100%;
 }
 /* Reset default margin and font properties on Headings and Paragraph. */
+
+.hight-wrapper {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+#__next {
+  height: 100%;
+}
+
+main {
+  flex-grow: 1;
+}
 
 h1,
 h2,

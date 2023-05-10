@@ -10,9 +10,9 @@ import { ISellItemForm } from '../../types/newItem.types';
 const initialSellItemFormState: ISellItemForm = {
   title: '',
   description: '',
-  category: undefined,
+  category: '',
   brand: '',
-  condition: undefined,
+  condition: '',
   price: undefined,
 };
 
@@ -31,6 +31,10 @@ const New = () => {
     setSellItemFormData({ ...sellItemFormData, [name]: value });
   };
 
+  const handleRadio = ({ name, value }: { name: string; value: string }) => {
+    setSellItemFormData({ ...sellItemFormData, [name]: value });
+  };
+
   return (
     <NewItemWrapper>
       <div className="container">
@@ -44,8 +48,8 @@ const New = () => {
           handleChange={handleChange}
         />
         <CategorySetter
+          handleRadio={handleRadio}
           sellItemFormData={sellItemFormData}
-          handleChange={handleChange}
         />
         <PriceSetter
           sellItemFormData={sellItemFormData}
@@ -53,13 +57,14 @@ const New = () => {
         />
         <ButtonPanel />
       </div>
+      <div className="container"></div>
     </NewItemWrapper>
   );
 };
 
 export default New;
 
-const NewItemWrapper = styled.main`
+const NewItemWrapper = styled.div`
   background-color: #f2f1f2;
   min-height: calc(100vh - 110px);
   overflow: scroll;

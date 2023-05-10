@@ -1,13 +1,19 @@
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import user from '../../public/user.png';
 import SellNowButton from './SellNowButton';
 
 function UserSellNow() {
+  const router = useRouter();
   return (
     <Wrapper>
-      <Image className="img" src={user} alt="user image" />
-      {/* <img src={user} alt="user image" /> */}
+      <Image
+        className="img"
+        src={user}
+        alt="user image"
+        onClick={() => router.push('/user/dmsd')}
+      />
 
       <SellNowButton />
     </Wrapper>

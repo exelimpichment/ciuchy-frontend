@@ -1,5 +1,7 @@
+import { handleRadio } from '@/types/authentication.types';
 import { ISellItemForm } from '@/types/newItem.types';
 import { useState } from 'react';
+import { TbChevronDown } from 'react-icons/tb';
 import styled from 'styled-components';
 import {
   brandsList,
@@ -9,13 +11,11 @@ import {
 import DropdownLinesContainer from './dropdownFormIput/DropdownLinesContainer';
 
 function CategorySetter({
+  handleRadio,
   sellItemFormData,
-  handleChange,
 }: {
+  handleRadio: handleRadio;
   sellItemFormData: ISellItemForm;
-  handleChange: (
-    _e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => void;
 }) {
   const initialState = { category: false, brand: false, condition: false };
 
@@ -78,11 +78,21 @@ function CategorySetter({
       <div className="categorySetterWrapper__category">
         <p className="categorySetterWrapper__text">Category</p>
         <div className="categorySetterWrapper__input-container">
+          <div
+            className="input__chevron-container"
+            onClick={categoryDropdownHandler}
+          >
+            <TbChevronDown
+              style={
+                dropdownOpen.category ? { transform: 'rotate(180deg)' } : {}
+              }
+            />
+          </div>
           <label htmlFor="category"></label>
           <input
-            // onChange={handleChange}
             onClick={categoryDropdownHandler}
-            // value={sellItemFormData.category}
+            readOnly
+            value={sellItemFormData.category}
             type="text"
             autoComplete="off"
             name="category"
@@ -90,7 +100,11 @@ function CategorySetter({
             placeholder="select a category"
           />
           {dropdownOpen.category === true && (
-            <DropdownLinesContainer list={categoryList} />
+            <DropdownLinesContainer
+              list={categoryList}
+              handleRadio={handleRadio}
+              sellItemFormData={sellItemFormData}
+            />
           )}
         </div>
       </div>
@@ -98,10 +112,18 @@ function CategorySetter({
       <div className="categorySetterWrapper__brand">
         <p className="categorySetterWrapper__text">Brand</p>
         <div className="categorySetterWrapper__input-container">
+          <div
+            className="input__chevron-container"
+            onClick={brandDropdownHandler}
+          >
+            <TbChevronDown
+              style={dropdownOpen.brand ? { transform: 'rotate(180deg)' } : {}}
+            />
+          </div>
           <label htmlFor="brand"></label>
           <input
-            // onChange={handleChange}
-            // value={sellItemFormData.brand}
+            readOnly
+            value={sellItemFormData.brand}
             onClick={brandDropdownHandler}
             type="text"
             name="brand"
@@ -110,7 +132,11 @@ function CategorySetter({
             placeholder="please select a brand"
           />
           {dropdownOpen.brand === true && (
-            <DropdownLinesContainer list={brandsList} />
+            <DropdownLinesContainer
+              list={brandsList}
+              handleRadio={handleRadio}
+              sellItemFormData={sellItemFormData}
+            />
           )}
         </div>
       </div>
@@ -118,10 +144,20 @@ function CategorySetter({
       <div className="categorySetterWrapper__condition">
         <p className="categorySetterWrapper__text">Condition</p>
         <div className="categorySetterWrapper__input-container">
+          <div
+            className="input__chevron-container"
+            onClick={conditionDropdownHandler}
+          >
+            <TbChevronDown
+              style={
+                dropdownOpen.condition ? { transform: 'rotate(180deg)' } : {}
+              }
+            />
+          </div>
           <label htmlFor="condition"></label>
           <input
-            // onChange={handleChange}
-            // value={sellItemFormData.condition}
+            readOnly
+            value={sellItemFormData.condition}
             onClick={conditionDropdownHandler}
             type="text"
             name="condition"
@@ -130,7 +166,11 @@ function CategorySetter({
             placeholder="select condition"
           />
           {dropdownOpen.condition === true && (
-            <DropdownLinesContainer list={conditionList} />
+            <DropdownLinesContainer
+              list={conditionList}
+              handleRadio={handleRadio}
+              sellItemFormData={sellItemFormData}
+            />
           )}
         </div>
       </div>
@@ -160,6 +200,14 @@ const CategorySetterWrapper = styled.div`
   .categorySetterWrapper__input-container {
     min-width: 50%;
     position: relative;
+
+    .input__chevron-container {
+      position: absolute;
+      right: 2px;
+      top: 0;
+      font-size: 1.7rem;
+      cursor: pointer;
+    }
   }
 
   .categorySetterWrapper__category,

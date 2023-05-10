@@ -3,3 +3,11 @@ export interface IInitialValues {
   email: string;
   password: string;
 }
+
+export type handleRadio = ({
+  name,
+  value,
+}: {
+  name: string;
+  value: string;
+}) => void;

@@ -26,6 +26,7 @@ export default SearchBar;
 const Wrapper = styled.div`
   border-bottom: 1px #d6d6d6 solid;
   height: 55px;
+  background-color: #fff;
 
   .search__inner {
     display: flex;

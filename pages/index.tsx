@@ -7,13 +7,13 @@ import { useDispatch } from 'react-redux';
 export default function Showcase() {
   const dispatch = useDispatch();
   return (
-    <main>
+    <div>
       <Head>{<title>ciuchy - dress for less</title>}</Head>
       <Hero />
       <button type="button" onClick={() => logout({ dispatch })}>
         LOG OUT
       </button>
-    </main>
+    </div>
   );
 }
 

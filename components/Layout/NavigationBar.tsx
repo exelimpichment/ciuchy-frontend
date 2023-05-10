@@ -28,6 +28,7 @@ export default NavigationBar;
 
 const Wrapper = styled.div`
   border-bottom: 1px #d6d6d6 solid;
+  background-color: #fff;
 
   .navbar__inner {
     height: 55px;

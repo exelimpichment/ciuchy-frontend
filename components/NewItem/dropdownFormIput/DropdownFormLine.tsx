@@ -1,24 +1,44 @@
-import { useState } from 'react';
+import { handleRadio } from '@/types/authentication.types';
+import { ISellItemForm } from '@/types/newItem.types';
 import { ImRadioChecked2, ImRadioUnchecked } from 'react-icons/im';
 import styled from 'styled-components';
 
-function DropdownFormLine({ text }: { text: string }) {
-  const [checked, setChecked] = useState<boolean>(false);
+function DropdownFormLine({
+  handleRadio,
+  item,
+  sellItemFormData,
+}: {
+  handleRadio: handleRadio;
 
-  const radio = checked ? <ImRadioChecked2 /> : <ImRadioUnchecked />;
-
-  // const radioClickHandler = () => {}
+  item: {
+    key: number;
+    value: string;
+    group: string;
+  };
+  sellItemFormData: ISellItemForm;
+}) {
+  const radio =
+    sellItemFormData[item.group] === item.value ? (
+      <ImRadioChecked2 />
+    ) : (
+      <ImRadioUnchecked />
+    );
 
   return (
     <DropdownFormLineWrapper>
       <div className="dropdownFormLineWrapper__inner">
-        <p>{text}</p>
+        <p>{item.value}</p>
         <button
           type="button"
-          // onClick={radioClickHandler}
-          style={!checked ? { color: '#ccc' } : { color: '#c45f55' }}
+          onClick={() => {
+            handleRadio({ name: item.group, value: item.value });
+          }}
+          style={
+            sellItemFormData[item.group] !== item.value
+              ? { color: '#ccc' }
+              : { color: '#c45f55' }
+          }
           className="dropdownFormLineWrapper_swg-container"
-          onClick={() => setChecked(!checked)}
         >
           {radio}
         </button>
