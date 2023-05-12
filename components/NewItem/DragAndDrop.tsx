@@ -63,15 +63,16 @@ function DragAndDrop({
   const onDropHandler = (e: DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     setDrag(false);
-    const files = [...e.dataTransfer.files];
 
-    let fileList = Array.from(files);
+    let files;
+    files = [...e.dataTransfer.files];
+    console.log(files);
 
-    if (fileList.length > 5) {
-      fileList = fileList.slice(0, 5); // Truncate the selected files to the maximum limit
+    if (files.length > 5) {
+      files = files.slice(0, 5); // Truncate the selected files to the maximum limit
     }
 
-    const validFiles = fileList.filter((file) =>
+    const validFiles = files.filter((file) =>
       allowedFormats.includes(file.type)
     );
 
@@ -109,7 +110,10 @@ function DragAndDrop({
             onDragLeave={(e) => dragLeaveHandler(e)}
             onDragOver={(e) => dragStartHandler(e)}
           >
-            <UploadPhotosButton />
+            <UploadPhotosButton
+              selectedFiles={selectedFiles}
+              setSelectedFiles={setSelectedFiles}
+            />
           </div>
         )}
       </div>

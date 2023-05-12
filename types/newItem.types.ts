@@ -14,6 +14,6 @@ export interface ISellItemForm {
     | 'Adidas'
     | '';
   condition: 'New' | 'Very Good' | 'Good' | 'Poor' | '';
-  price: number | undefined;
+  price: number | '';
   [key: string]: string | number | undefined;
 }

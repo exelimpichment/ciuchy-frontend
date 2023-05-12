@@ -8,12 +8,12 @@ import styled from 'styled-components';
 import { ISellItemForm } from '../../types/newItem.types';
 
 const initialSellItemFormState: ISellItemForm = {
-  title: '',
-  description: '',
-  category: '',
-  brand: '',
-  condition: '',
-  price: undefined,
+  title: 'sdsdsd',
+  description: 'sdsd',
+  category: 'men',
+  brand: 'Nike',
+  condition: 'New',
+  price: 0,
 };
 
 const New = () => {
@@ -33,6 +33,77 @@ const New = () => {
 
   const handleRadio = ({ name, value }: { name: string; value: string }) => {
     setSellItemFormData({ ...sellItemFormData, [name]: value });
+  };
+
+  const isSellItemFormValid = (sellItemForm: ISellItemForm): boolean => {
+    for (const key in sellItemForm) {
+      const value = sellItemForm[key];
+      if (value === undefined || value === '') {
+        return false;
+      }
+    }
+    return true;
+  };
+
+  // const handleDraft = async () => {
+  //   let formData = new FormData();
+  // };
+
+  const handleUpload = async () => {
+    let formData = new FormData();
+    formData.append('firstName', 'John');
+
+    if (selectedFiles.length < 1 || !isSellItemFormValid(sellItemFormData))
+      return;
+    console.log('passed');
+
+    for (const [key, value] of Object.entries(initialSellItemFormState)) {
+      formData.append(key, String(value));
+    }
+
+    const blobs = [];
+    for (const file of selectedFiles) {
+      const blob = await new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => {
+          resolve(reader.result);
+        };
+        reader.onerror = (error) => {
+          reject(error);
+        };
+        reader.readAsArrayBuffer(file);
+      });
+      blobs.push(blob);
+      console.log('for of');
+    }
+
+    blobs.forEach((blob) => {
+      formData.append(`file`, new Blob([blob as ArrayBuffer]));
+      console.log('done inside for each all');
+    });
+    formData.append('firstName', 'John');
+
+    console.log(formData.has('firstName'));
+
+    fetch('http://localhost:5001/api/v1/item/addItem', {
+      // fetch(''http://localhost:5001/multer'', {
+      method: 'POST',
+      mode: 'cors',
+      credentials: 'include',
+      // headers: {
+      //   'Content-Type': 'multipart/form-data',
+      // },
+
+      body: formData,
+    })
+      .then(async (response) => {
+        // Handle the response
+        console.log(await response.json());
+      })
+      .catch((error) => {
+        // Handle any errors
+        console.log(error);
+      });
   };
 
   return (
@@ -55,7 +126,7 @@ const New = () => {
           sellItemFormData={sellItemFormData}
           handleChange={handleChange}
         />
-        <ButtonPanel />
+        <ButtonPanel handleUpload={handleUpload} />
       </div>
       <div className="container"></div>
     </NewItemWrapper>

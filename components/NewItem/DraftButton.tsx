@@ -9,7 +9,7 @@ interface IDraftButton {
 function DraftButton({ isLoading, onClick, text }: IDraftButton) {
   return (
     <DraftButtonWrapper
-      type="button"
+      // type="button"
       disabled={isLoading}
       className="btn"
       onClick={onClick ? onClick : () => {}}

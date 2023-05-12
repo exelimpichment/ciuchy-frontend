@@ -1,10 +1,28 @@
+import { Dispatch, SetStateAction } from 'react';
 import { HiPlus } from 'react-icons/hi';
 import styled from 'styled-components';
 
-function UploadPhotosButton() {
+function UploadPhotosButton({
+  selectedFiles,
+  setSelectedFiles,
+}: {
+  selectedFiles: File[];
+  setSelectedFiles: Dispatch<SetStateAction<File[]>>;
+}) {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    const temp = Array.from(files || []);
+    setSelectedFiles([...selectedFiles, ...temp]);
+  };
+
   return (
     <UploadPhotosButtonWrapper>
-      <input type="file" />
+      <input
+        type="file"
+        onChange={handleChange}
+        // multiple
+        accept="image/png, image/jpeg"
+      />
       <span className="svg-container">
         <HiPlus />
       </span>

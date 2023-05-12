@@ -2,17 +2,17 @@ import styled from 'styled-components';
 
 interface IUploadButton {
   isLoading: boolean;
-  onClick?: () => void;
   text: string;
+  handleUpload: () => void;
 }
 
-function UploadButton({ isLoading, onClick, text }: IUploadButton) {
+function UploadButton({ isLoading, text, handleUpload }: IUploadButton) {
   return (
     <UploadButtonWrapper
       type="button"
       disabled={isLoading}
       className="btn"
-      onClick={onClick ? onClick : () => {}}
+      onClick={handleUpload}
     >
       {text}
     </UploadButtonWrapper>
