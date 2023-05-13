@@ -20,7 +20,7 @@ function UploadPhotosButton({
       <input
         type="file"
         onChange={handleChange}
-        // multiple
+        multiple
         accept="image/png, image/jpeg"
       />
       <span className="svg-container">

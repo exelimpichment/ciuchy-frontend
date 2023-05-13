@@ -9,3 +9,10 @@ export const axiosInstance = axios.create({
   headers: { 'Content-Type': 'application/json;charset=utf-8' },
   withCredentials: true,
 });
+
+export const formDataAxiosInstance = axios.create({
+  baseURL: 'http://localhost:5001/api/v1/item',
+  timeout: 10000,
+  // headers: { 'Content-Type': 'multipart/form-data' },
+  withCredentials: true,
+});

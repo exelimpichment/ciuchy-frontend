@@ -24,7 +24,7 @@ export default function Layout({ children }: { children: ReactElement }) {
         {router.pathname !== '/_error' && (
           <nav
             className={inter.className}
-            style={{ position: 'sticky', top: 0 }}
+            style={{ position: 'sticky', top: 0, zIndex: 10 }}
           >
             <SearchBar />
             <NavigationBar />

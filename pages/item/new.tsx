@@ -3,20 +3,28 @@ import CategorySetter from '@/components/NewItem/CategorySetter';
 import PhotoSetter from '@/components/NewItem/PhotoSetter';
 import PriceSetter from '@/components/NewItem/PriceSetter';
 import TitleSetter from '@/components/NewItem/TitleSetter';
+import { RootState } from '@/redux/store';
+import axios from 'axios';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 import styled from 'styled-components';
 import { ISellItemForm } from '../../types/newItem.types';
 
 const initialSellItemFormState: ISellItemForm = {
-  title: 'sdsdsd',
-  description: 'sdsd',
-  category: 'men',
-  brand: 'Nike',
-  condition: 'New',
+  title: '',
+  description: '',
+  category: '',
+  brand: '',
+  condition: '',
   price: 0,
 };
 
 const New = () => {
+  const router = useRouter();
+  const userId = useSelector((state: RootState) => state.authentication?.user);
+
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
   const [sellItemFormData, setSellItemFormData] = useState<ISellItemForm>(
     initialSellItemFormState
@@ -45,19 +53,13 @@ const New = () => {
     return true;
   };
 
-  // const handleDraft = async () => {
-  //   let formData = new FormData();
-  // };
-
   const handleUpload = async () => {
     let formData = new FormData();
-    formData.append('firstName', 'John');
 
     if (selectedFiles.length < 1 || !isSellItemFormValid(sellItemFormData))
       return;
-    console.log('passed');
 
-    for (const [key, value] of Object.entries(initialSellItemFormState)) {
+    for (const [key, value] of Object.entries(sellItemFormData)) {
       formData.append(key, String(value));
     }
 
@@ -74,36 +76,30 @@ const New = () => {
         reader.readAsArrayBuffer(file);
       });
       blobs.push(blob);
-      console.log('for of');
     }
 
-    blobs.forEach((blob) => {
-      formData.append(`file`, new Blob([blob as ArrayBuffer]));
-      console.log('done inside for each all');
+    selectedFiles.forEach((file) => {
+      console.log(file);
+      formData.append(`file`, file);
     });
-    formData.append('firstName', 'John');
 
-    console.log(formData.has('firstName'));
-
-    fetch('http://localhost:5001/api/v1/item/addItem', {
-      // fetch(''http://localhost:5001/multer'', {
-      method: 'POST',
-      mode: 'cors',
-      credentials: 'include',
-      // headers: {
-      //   'Content-Type': 'multipart/form-data',
-      // },
-
-      body: formData,
-    })
-      .then(async (response) => {
-        // Handle the response
-        console.log(await response.json());
-      })
-      .catch((error) => {
-        // Handle any errors
-        console.log(error);
+    try {
+      const url = 'http://localhost:5001/api/v1/item/addItem';
+      const response = await axios({
+        method: 'post',
+        url,
+        data: formData,
+        headers: { 'Content-Type': 'multipart/form-data' },
       });
+      console.log(response);
+      toast.success('Item added successfully');
+      setSellItemFormData({ ...sellItemFormData, ...initialSellItemFormState });
+      setTimeout(() => {
+        router.push(`/user/${userId}`);
+      }, 1000);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
