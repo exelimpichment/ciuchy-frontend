@@ -7,6 +7,7 @@ import {
   brandsList,
   categoryList,
   conditionList,
+  typeList,
 } from '../../utils/sellNowLists';
 import DropdownLinesContainer from './dropdownFormIput/DropdownLinesContainer';
 
@@ -17,11 +18,17 @@ function CategorySetter({
   handleRadio: handleRadio;
   sellItemFormData: ISellItemForm;
 }) {
-  const initialState = { category: false, brand: false, condition: false };
+  const initialState = {
+    category: false,
+    brand: false,
+    type: false,
+    condition: false,
+  };
 
   interface IInitialState {
     category: boolean;
     brand: boolean;
+    type: boolean;
     condition: boolean;
   }
 
@@ -33,6 +40,7 @@ function CategorySetter({
           ...dropdownOpen,
           category: false,
           brand: false,
+          type: false,
           condition: false,
         })
       : setDropdownOpen({
@@ -40,6 +48,7 @@ function CategorySetter({
           category: true,
           brand: false,
           condition: false,
+          type: false,
         });
   };
   const brandDropdownHandler = () => {
@@ -48,27 +57,50 @@ function CategorySetter({
           ...dropdownOpen,
           category: false,
           brand: false,
+          type: false,
           condition: false,
         })
       : setDropdownOpen({
           ...dropdownOpen,
           category: false,
           brand: true,
+          type: false,
           condition: false,
         });
   };
-  const conditionDropdownHandler = () => {
-    dropdownOpen.condition
+
+  const typeDropdownHandler = () => {
+    dropdownOpen.type
       ? setDropdownOpen({
           ...dropdownOpen,
           category: false,
           brand: false,
+          type: false,
           condition: false,
         })
       : setDropdownOpen({
           ...dropdownOpen,
           category: false,
           brand: false,
+          type: true,
+          condition: false,
+        });
+  };
+
+  const conditionDropdownHandler = () => {
+    dropdownOpen.condition
+      ? setDropdownOpen({
+          ...dropdownOpen,
+          category: false,
+          brand: false,
+          type: false,
+          condition: false,
+        })
+      : setDropdownOpen({
+          ...dropdownOpen,
+          category: false,
+          brand: false,
+          type: false,
           condition: true,
         });
   };
@@ -134,6 +166,38 @@ function CategorySetter({
           {dropdownOpen.brand === true && (
             <DropdownLinesContainer
               list={brandsList}
+              handleRadio={handleRadio}
+              sellItemFormData={sellItemFormData}
+            />
+          )}
+        </div>
+      </div>
+
+      <div className="categorySetterWrapper__type">
+        <p className="categorySetterWrapper__text">Type</p>
+        <div className="categorySetterWrapper__input-container">
+          <div
+            className="input__chevron-container"
+            onClick={typeDropdownHandler}
+          >
+            <TbChevronDown
+              style={dropdownOpen.type ? { transform: 'rotate(180deg)' } : {}}
+            />
+          </div>
+          <label htmlFor="type"></label>
+          <input
+            readOnly
+            value={sellItemFormData.type}
+            onClick={typeDropdownHandler}
+            type="text"
+            name="type"
+            autoComplete="off"
+            className="categorySetterWrapper__input"
+            placeholder="select type"
+          />
+          {dropdownOpen.type === true && (
+            <DropdownLinesContainer
+              list={typeList}
               handleRadio={handleRadio}
               sellItemFormData={sellItemFormData}
             />
@@ -212,6 +276,7 @@ const CategorySetterWrapper = styled.div`
 
   .categorySetterWrapper__category,
   .categorySetterWrapper__brand,
+  .categorySetterWrapper__type,
   .categorySetterWrapper__condition {
     display: flex;
     justify-content: space-between;

@@ -13,6 +13,7 @@ export interface ISellItemForm {
     | 'Burberry'
     | 'Adidas'
     | '';
+  type: 'Shoes' | 'Clothes' | 'Accessories' | '';
   condition: 'New' | 'Very Good' | 'Good' | 'Poor' | '';
   price: number | '';
   [key: string]: string | number | undefined;

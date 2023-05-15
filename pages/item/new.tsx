@@ -17,13 +17,16 @@ const initialSellItemFormState: ISellItemForm = {
   description: '',
   category: '',
   brand: '',
+  type: '',
   condition: '',
   price: 0,
 };
 
 const New = () => {
   const router = useRouter();
-  const userId = useSelector((state: RootState) => state.authentication?.user);
+  const { userId } = useSelector(
+    (state: RootState) => state.authentication?.user
+  );
 
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
   const [sellItemFormData, setSellItemFormData] = useState<ISellItemForm>(
@@ -84,6 +87,7 @@ const New = () => {
     });
 
     try {
+      debugger;
       const url = 'http://localhost:5001/api/v1/item/addItem';
       const response = await axios({
         method: 'post',
@@ -93,10 +97,11 @@ const New = () => {
       });
       console.log(response);
       toast.success('Item added successfully');
-      setSellItemFormData({ ...sellItemFormData, ...initialSellItemFormState });
+
       setTimeout(() => {
         router.push(`/user/${userId}`);
-      }, 1000);
+      }, 700);
+      setSellItemFormData({ ...sellItemFormData, ...initialSellItemFormState });
     } catch (error) {
       console.log(error);
     }

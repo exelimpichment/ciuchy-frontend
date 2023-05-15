@@ -22,3 +22,8 @@ export const categoryList = [
   { key: 2, value: 'men', group: 'category' },
   { key: 3, value: 'kids', group: 'category' },
 ];
+export const typeList = [
+  { key: 1, value: 'Shoes', group: 'type' },
+  { key: 2, value: 'Clothes', group: 'type' },
+  { key: 3, value: 'Accessories', group: 'type' },
+];
