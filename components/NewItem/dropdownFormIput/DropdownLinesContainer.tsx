@@ -37,6 +37,7 @@ const DropdownLinesContainerWrapper = styled.div`
   position: absolute;
   left: 0;
   z-index: 10;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 
   &::-webkit-scrollbar {
     display: none;
