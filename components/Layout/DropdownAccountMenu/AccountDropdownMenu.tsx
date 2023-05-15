@@ -1,6 +1,7 @@
 import { RootState } from '@/redux/store';
 import { logout } from '@/utils/authenticator';
 import { useRouter } from 'next/router';
+import { Dispatch, SetStateAction } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import DropdownAccountMenuLine from './DropdownAccountMenuLine';
@@ -10,7 +11,7 @@ import DropdownAccountMenuLine from './DropdownAccountMenuLine';
 const AccountDropdownMenu = ({
   setShowAccountDropdownMenu,
 }: {
-  setShowAccountDropdownMenu: any;
+  setShowAccountDropdownMenu: Dispatch<SetStateAction<boolean>>;
 }) => {
   const dispatch = useDispatch();
   const router = useRouter();
