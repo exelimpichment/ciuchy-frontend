@@ -34,4 +34,4 @@ function UserProfile() {
 
 export default UserProfile;
 
-const UserProfileWrapper = styled.div``;
+const UserProfileWrapper = styled.section``;

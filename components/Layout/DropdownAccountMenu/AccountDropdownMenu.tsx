@@ -29,11 +29,11 @@ const AccountDropdownMenu = ({
   };
   const messagesHandler = () => {
     setShowAccountDropdownMenu(false);
-    console.log('Messages section');
+    router.push(`/user/${userId}/messages`);
   };
   const settingsHandler = () => {
     setShowAccountDropdownMenu(false);
-    console.log('Messages section');
+    router.push(`/user/${userId}/settings`);
   };
 
   const menuItems = [

@@ -1,9 +1,24 @@
+import { RootState } from '@/redux/store';
+import { useRouter } from 'next/router';
 import { FiEdit2 } from 'react-icons/fi';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
 function EditProfileButton() {
+  const router = useRouter();
+  const { userId } = useSelector(
+    (state: RootState) => state.authentication?.user
+  );
+  const handleEditProfileButton = () => {
+    router.push(`/user/${userId}/settings`);
+  };
+
   return (
-    <EditProfileButtonWrapper type="button" className="edit-profile__button">
+    <EditProfileButtonWrapper
+      type="button"
+      className="edit-profile__button"
+      onClick={handleEditProfileButton}
+    >
       <span className="svg-container">
         <FiEdit2 />
       </span>

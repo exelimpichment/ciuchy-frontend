@@ -136,7 +136,7 @@ const New = () => {
 
 export default New;
 
-const NewItemWrapper = styled.div`
+const NewItemWrapper = styled.section`
   background-color: #f2f1f2;
   min-height: calc(100vh - 110px);
   overflow: scroll;
