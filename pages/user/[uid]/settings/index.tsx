@@ -32,6 +32,7 @@ function Settings() {
         <div className="settingsWrapper__inner">
           <SettingsSidebar
             handleSettingsSidebarClick={handleSettingsSidebarClick}
+            activeSubmenu={activeSubmenu}
           />
           <SettingsMain activeSubmenu={activeSubmenu} />
         </div>

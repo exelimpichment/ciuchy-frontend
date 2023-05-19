@@ -1,3 +1,4 @@
+import styled from 'styled-components';
 import ProfileDetails from './ProfileDetails';
 
 interface SettingsMainProps {
@@ -13,12 +14,16 @@ interface SettingsMainProps {
 
 const SettingsMain: React.FC<SettingsMainProps> = ({ activeSubmenu }) => {
   return (
-    <div>
+    <SettingsMainWrapper>
       {activeSubmenu === 'Profile details' && <ProfileDetails />}
       {/*activeSubmenu === 'Account settings'  <AccountSettings /> */}
       {/* <SettingsSubmenuPlaceholder /> */}
-    </div>
+    </SettingsMainWrapper>
   );
 };
 
 export default SettingsMain;
+
+const SettingsMainWrapper = styled.div`
+  flex-grow: 1;
+`;

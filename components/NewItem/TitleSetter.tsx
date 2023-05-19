@@ -15,7 +15,7 @@ function TitleSetter({
     <TitleSetterWrapper>
       <div className="titleSetterWrapper__title">
         <p className="titleSetterWrapper__text">Title</p>
-        <label htmlFor="category"></label>
+        <label htmlFor="title"></label>
         <input
           onChange={handleChange}
           value={sellItemFormData.title}
@@ -31,7 +31,7 @@ function TitleSetter({
 
       <div className="titleSetterWrapper__description">
         <p className="titleSetterWrapper__text">Describe your item</p>
-        <label htmlFor="category"></label>
+        <label htmlFor="description"></label>
         <textarea
           value={sellItemFormData.description}
           onChange={handleChange}

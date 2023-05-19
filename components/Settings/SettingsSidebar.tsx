@@ -13,10 +13,19 @@ const sidebarLinks = [
 
 interface ISettingsSidebarProps {
   handleSettingsSidebarClick: (e: React.MouseEvent<HTMLLIElement>) => void;
+  activeSubmenu:
+    | 'Profile details'
+    | 'Account settings'
+    | 'Postage'
+    | 'Payments'
+    | 'Notifications'
+    | 'Privacy settings'
+    | 'Security';
 }
 
 const SettingsSidebar: React.FC<ISettingsSidebarProps> = ({
   handleSettingsSidebarClick,
+  activeSubmenu,
 }) => {
   return (
     <SettingsSidebarWrapper>
@@ -27,6 +36,7 @@ const SettingsSidebar: React.FC<ISettingsSidebarProps> = ({
             key={key}
             text={text}
             onClick={handleSettingsSidebarClick}
+            activeSubmenu={activeSubmenu}
           />
         ))}
       </ul>

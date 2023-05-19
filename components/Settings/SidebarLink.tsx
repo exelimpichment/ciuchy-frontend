@@ -3,12 +3,29 @@ import styled from 'styled-components';
 interface ISidebarLinkProps {
   text: string;
   onClick: (e: React.MouseEvent<HTMLLIElement>) => void;
+  activeSubmenu:
+    | 'Profile details'
+    | 'Account settings'
+    | 'Postage'
+    | 'Payments'
+    | 'Notifications'
+    | 'Privacy settings'
+    | 'Security';
 }
 
-const SidebarLink: React.FC<ISidebarLinkProps> = ({ text, onClick }) => {
+const SidebarLink: React.FC<ISidebarLinkProps> = ({
+  text,
+  onClick,
+  activeSubmenu,
+}) => {
   return (
     <SidebarLinkWrapper>
-      <li onClick={onClick}>{text}</li>
+      <li
+        onClick={onClick}
+        style={activeSubmenu === text ? { color: 'black' } : undefined}
+      >
+        {text}
+      </li>
     </SidebarLinkWrapper>
   );
 };

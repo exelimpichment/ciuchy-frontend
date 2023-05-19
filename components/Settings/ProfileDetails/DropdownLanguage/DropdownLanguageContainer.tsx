@@ -1,0 +1,59 @@
+import styled from 'styled-components';
+import DropdownLanguageLine from './DropdownLanguageLine';
+
+interface Language {
+  key: number;
+  name: 'English(English)' | 'Украінська(Ukrainian)' | 'Polski(Polish)';
+}
+
+const languages: Language[] = [
+  { key: 0, name: 'English(English)' },
+  { key: 1, name: 'Украінська(Ukrainian)' },
+  { key: 2, name: 'Polski(Polish)' },
+];
+
+interface IDropdownLanguageContainerProps {
+  language: 'English(English)' | 'Украінська(Ukrainian)' | 'Polski(Polish)';
+  handleLanguageChange: ({
+    text,
+  }: {
+    text: 'English(English)' | 'Украінська(Ukrainian)' | 'Polski(Polish)';
+  }) => void;
+}
+
+const DropdownLanguageContainer: React.FC<IDropdownLanguageContainerProps> = ({
+  language,
+  handleLanguageChange,
+}) => {
+  return (
+    <DropdownLanguageContainerWrapper>
+      <ul>
+        {languages.map(({ key, name }) => (
+          <DropdownLanguageLine
+            key={key}
+            text={name}
+            language={language}
+            handleLanguageChange={handleLanguageChange}
+          />
+        ))}
+      </ul>
+    </DropdownLanguageContainerWrapper>
+  );
+};
+
+export default DropdownLanguageContainer;
+
+const DropdownLanguageContainerWrapper = styled.div`
+  background-color: #fff;
+  max-height: 400px;
+  overflow: scroll;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  z-index: 10;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+`;
