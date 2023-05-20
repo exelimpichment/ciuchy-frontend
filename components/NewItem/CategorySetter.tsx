@@ -249,6 +249,10 @@ const CategorySetterWrapper = styled.div`
   font-size: 1.2rem;
   background-color: #fff;
 
+  svg {
+    transition: transform 0.35s ease-in-out;
+  }
+
   input {
     all: unset;
     caret-color: transparent;

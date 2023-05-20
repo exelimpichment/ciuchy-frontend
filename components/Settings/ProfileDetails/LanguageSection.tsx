@@ -63,6 +63,10 @@ const LanguageSectionWrapper = styled.div`
   font-size: 1.2rem;
   padding: 2rem;
 
+  svg {
+    transition: transform 0.3s ease-in-out;
+  }
+
   .language-section__selector-container {
     min-width: 50%;
     position: relative;
@@ -73,6 +77,7 @@ const LanguageSectionWrapper = styled.div`
       font-size: 1.4rem;
       right: 2px;
       top: 0;
+      transition: transform 0.3s ease-in-out;
     }
 
     input {

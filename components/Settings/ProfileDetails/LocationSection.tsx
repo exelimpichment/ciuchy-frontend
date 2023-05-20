@@ -20,7 +20,7 @@ export type countryType =
   | 'Denmark';
 
 function LocationSection() {
-  const [dropdownOpen, setDropdownOpen] = useState<boolean>(true);
+  const [dropdownOpen, setDropdownOpen] = useState<boolean>(false);
   const [country, setCountry] = useState<countryType>('not selected');
 
   const handleCountryDropdownOpen = () => {
@@ -29,7 +29,6 @@ function LocationSection() {
 
   const handleLocationChange = ({ text }: { text: countryType }) => {
     setCountry(text);
-    // console.log('click clikck');
   };
 
   return (
@@ -54,7 +53,7 @@ function LocationSection() {
             name="selector"
             value={country}
             readOnly
-            // onClick={handleLanguageDropdownOpen}
+            onClick={handleCountryDropdownOpen}
           />
           {dropdownOpen && (
             <DropdownCountryContainer
@@ -75,6 +74,10 @@ const LocationSectionWrapper = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 2rem;
+
+  svg {
+    transition: transform 0.3s ease-in-out;
+  }
 
   .locationSection__selector-container {
     min-width: 50%;
@@ -105,5 +108,6 @@ const LocationSectionWrapper = styled.div`
     font-size: 1.4rem;
     right: 2px;
     top: 0;
+    transition: transform 0.3s ease-in-out;
   }
 `;

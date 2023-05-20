@@ -1,18 +1,17 @@
 import styled from 'styled-components';
 
-const handleProfileDetailsUpdateButton = () => {};
-
-function ProfileDetailsUpdateButton() {
+function ProfileDetailsSaveButton() {
+  const handleProfileDetailsUpdateButton = () => {};
   return (
     <ProfileDetailsUpdateButtonWrapper>
       <button type="button" onClick={handleProfileDetailsUpdateButton}>
-        Update profile
+        Save
       </button>
     </ProfileDetailsUpdateButtonWrapper>
   );
 }
 
-export default ProfileDetailsUpdateButton;
+export default ProfileDetailsSaveButton;
 
 const ProfileDetailsUpdateButtonWrapper = styled.div`
   display: flex;

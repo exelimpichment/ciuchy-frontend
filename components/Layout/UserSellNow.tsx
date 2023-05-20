@@ -58,6 +58,7 @@ const UserSellNowWrapper = styled.div`
   svg {
     font-size: 1.3rem;
     cursor: pointer;
+    transition: transform 0.3s ease-in-out;
   }
   .userSellNow-img__container {
     position: relative;

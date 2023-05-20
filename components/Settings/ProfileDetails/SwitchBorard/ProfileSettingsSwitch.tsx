@@ -59,11 +59,11 @@ const ProfileSettingsSwitchWrapper = styled.div`
 const CustomSwitch = styled(Switch)`
   .MuiSwitch-track {
     background-color: ${({ checked }) =>
-      checked ? '#a7655f' : 'black'} !important; // Custom color for the track
+      checked ? '#a7655f' : 'grey'} !important; // Custom color for the track
   }
 
   .MuiSwitch-thumb {
     color: ${({ checked }) =>
-      checked ? '#c45f55' : 'black'}; // Custom color for the thumb
+      checked ? '#c45f55' : 'grey'}; // Custom color for the thumb
   }
 `;

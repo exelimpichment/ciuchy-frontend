@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import AccountSettings from './AccountSettings';
 import ProfileDetails from './ProfileDetails';
 
 interface SettingsMainProps {
@@ -16,7 +17,7 @@ const SettingsMain: React.FC<SettingsMainProps> = ({ activeSubmenu }) => {
   return (
     <SettingsMainWrapper>
       {activeSubmenu === 'Profile details' && <ProfileDetails />}
-      {/*activeSubmenu === 'Account settings'  <AccountSettings /> */}
+      {activeSubmenu === 'Account settings' && <AccountSettings />}
       {/* <SettingsSubmenuPlaceholder /> */}
     </SettingsMainWrapper>
   );

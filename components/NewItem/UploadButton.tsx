@@ -30,7 +30,7 @@ const UploadButtonWrapper = styled.button`
   color: white;
   font-weight: 500;
   height: 42px;
-  width: 120px;
+  min-width: 120px;
   margin: 1.3rem 0 1.3rem 1rem;
 
   &:hover {
