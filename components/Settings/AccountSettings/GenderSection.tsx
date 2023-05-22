@@ -1,33 +1,31 @@
 import { useState } from 'react';
 import { TbChevronDown } from 'react-icons/tb';
 import styled from 'styled-components';
-import DropdownLanguageContainer from './DropdownLanguage/DropdownLanguageContainer';
-type LanguageType =
-  | 'English(English)'
-  | 'Украінська(Ukrainian)'
-  | 'Polski(Polish)';
+import DropdownGenderContainer from './DropdownGender/DropdownGenderContainer';
 
-function LanguageSection() {
+type GenderType = 'Woman' | 'Man' | 'Other' | 'Select gender';
+
+function GenderSection() {
   const [dropdownOpen, setDropdownOpen] = useState<boolean>(false);
-  const [language, setLanguage] = useState<LanguageType>('English(English)');
+  const [gender, setGender] = useState<GenderType>('Select gender');
 
-  const handleLanguageDropdownOpen = () => {
+  const handleGenderDropdownOpen = () => {
     setDropdownOpen(!dropdownOpen);
   };
 
-  const handleLanguageChange = ({ text }: { text: LanguageType }) => {
-    setLanguage(text);
+  const handleGenderChange = ({ text }: { text: GenderType }) => {
+    setGender(text);
   };
 
   return (
-    <LanguageSectionWrapper>
+    <GenderSectionWrapper>
       <div className="language-section__text-inner">
-        <p className="language-section__text">Language</p>
+        <p className="language-section__text">Gender</p>
       </div>
       <div className="language-section__selector-container">
         <div
           className="selector__chevron-container"
-          onClick={handleLanguageDropdownOpen}
+          onClick={handleGenderDropdownOpen}
         >
           <TbChevronDown
             style={dropdownOpen ? { transform: 'rotate(180deg)' } : undefined}
@@ -37,24 +35,24 @@ function LanguageSection() {
         <input
           type="text"
           name="selector"
-          value={language}
+          value={gender}
           readOnly
-          onClick={handleLanguageDropdownOpen}
+          onClick={handleGenderDropdownOpen}
         />
         {dropdownOpen && (
-          <DropdownLanguageContainer
-            language={language}
-            handleLanguageChange={handleLanguageChange}
+          <DropdownGenderContainer
+            gender={gender}
+            handleGenderChange={handleGenderChange}
           />
         )}
       </div>
-    </LanguageSectionWrapper>
+    </GenderSectionWrapper>
   );
 }
 
-export default LanguageSection;
+export default GenderSection;
 
-const LanguageSectionWrapper = styled.div`
+const GenderSectionWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;

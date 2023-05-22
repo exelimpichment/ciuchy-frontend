@@ -35,12 +35,12 @@ const DeleteAccount: React.FC<IDeleteAccountProps> = ({
 export default DeleteAccount;
 
 const DeleteAccountWrapper = styled.div`
+  margin-top: 2rem;
   background-color: #fff;
   display: flex;
   justify-content: space-between;
   padding: 2rem;
   font-size: 1.2rem;
-  transition: all 4s ease-in-out;
 
   .deleteAccount__button {
     display: flex;

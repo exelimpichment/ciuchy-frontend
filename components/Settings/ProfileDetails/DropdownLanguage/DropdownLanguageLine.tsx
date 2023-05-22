@@ -18,8 +18,6 @@ const DropdownLanguageLine: React.FC<IDropdownLanguageLineProps> = ({
 }) => {
   const radio = language === text ? <ImRadioChecked2 /> : <ImRadioUnchecked />;
 
-  console.log(text);
-
   return (
     <DropdownLanguageLineWrapper>
       <p className="dropdownLanguageLine__inner"> {text} </p>

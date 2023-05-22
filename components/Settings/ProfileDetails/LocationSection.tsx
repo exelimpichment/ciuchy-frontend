@@ -3,7 +3,7 @@ import { TbChevronDown } from 'react-icons/tb';
 import styled from 'styled-components';
 import DropdownCountryContainer from './DropdownCountry/DropdownCountryContainer';
 
-export type countryType =
+export type CountryType =
   | 'not selected'
   | 'Germany'
   | 'United Kingdom'
@@ -21,13 +21,13 @@ export type countryType =
 
 function LocationSection() {
   const [dropdownOpen, setDropdownOpen] = useState<boolean>(false);
-  const [country, setCountry] = useState<countryType>('not selected');
+  const [country, setCountry] = useState<CountryType>('not selected');
 
   const handleCountryDropdownOpen = () => {
     setDropdownOpen(!dropdownOpen);
   };
 
-  const handleLocationChange = ({ text }: { text: countryType }) => {
+  const handleLocationChange = ({ text }: { text: CountryType }) => {
     setCountry(text);
   };
 

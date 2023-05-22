@@ -1,11 +1,11 @@
 import { ImRadioChecked2, ImRadioUnchecked } from 'react-icons/im';
 import styled from 'styled-components';
-import { countryType } from '../LocationSection';
+import { CountryType } from '../LocationSection';
 
 interface IDropdownCountryLineProps {
   text: any;
-  handleLocationChange: ({ text }: { text: countryType }) => void;
-  country: countryType;
+  handleLocationChange: ({ text }: { text: CountryType }) => void;
+  country: CountryType;
 }
 
 const DropdownCountryLine: React.FC<IDropdownCountryLineProps> = ({

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { countryType } from '../LocationSection';
+import { CountryType } from '../LocationSection';
 import DropdownCountryLine from './DropdownCountryLine';
 
 interface ICountry {
@@ -39,8 +39,8 @@ const countries: ICountry[] = [
 ];
 
 interface DropdownCountryContainerProps {
-  country: countryType;
-  handleLocationChange: ({ text }: { text: countryType }) => void;
+  country: CountryType;
+  handleLocationChange: ({ text }: { text: CountryType }) => void;
 }
 
 const DropdownCountryContainer: React.FC<DropdownCountryContainerProps> = ({

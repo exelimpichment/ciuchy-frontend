@@ -29,9 +29,10 @@ export default HolidayMode;
 const HolidayModeWrapper = styled.div`
   display: flex;
   justify-content: space-between;
-  padding: 1rem 2rem 1rem 2rem;
+  padding: 2rem 2rem 2rem 2rem;
   font-size: 1.2rem;
   background-color: #fff;
+  margin-top: 2rem;
 
   .locationSection__toggle-container {
     display: flex;

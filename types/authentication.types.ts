@@ -4,7 +4,7 @@ export interface IInitialValues {
   password: string;
 }
 
-export type handleRadio = ({
+export type HandleRadio = ({
   name,
   value,
 }: {

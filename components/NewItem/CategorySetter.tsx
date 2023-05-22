@@ -1,4 +1,4 @@
-import { handleRadio } from '@/types/authentication.types';
+import { HandleRadio } from '@/types/authentication.types';
 import { ISellItemForm } from '@/types/newItem.types';
 import { useState } from 'react';
 import { TbChevronDown } from 'react-icons/tb';
@@ -15,7 +15,7 @@ function CategorySetter({
   handleRadio,
   sellItemFormData,
 }: {
-  handleRadio: handleRadio;
+  handleRadio: HandleRadio;
   sellItemFormData: ISellItemForm;
 }) {
   const initialState = {

@@ -1,4 +1,4 @@
-import { handleRadio } from '@/types/authentication.types';
+import { HandleRadio } from '@/types/authentication.types';
 import { ISellItemForm } from '@/types/newItem.types';
 import { ImRadioChecked2, ImRadioUnchecked } from 'react-icons/im';
 import styled from 'styled-components';
@@ -8,7 +8,7 @@ function DropdownFormLine({
   item,
   sellItemFormData,
 }: {
-  handleRadio: handleRadio;
+  handleRadio: HandleRadio;
 
   item: {
     key: number;

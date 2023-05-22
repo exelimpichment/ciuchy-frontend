@@ -1,4 +1,4 @@
-import { handleRadio } from '@/types/authentication.types';
+import { HandleRadio } from '@/types/authentication.types';
 import { ISellItemForm } from '@/types/newItem.types';
 import styled from 'styled-components';
 import DropdownFormLine from './DropdownFormLine';
@@ -9,7 +9,7 @@ function DropdownLinesContainer({
   sellItemFormData,
 }: {
   list: { key: number; value: string; group: string }[];
-  handleRadio: handleRadio;
+  handleRadio: HandleRadio;
   sellItemFormData: ISellItemForm;
 }) {
   return (

@@ -3,7 +3,7 @@ import SettingsSidebar from '@/components/Settings/SettingsSidebar';
 import { useState } from 'react';
 import styled from 'styled-components';
 
-export type activeSubmenu =
+export type ActiveSubmenu =
   | 'Profile details'
   | 'Account settings'
   | 'Postage'
@@ -14,7 +14,7 @@ export type activeSubmenu =
 
 function Settings() {
   const [activeSubmenu, setActiveSubmenu] =
-    useState<activeSubmenu>('Profile details');
+    useState<ActiveSubmenu>('Profile details');
 
   const handleSettingsSidebarClick = (
     event: React.MouseEvent<HTMLLIElement>
@@ -22,7 +22,7 @@ function Settings() {
     event.preventDefault();
     const target = event.target as HTMLLIElement;
     if (target.textContent) {
-      setActiveSubmenu(target.textContent as activeSubmenu);
+      setActiveSubmenu(target.textContent as ActiveSubmenu);
     }
   };
 
