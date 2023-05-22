@@ -37,7 +37,7 @@ const DeleteAccountFallDownMenu: React.FC<DeleteAccountFallDownMenuProps> = ({
         </p>
         <div className="consent__tickBox">
           <CustomCheckbox
-            checked={!isConsentOn}
+            checked={isConsentOn}
             onChange={handleChange}
             inputProps={{ 'aria-label': 'controlled' }}
           />

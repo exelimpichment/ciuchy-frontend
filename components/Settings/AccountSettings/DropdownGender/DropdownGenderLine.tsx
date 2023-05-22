@@ -2,12 +2,12 @@ import { ImRadioChecked2, ImRadioUnchecked } from 'react-icons/im';
 import styled from 'styled-components';
 
 interface IDropdownGenderLineProps {
-  text: 'Woman' | 'Man' | 'Other' | 'Select gender';
-  gender: 'Woman' | 'Man' | 'Other' | 'Select gender';
+  text: 'Woman' | 'Man' | 'Other' | '';
+  gender: 'Woman' | 'Man' | 'Other' | '';
   handleGenderChange: ({
     text,
   }: {
-    text: 'Woman' | 'Man' | 'Other' | 'Select gender';
+    text: 'Woman' | 'Man' | 'Other' | '';
   }) => void;
 }
 

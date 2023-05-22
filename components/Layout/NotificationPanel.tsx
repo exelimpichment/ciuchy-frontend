@@ -1,57 +1,66 @@
-import { FcLike, FcLikePlaceholder } from 'react-icons/fc';
-import { RxEnvelopeClosed, RxEnvelopeOpen } from 'react-icons/rx';
-import { VscBell, VscBellDot } from 'react-icons/vsc';
-
+import { RootState } from '@/redux/store';
+import { Badge } from '@mui/material';
+import { useRouter } from 'next/router';
+import { useState } from 'react';
+import { AiOutlineHeart } from 'react-icons/ai';
+import { HiOutlineMail } from 'react-icons/hi';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
-let newMessageReceived = true;
-let newNotificationReceived = true;
-let newLikeReceived = true;
-
 function NotificationPanel() {
+  const [messageCount, setMessageCount] = useState<number>(100);
+  const [likeCount, setLikeCount] = useState<number>(1);
+
+  const { userId } = useSelector(
+    (state: RootState) => state.authentication?.user
+  );
+  const router = useRouter();
+
+  const handleMessageClick = () => {
+    router.push(`/user/${userId}/messages`);
+  };
+
   return (
-    <Wrapper>
-      <div
-        //  type='button'
-        className="notification-btn"
-        onClick={() => {
-          console.log('envelope');
-        }}
-      >
-        {newMessageReceived ? <RxEnvelopeClosed /> : <RxEnvelopeOpen />}
+    <NotificationPanelWrapper>
+      <div className="notification-panel__message">
+        <CustomBadge badgeContent={messageCount}>
+          <HiOutlineMail onClick={handleMessageClick} />
+        </CustomBadge>
       </div>
-      <div
-        // type="button"
-        className="notification-btn"
-        onClick={() => {
-          console.log('bell');
-        }}
-      >
-        {newNotificationReceived ? <VscBellDot /> : <VscBell />}
+
+      <div className="notification-panel__like">
+        <CustomBadge badgeContent={likeCount}>
+          <AiOutlineHeart color="action" />
+        </CustomBadge>
       </div>
-      <div
-        // type="button"
-        className="notification-btn"
-        onClick={() => {
-          console.log('like');
-        }}
-      >
-        {newLikeReceived ? <FcLike /> : <FcLikePlaceholder />}
-      </div>
-    </Wrapper>
+    </NotificationPanelWrapper>
   );
 }
 
 export default NotificationPanel;
 
-const Wrapper = styled.div`
+const NotificationPanelWrapper = styled.div`
   display: flex;
   font-size: 1.6rem;
-  margin-left: 15px;
+  align-items: center;
 
-  .notification-btn {
+  .notification-panel__like {
+    margin-left: 15px;
+  }
+
+  svg {
+    font-size: 2rem;
     cursor: pointer;
-    margin-left: 20px;
-    height: 1.6rem;
+    &:hover {
+      color: #787878;
+      transition: all ease 0.2s;
+    }
+  }
+`;
+
+const CustomBadge = styled(Badge)`
+  .MuiBadge-badge {
+    background-color: #c45f55;
+    color: white;
   }
 `;

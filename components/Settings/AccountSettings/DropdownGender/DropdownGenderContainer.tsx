@@ -3,22 +3,21 @@ import DropdownGenderLine from './DropdownGenderLine';
 
 interface IGender {
   key: number;
-  name: 'Woman' | 'Man' | 'Other' | 'Select gender';
+  name: 'Woman' | 'Man' | 'Other' | '';
 }
 
 const genders: IGender[] = [
-  { key: 0, name: 'Select gender' },
-  { key: 1, name: 'Woman' },
-  { key: 2, name: 'Man' },
-  { key: 3, name: 'Other' },
+  { key: 0, name: 'Woman' },
+  { key: 1, name: 'Man' },
+  { key: 2, name: 'Other' },
 ];
 
 interface DropdownGenderContainerProps {
-  gender: 'Woman' | 'Man' | 'Other' | 'Select gender';
+  gender: 'Woman' | 'Man' | 'Other' | '';
   handleGenderChange: ({
     text,
   }: {
-    text: 'Woman' | 'Man' | 'Other' | 'Select gender';
+    text: 'Woman' | 'Man' | 'Other' | '';
   }) => void;
 }
 

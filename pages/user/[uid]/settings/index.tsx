@@ -45,7 +45,7 @@ export default Settings;
 
 const SettingsWrapper = styled.section`
   background-color: #f2f1f2;
-  min-height: calc(100vh - 110px);
+  min-height: calc(100vh - (110px + 65px));
   overflow: scroll;
 
   .settingsWrapper__inner {

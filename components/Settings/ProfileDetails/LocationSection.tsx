@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import DropdownCountryContainer from './DropdownCountry/DropdownCountryContainer';
 
 export type CountryType =
-  | 'not selected'
+  | ''
   | 'Germany'
   | 'United Kingdom'
   | 'France'
@@ -21,7 +21,7 @@ export type CountryType =
 
 function LocationSection() {
   const [dropdownOpen, setDropdownOpen] = useState<boolean>(false);
-  const [country, setCountry] = useState<CountryType>('not selected');
+  const [country, setCountry] = useState<CountryType>('');
 
   const handleCountryDropdownOpen = () => {
     setDropdownOpen(!dropdownOpen);
@@ -51,9 +51,10 @@ function LocationSection() {
           <input
             type="text"
             name="selector"
-            value={country}
             readOnly
             onClick={handleCountryDropdownOpen}
+            placeholder="not selected"
+            value={country}
           />
           {dropdownOpen && (
             <DropdownCountryContainer
@@ -89,6 +90,10 @@ const LocationSectionWrapper = styled.div`
     all: unset;
     border-bottom: #9e9e9e 1px solid;
     min-width: 100%;
+    &::placeholder {
+      font-size: 1.2rem;
+      color: #acacac;
+    }
   }
 
   .locationSection__city-container .locationSection__toggle-container {

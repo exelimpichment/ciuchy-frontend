@@ -17,7 +17,7 @@ const AccountSettingsSaveButton: React.FC<IAccountSettingsSaveButtonProps> = ({
       <button
         type="button"
         onClick={handleProfileDetailsUpdateButton}
-        disabled={deleteSectionOpen && isConsentOn}
+        disabled={deleteSectionOpen && !isConsentOn}
       >
         {buttonText}
       </button>
@@ -30,7 +30,7 @@ export default AccountSettingsSaveButton;
 const AccountSettingsSaveButtonWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
-  margin-top: 2rem;
+  margin: 2rem 0;
 
   button {
     background-color: #c45f55;

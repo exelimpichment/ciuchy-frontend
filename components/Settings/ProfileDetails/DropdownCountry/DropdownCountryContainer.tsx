@@ -5,7 +5,6 @@ import DropdownCountryLine from './DropdownCountryLine';
 interface ICountry {
   key: number;
   name:
-    | 'not selected'
     | 'Germany'
     | 'United Kingdom'
     | 'France'
@@ -22,8 +21,8 @@ interface ICountry {
 }
 
 const countries: ICountry[] = [
-  { key: 0, name: 'not selected' },
-  { key: 1, name: 'Germany' },
+  { key: 0, name: 'Germany' },
+  { key: 1, name: 'Denmark' },
   { key: 2, name: 'United Kingdom' },
   { key: 3, name: 'France' },
   { key: 4, name: 'Italy' },
@@ -35,7 +34,6 @@ const countries: ICountry[] = [
   { key: 10, name: 'Greece' },
   { key: 11, name: 'Portugal' },
   { key: 12, name: 'Austria' },
-  { key: 13, name: 'Denmark' },
 ];
 
 interface DropdownCountryContainerProps {

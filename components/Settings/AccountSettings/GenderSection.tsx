@@ -3,11 +3,11 @@ import { TbChevronDown } from 'react-icons/tb';
 import styled from 'styled-components';
 import DropdownGenderContainer from './DropdownGender/DropdownGenderContainer';
 
-type GenderType = 'Woman' | 'Man' | 'Other' | 'Select gender';
+type GenderType = 'Woman' | 'Man' | 'Other' | '';
 
 function GenderSection() {
   const [dropdownOpen, setDropdownOpen] = useState<boolean>(false);
-  const [gender, setGender] = useState<GenderType>('Select gender');
+  const [gender, setGender] = useState<GenderType>('');
 
   const handleGenderDropdownOpen = () => {
     setDropdownOpen(!dropdownOpen);
@@ -38,6 +38,7 @@ function GenderSection() {
           value={gender}
           readOnly
           onClick={handleGenderDropdownOpen}
+          placeholder="Select gender"
         />
         {dropdownOpen && (
           <DropdownGenderContainer
@@ -56,10 +57,10 @@ const GenderSectionWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 2rem;
   background-color: #fff;
   font-size: 1.2rem;
   padding: 2rem;
+  border-top: 1px solid #e6ecf0;
 
   svg {
     transition: transform 0.3s ease-in-out;
@@ -82,6 +83,10 @@ const GenderSectionWrapper = styled.div`
       all: unset;
       border-bottom: #9e9e9e 1px solid;
       min-width: 100%;
+      &::placeholder {
+        font-size: 1.2rem;
+        color: #acacac;
+      }
     }
   }
 `;

@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { showUser } from '../../utils/authenticator';
+import Footer from './DropdownAccountMenu/Footer';
 import NavigationBar from './NavigationBar';
 import SearchBar from './SearchBar';
 
@@ -32,6 +33,7 @@ export default function Layout({ children }: { children: ReactElement }) {
           </nav>
         )}
         <>{children}</>
+        <Footer />
       </div>
     </>
   );

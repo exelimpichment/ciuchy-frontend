@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import AccountSettings from './AccountSettings';
 import ProfileDetails from './ProfileDetails';
+import UnderConstruction from './UnderConstruction/UnderConstruction';
 
 interface SettingsMainProps {
   activeSubmenu:
@@ -18,7 +19,8 @@ const SettingsMain: React.FC<SettingsMainProps> = ({ activeSubmenu }) => {
     <SettingsMainWrapper>
       {activeSubmenu === 'Profile details' && <ProfileDetails />}
       {activeSubmenu === 'Account settings' && <AccountSettings />}
-      {/* <SettingsSubmenuPlaceholder /> */}
+      {activeSubmenu !== 'Profile details' &&
+        activeSubmenu !== 'Account settings' && <UnderConstruction />}
     </SettingsMainWrapper>
   );
 };

@@ -14,7 +14,14 @@ function BirthSection() {
         main: '#c45f55',
       },
     },
+    typography: {
+      body1: {
+        fontSize: '1.2rem',
+        fontFamily: 'sans-serif',
+      },
+    },
   });
+  console.log(theme);
 
   return (
     <BirthSectionWrapper>
