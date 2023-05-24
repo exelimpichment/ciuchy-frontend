@@ -3,7 +3,7 @@ import styled from 'styled-components';
 function ChoosePhotoButton() {
   return (
     <ChoosePhotoButtonWrapper type="button">
-      Edit profile
+      Edit photo
     </ChoosePhotoButtonWrapper>
   );
 }
@@ -20,6 +20,7 @@ const ChoosePhotoButtonWrapper = styled.button`
   border: 1px solid #c45f55;
   border-radius: 4px;
   color: #c45f55;
+  font-size: 1.1rem;
   font-weight: 500;
   min-height: 35px;
   min-width: 110px;

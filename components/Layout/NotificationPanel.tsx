@@ -1,6 +1,6 @@
 import { RootState } from '@/redux/store';
 import { Badge } from '@mui/material';
-import { useRouter } from 'next/router';
+import Link from 'next/link';
 import { useState } from 'react';
 import { AiOutlineHeart } from 'react-icons/ai';
 import { HiOutlineMail } from 'react-icons/hi';
@@ -14,18 +14,15 @@ function NotificationPanel() {
   const { userId } = useSelector(
     (state: RootState) => state.authentication?.user
   );
-  const router = useRouter();
-
-  const handleMessageClick = () => {
-    router.push(`/user/${userId}/messages`);
-  };
 
   return (
     <NotificationPanelWrapper>
       <div className="notification-panel__message">
-        <CustomBadge badgeContent={messageCount}>
-          <HiOutlineMail onClick={handleMessageClick} />
-        </CustomBadge>
+        <Link href={`/user/${userId}/messages`} prefetch={false}>
+          <CustomBadge badgeContent={messageCount}>
+            <HiOutlineMail />
+          </CustomBadge>
+        </Link>
       </div>
 
       <div className="notification-panel__like">

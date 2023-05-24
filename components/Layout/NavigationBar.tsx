@@ -12,9 +12,7 @@ function NavigationBar() {
           <ul className="navbar__inner">
             {navigationItems.map((navigationItem) => (
               <li key={navigationItem.id}>
-                <Link href={navigationItem.path} legacyBehavior>
-                  <a className="link">{navigationItem.name}</a>
-                </Link>
+                <Link href={navigationItem.path}>{navigationItem.name}</Link>
               </li>
             ))}
           </ul>
@@ -35,7 +33,7 @@ const Wrapper = styled.div`
     display: flex;
     align-items: center;
 
-    .link {
+    li {
       cursor: pointer;
       color: #303030;
       font-size: 1.1rem;
