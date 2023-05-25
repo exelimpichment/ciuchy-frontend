@@ -3,12 +3,8 @@ import { ISellItemForm } from '@/types/newItem.types';
 import { useState } from 'react';
 import { TbChevronDown } from 'react-icons/tb';
 import styled from 'styled-components';
-import {
-  brandsList,
-  categoryList,
-  conditionList,
-  typeList,
-} from '../../utils/sellNowLists';
+
+import lists from '../../utils/sellNowLists';
 import DropdownLinesContainer from './dropdownFormIput/DropdownLinesContainer';
 
 function CategorySetter({
@@ -21,6 +17,7 @@ function CategorySetter({
   const initialState = {
     category: false,
     brand: false,
+    color: false,
     type: false,
     condition: false,
   };
@@ -28,6 +25,7 @@ function CategorySetter({
   interface IInitialState {
     category: boolean;
     brand: boolean;
+    color: boolean;
     type: boolean;
     condition: boolean;
   }
@@ -64,6 +62,26 @@ function CategorySetter({
           ...dropdownOpen,
           category: false,
           brand: true,
+          type: false,
+          condition: false,
+        });
+  };
+
+  const colorDropdownHandler = () => {
+    dropdownOpen.color
+      ? setDropdownOpen({
+          ...dropdownOpen,
+          category: false,
+          brand: false,
+          color: false,
+          type: false,
+          condition: false,
+        })
+      : setDropdownOpen({
+          ...dropdownOpen,
+          category: false,
+          brand: false,
+          color: true,
           type: false,
           condition: false,
         });
@@ -133,7 +151,7 @@ function CategorySetter({
           />
           {dropdownOpen.category === true && (
             <DropdownLinesContainer
-              list={categoryList}
+              list={lists.category}
               handleRadio={handleRadio}
               sellItemFormData={sellItemFormData}
             />
@@ -165,7 +183,44 @@ function CategorySetter({
           />
           {dropdownOpen.brand === true && (
             <DropdownLinesContainer
-              list={brandsList}
+              list={lists.brand}
+              handleRadio={handleRadio}
+              sellItemFormData={sellItemFormData}
+            />
+          )}
+        </div>
+      </div>
+
+      <div className="categorySetterWrapper__color">
+        <p className="categorySetterWrapper__text">Color</p>
+        <div className="categorySetterWrapper__input-container">
+          <div
+            className="input__chevron-container"
+            onClick={colorDropdownHandler}
+          >
+            <TbChevronDown
+              style={dropdownOpen.color ? { transform: 'rotate(180deg)' } : {}}
+            />
+          </div>
+          <label htmlFor="color"></label>
+          <input
+            style={{
+              color: sellItemFormData.color
+                ? sellItemFormData.color.toString()
+                : undefined,
+            }}
+            readOnly
+            value={sellItemFormData.color}
+            onClick={colorDropdownHandler}
+            type="text"
+            name="color"
+            autoComplete="off"
+            className="categorySetterWrapper__input"
+            placeholder="please select a color"
+          />
+          {dropdownOpen.color === true && (
+            <DropdownLinesContainer
+              list={lists.color}
               handleRadio={handleRadio}
               sellItemFormData={sellItemFormData}
             />
@@ -197,7 +252,7 @@ function CategorySetter({
           />
           {dropdownOpen.type === true && (
             <DropdownLinesContainer
-              list={typeList}
+              list={lists.type}
               handleRadio={handleRadio}
               sellItemFormData={sellItemFormData}
             />
@@ -231,7 +286,7 @@ function CategorySetter({
           />
           {dropdownOpen.condition === true && (
             <DropdownLinesContainer
-              list={conditionList}
+              list={lists.condition}
               handleRadio={handleRadio}
               sellItemFormData={sellItemFormData}
             />
@@ -280,6 +335,7 @@ const CategorySetterWrapper = styled.div`
 
   .categorySetterWrapper__category,
   .categorySetterWrapper__brand,
+  .categorySetterWrapper__color,
   .categorySetterWrapper__type,
   .categorySetterWrapper__condition {
     display: flex;

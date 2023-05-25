@@ -1,46 +1,40 @@
-import { HandleRadio } from '@/types/authentication.types';
-import { ISellItemForm } from '@/types/newItem.types';
+import { IInitialFilterState } from '@/types/catalog.types';
+import { IList } from '@/utils/sellNowLists';
 import { ImRadioChecked2, ImRadioUnchecked } from 'react-icons/im';
 import styled from 'styled-components';
 
-function DropdownFormLine({
-  handleRadio,
-  item,
-  sellItemFormData,
-}: {
-  handleRadio: HandleRadio;
+interface IDropdownFilterLineProps {
+  item: IList;
+  filters: IInitialFilterState;
+  handleRadio: ({ name, value }: { name: string; value: string }) => void;
+}
 
-  item: {
-    key: number;
-    value: string;
-    group: string;
-  };
-  sellItemFormData: ISellItemForm;
-}) {
+const DropdownFilterLine: React.FC<IDropdownFilterLineProps> = ({
+  item,
+  handleRadio,
+  filters,
+}) => {
+  // console.log(item.group);
+
+  // console.log(filters[item.group]);
+
   const radio =
-    sellItemFormData[item.group] === item.value ? (
+    filters[item.group] === item.value ? (
       <ImRadioChecked2 />
     ) : (
       <ImRadioUnchecked />
     );
-
   return (
-    <DropdownFormLineWrapper>
+    <DropdownFilterLineWrapper>
       <div className="dropdownFormLineWrapper__inner">
-        <p
-          style={
-            item.group === 'color' ? { color: `${item.value}` } : undefined
-          }
-        >
-          {item.value}
-        </p>
+        <p>{item.value}</p>
         <button
           type="button"
           onClick={() => {
             handleRadio({ name: item.group, value: item.value });
           }}
           style={
-            sellItemFormData[item.group] !== item.value
+            filters[item.group] !== item.value
               ? { color: '#ccc' }
               : { color: '#c45f55' }
           }
@@ -49,21 +43,21 @@ function DropdownFormLine({
           {radio}
         </button>
       </div>
-    </DropdownFormLineWrapper>
+    </DropdownFilterLineWrapper>
   );
-}
+};
 
-export default DropdownFormLine;
+export default DropdownFilterLine;
 
-const DropdownFormLineWrapper = styled.div`
+const DropdownFilterLineWrapper = styled.div`
   background-color: #fff;
 
   border-bottom: 1px #f3f3f3 solid;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
 
   .dropdownFormLineWrapper__inner {
-    min-height: 66px;
-    padding: 16px;
+    min-height: 56px;
+    padding: 10px;
     display: flex;
     align-items: center;
     justify-content: space-between;

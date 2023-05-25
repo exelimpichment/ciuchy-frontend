@@ -16,6 +16,7 @@ const initialSellItemFormState: ISellItemForm = {
   title: '',
   description: '',
   category: '',
+  color: '',
   brand: '',
   type: '',
   condition: '',
@@ -87,7 +88,6 @@ const New = () => {
     });
 
     try {
-      debugger;
       const url = 'http://localhost:5001/api/v1/item/addItem';
       const response = await axios({
         method: 'post',
