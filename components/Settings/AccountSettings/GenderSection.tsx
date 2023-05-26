@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { TbChevronDown } from 'react-icons/tb';
 import styled from 'styled-components';
 import DropdownGenderContainer from './DropdownGender/DropdownGenderContainer';
@@ -9,13 +9,51 @@ function GenderSection() {
   const [dropdownOpen, setDropdownOpen] = useState<boolean>(false);
   const [gender, setGender] = useState<GenderType>('');
 
-  const handleGenderDropdownOpen = () => {
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  const handleGenderDropdownOpen = (
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>
+  ) => {
+    event.stopPropagation();
     setDropdownOpen(!dropdownOpen);
   };
 
-  const handleGenderChange = ({ text }: { text: GenderType }) => {
+  const handleGenderChange = ({
+    text,
+    event,
+  }: {
+    text: GenderType;
+    event: React.MouseEvent<HTMLButtonElement>;
+  }) => {
+    event.stopPropagation();
     setGender(text);
   };
+
+  useEffect(() => {
+    const handleOutsideClick = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setDropdownOpen(false);
+      }
+    };
+
+    const handleEscapeKey = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setDropdownOpen(false);
+      }
+    };
+
+    console.log({ dropdownRef });
+    window.addEventListener('click', handleOutsideClick);
+    window.addEventListener('keydown', handleEscapeKey);
+
+    return () => {
+      window.removeEventListener('click', handleOutsideClick);
+      window.removeEventListener('keydown', handleEscapeKey);
+    };
+  }, []);
 
   return (
     <GenderSectionWrapper>
@@ -25,7 +63,7 @@ function GenderSection() {
       <div className="language-section__selector-container">
         <div
           className="selector__chevron-container"
-          onClick={handleGenderDropdownOpen}
+          onClick={(event) => handleGenderDropdownOpen(event)}
         >
           <TbChevronDown
             style={dropdownOpen ? { transform: 'rotate(180deg)' } : undefined}
@@ -37,13 +75,14 @@ function GenderSection() {
           name="selector"
           value={gender}
           readOnly
-          onClick={handleGenderDropdownOpen}
+          onClick={(event) => handleGenderDropdownOpen(event)}
           placeholder="Select gender"
         />
         {dropdownOpen && (
           <DropdownGenderContainer
             gender={gender}
             handleGenderChange={handleGenderChange}
+            dropdownRef={dropdownRef}
           />
         )}
       </div>

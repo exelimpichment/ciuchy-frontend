@@ -6,8 +6,10 @@ interface IDropdownGenderLineProps {
   gender: 'Woman' | 'Man' | 'Other' | '';
   handleGenderChange: ({
     text,
+    event,
   }: {
     text: 'Woman' | 'Man' | 'Other' | '';
+    event: React.MouseEvent<HTMLButtonElement>;
   }) => void;
 }
 
@@ -21,7 +23,7 @@ const DropdownGenderLine: React.FC<IDropdownGenderLineProps> = ({
     <DropdownGenderLineWrapper>
       <p className="dropdownLanguageLine__inner"> {text} </p>
       <button
-        onClick={() => handleGenderChange({ text })}
+        onClick={(event) => handleGenderChange({ text, event })}
         type="button"
         style={gender !== text ? { color: '#ccc' } : { color: '#c45f55' }}
         className="dropdownLanguageLine__swg-container"

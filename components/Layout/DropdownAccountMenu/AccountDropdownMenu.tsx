@@ -6,12 +6,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import DropdownAccountMenuLine from './DropdownAccountMenuLine';
 
-// interface AccountDropdownMenuProps { Dispatch<SetStateAction<boolean>>};
-
 const AccountDropdownMenu = ({
   setShowAccountDropdownMenu,
+  dropdownRef,
 }: {
   setShowAccountDropdownMenu: Dispatch<SetStateAction<boolean>>;
+  dropdownRef: React.RefObject<HTMLDivElement>;
 }) => {
   const dispatch = useDispatch();
   const router = useRouter();
@@ -37,14 +37,14 @@ const AccountDropdownMenu = ({
   };
 
   const menuItems = [
-    { key: 0, value: 'Profile', onClick: profileHandler },
-    { key: 1, value: 'Messages', onClick: messagesHandler },
-    { key: 2, value: 'Settings', onClick: settingsHandler },
-    { key: 3, value: 'Log Out', onClick: logOutHandler },
+    { key: 0, value: 'Profile', onClick: () => profileHandler() },
+    { key: 1, value: 'Messages', onClick: () => messagesHandler() },
+    { key: 2, value: 'Settings', onClick: () => settingsHandler() },
+    { key: 3, value: 'Log Out', onClick: () => logOutHandler() },
   ];
 
   return (
-    <AccountDropdownMenuWrapper>
+    <AccountDropdownMenuWrapper ref={dropdownRef}>
       <p>Account</p>
       {menuItems.map((item) => (
         <DropdownAccountMenuLine

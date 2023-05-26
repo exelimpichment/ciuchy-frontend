@@ -1,6 +1,7 @@
 import { IInitialFilterState, IInitialState } from '@/types/catalog.types';
+import styleSetter from '@/utils/filterStyleSetter';
 import { IList } from '@/utils/sellNowLists';
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, RefObject, SetStateAction } from 'react';
 import { TbChevronDown } from 'react-icons/tb';
 import styled from 'styled-components';
 import DropdownFilterLinesContainer from './FilterDropdown/DropdownFilterLinesContainer';
@@ -8,7 +9,7 @@ import DropdownFilterLinesContainer from './FilterDropdown/DropdownFilterLinesCo
 interface IFilterButtonProps {
   text: string;
   dropdownOpen: IInitialState;
-  filterDropdownHandler: (name: string) => void;
+  filterDropdownHandler: (name: string, event: React.MouseEvent) => void;
   initialState: IInitialState;
   lists: {
     [key: string]: IList[];
@@ -21,8 +22,17 @@ interface IFilterButtonProps {
     price: IList[];
   };
   filters: IInitialFilterState;
-  handleRadio: ({ name, value }: { name: string; value: string }) => void;
+  handleRadio: ({
+    name,
+    value,
+    event,
+  }: {
+    name: string;
+    value: string;
+    event: React.MouseEvent;
+  }) => void;
   setFilters: Dispatch<SetStateAction<IInitialFilterState>>;
+  dropdownRef: RefObject<HTMLDivElement>;
 }
 
 const FilterButton: React.FC<IFilterButtonProps> = ({
@@ -34,12 +44,14 @@ const FilterButton: React.FC<IFilterButtonProps> = ({
   filters,
   handleRadio,
   setFilters,
+  dropdownRef,
 }) => {
   return (
     <FilterSelectionSection>
       <FilterButtonWrapper
+        style={styleSetter({ filters, text })}
         type="button"
-        onClick={() => filterDropdownHandler(text)}
+        onClick={(event) => filterDropdownHandler(text, event)}
       >
         {text}
         <TbChevronDown
@@ -52,6 +64,7 @@ const FilterButton: React.FC<IFilterButtonProps> = ({
       </FilterButtonWrapper>
       {dropdownOpen[text] && (
         <DropdownFilterLinesContainer
+          dropdownRef={dropdownRef}
           handleRadio={handleRadio}
           filters={filters}
           list={lists[text.toLowerCase()]}
@@ -78,7 +91,7 @@ const FilterButtonWrapper = styled.button`
   }
 
   margin-right: 0.7rem;
-  padding: 8px 15px;
+  padding: 6px 12px;
   border: 1px solid #c45f55;
   border-radius: 4px;
   color: #c45f55;

@@ -32,6 +32,9 @@ function CategorySetter({
 
   const [dropdownOpen, setDropdownOpen] = useState<IInitialState>(initialState);
 
+  //I violated DRY here. this can be refactored
+  // will be refactored and updated shortly
+
   const categoryDropdownHandler = () => {
     dropdownOpen.category
       ? setDropdownOpen({

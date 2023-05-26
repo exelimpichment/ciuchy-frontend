@@ -4,7 +4,13 @@ import { CountryType } from '../LocationSection';
 
 interface IDropdownCountryLineProps {
   text: any;
-  handleLocationChange: ({ text }: { text: CountryType }) => void;
+  handleLocationChange: ({
+    text,
+    event,
+  }: {
+    text: CountryType;
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>;
+  }) => void;
   country: CountryType;
 }
 
@@ -19,7 +25,7 @@ const DropdownCountryLine: React.FC<IDropdownCountryLineProps> = ({
     <DropdownCountryLineWrapper>
       <p className="dropdownLanguageLine__inner"> {text} </p>
       <button
-        onClick={() => handleLocationChange({ text })}
+        onClick={(event) => handleLocationChange({ text, event })}
         type="button"
         style={country !== text ? { color: '#ccc' } : { color: '#c45f55' }}
         className="dropdownCountryLine__swg-container"

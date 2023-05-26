@@ -6,8 +6,10 @@ interface IDropdownLanguageLineProps {
   language: 'English(English)' | 'Украінська(Ukrainian)' | 'Polski(Polish)';
   handleLanguageChange: ({
     text,
+    event,
   }: {
     text: 'English(English)' | 'Украінська(Ukrainian)' | 'Polski(Polish)';
+    event: React.MouseEvent<HTMLButtonElement>;
   }) => void;
 }
 
@@ -22,7 +24,7 @@ const DropdownLanguageLine: React.FC<IDropdownLanguageLineProps> = ({
     <DropdownLanguageLineWrapper>
       <p className="dropdownLanguageLine__inner"> {text} </p>
       <button
-        onClick={() => handleLanguageChange({ text })}
+        onClick={(event) => handleLanguageChange({ text, event })}
         type="button"
         style={language !== text ? { color: '#ccc' } : { color: '#c45f55' }}
         className="dropdownLanguageLine__swg-container"

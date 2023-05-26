@@ -10,8 +10,6 @@ const DropdownAccountMenuLine: React.FC<IDropdownAccountMenuLine> = ({
   text,
   onClick,
 }) => {
-  console.log(onClick);
-
   return (
     <DropdownAccountMenuLineWrapper
       style={text === 'Log Out' ? { color: 'red' } : undefined}
@@ -28,7 +26,10 @@ const DropdownAccountMenuLineWrapper = styled.div`
   background-color: #fff;
   padding: 5px 10px;
   cursor: pointer;
-
-  /* border-bottom: 1px #f3f3f3 solid; */
   font-size: 1.1rem;
+
+  &:hover {
+    background-color: #f5f5f5;
+    border-radius: 5px;
+  }
 `;

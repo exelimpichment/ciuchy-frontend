@@ -1,3 +1,4 @@
+import { RefObject } from 'react';
 import styled from 'styled-components';
 import DropdownLanguageLine from './DropdownLanguageLine';
 
@@ -13,20 +14,24 @@ const languages: Language[] = [
 ];
 
 interface IDropdownLanguageContainerProps {
+  dropdownRef: RefObject<HTMLDivElement>;
   language: 'English(English)' | 'Украінська(Ukrainian)' | 'Polski(Polish)';
   handleLanguageChange: ({
     text,
+    event,
   }: {
     text: 'English(English)' | 'Украінська(Ukrainian)' | 'Polski(Polish)';
+    event: React.MouseEvent<HTMLButtonElement>;
   }) => void;
 }
 
 const DropdownLanguageContainer: React.FC<IDropdownLanguageContainerProps> = ({
   language,
   handleLanguageChange,
+  dropdownRef,
 }) => {
   return (
-    <DropdownLanguageContainerWrapper>
+    <DropdownLanguageContainerWrapper ref={dropdownRef}>
       <ul>
         {languages.map(({ key, name }) => (
           <DropdownLanguageLine

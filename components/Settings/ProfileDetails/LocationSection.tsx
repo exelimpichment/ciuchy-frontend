@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { TbChevronDown } from 'react-icons/tb';
 import styled from 'styled-components';
 import DropdownCountryContainer from './DropdownCountry/DropdownCountryContainer';
@@ -23,13 +23,50 @@ function LocationSection() {
   const [dropdownOpen, setDropdownOpen] = useState<boolean>(false);
   const [country, setCountry] = useState<CountryType>('');
 
-  const handleCountryDropdownOpen = () => {
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  const handleCountryDropdownOpen = (
+    event: React.MouseEvent<HTMLDivElement>
+  ) => {
+    event.stopPropagation();
     setDropdownOpen(!dropdownOpen);
   };
 
-  const handleLocationChange = ({ text }: { text: CountryType }) => {
+  const handleLocationChange = ({
+    text,
+    event,
+  }: {
+    text: CountryType;
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>;
+  }) => {
+    event.stopPropagation();
     setCountry(text);
   };
+
+  useEffect(() => {
+    const handleOutsideClick = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setDropdownOpen(false);
+      }
+    };
+
+    const handleEscapeKey = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setDropdownOpen(false);
+      }
+    };
+
+    window.addEventListener('click', handleOutsideClick);
+    window.addEventListener('keydown', handleEscapeKey);
+
+    return () => {
+      window.removeEventListener('click', handleOutsideClick);
+      window.removeEventListener('keydown', handleEscapeKey);
+    };
+  }, []);
 
   return (
     <LocationSectionWrapper>
@@ -41,7 +78,7 @@ function LocationSection() {
         <div className="locationSection__selector-container">
           <div
             className="selector__chevron-container"
-            onClick={handleCountryDropdownOpen}
+            onClick={(event) => handleCountryDropdownOpen(event)}
           >
             <TbChevronDown
               style={dropdownOpen ? { transform: 'rotate(180deg)' } : undefined}
@@ -52,7 +89,7 @@ function LocationSection() {
             type="text"
             name="selector"
             readOnly
-            onClick={handleCountryDropdownOpen}
+            onClick={(event) => handleCountryDropdownOpen(event)}
             placeholder="not selected"
             value={country}
           />
@@ -60,6 +97,7 @@ function LocationSection() {
             <DropdownCountryContainer
               country={country}
               handleLocationChange={handleLocationChange}
+              dropdownRef={dropdownRef}
             />
           )}
         </div>

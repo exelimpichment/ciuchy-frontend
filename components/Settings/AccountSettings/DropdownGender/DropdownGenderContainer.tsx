@@ -16,17 +16,21 @@ interface DropdownGenderContainerProps {
   gender: 'Woman' | 'Man' | 'Other' | '';
   handleGenderChange: ({
     text,
+    event,
   }: {
     text: 'Woman' | 'Man' | 'Other' | '';
+    event: React.MouseEvent<HTMLButtonElement>;
   }) => void;
+  dropdownRef: React.RefObject<HTMLDivElement>;
 }
 
 const DropdownGenderContainer: React.FC<DropdownGenderContainerProps> = ({
   gender,
   handleGenderChange,
+  dropdownRef,
 }) => {
   return (
-    <DropdownGenderContainerWrapper>
+    <DropdownGenderContainerWrapper ref={dropdownRef}>
       <ul>
         {genders.map(({ key, name }) => (
           <DropdownGenderLine

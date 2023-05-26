@@ -1,21 +1,28 @@
 import { IInitialFilterState } from '@/types/catalog.types';
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, RefObject, SetStateAction } from 'react';
 import styled from 'styled-components';
 
 interface IPriceMenuDropDownProps {
   filters: IInitialFilterState;
   setFilters: Dispatch<SetStateAction<IInitialFilterState>>;
+  dropdownRef: RefObject<HTMLDivElement>;
 }
 
 const PriceMenuDropDown: React.FC<IPriceMenuDropDownProps> = ({
   filters,
   setFilters,
+  dropdownRef,
 }) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log('lol');
+    console.log(e.target.name); //from
+    console.log(e.target.value);
+
+    const newPrice = { ...filters.price, [e.target.name]: e.target.value };
+    const newFilters = { ...filters, price: newPrice };
+    setFilters(newFilters);
   };
   return (
-    <PriceMenuDropDownWrapper>
+    <PriceMenuDropDownWrapper ref={dropdownRef}>
       <div className="price__from">
         <p>From</p>
         <label htmlFor="FromPrice"></label>
@@ -27,7 +34,7 @@ const PriceMenuDropDown: React.FC<IPriceMenuDropDownProps> = ({
           min="1"
           max="250"
           step="any"
-          name="price"
+          name="from"
           placeholder="$"
         />
       </div>
@@ -42,7 +49,7 @@ const PriceMenuDropDown: React.FC<IPriceMenuDropDownProps> = ({
           min="1"
           max="250"
           step="any"
-          name="price"
+          name="to"
           placeholder="$"
         />
       </div>

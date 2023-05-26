@@ -6,7 +6,15 @@ import styled from 'styled-components';
 interface IDropdownFilterLineProps {
   item: IList;
   filters: IInitialFilterState;
-  handleRadio: ({ name, value }: { name: string; value: string }) => void;
+  handleRadio: ({
+    name,
+    value,
+    event,
+  }: {
+    name: string;
+    value: string;
+    event: React.MouseEvent;
+  }) => void;
 }
 
 const DropdownFilterLine: React.FC<IDropdownFilterLineProps> = ({
@@ -30,8 +38,8 @@ const DropdownFilterLine: React.FC<IDropdownFilterLineProps> = ({
         <p>{item.value}</p>
         <button
           type="button"
-          onClick={() => {
-            handleRadio({ name: item.group, value: item.value });
+          onClick={(event) => {
+            handleRadio({ name: item.group, value: item.value, event });
           }}
           style={
             filters[item.group] !== item.value

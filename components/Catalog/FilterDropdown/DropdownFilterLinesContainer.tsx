@@ -1,26 +1,41 @@
 import { IInitialFilterState } from '@/types/catalog.types';
 import { IList } from '@/utils/sellNowLists';
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, RefObject, SetStateAction } from 'react';
 import styled from 'styled-components';
 import DropdownFilterLine from './DropdownFilterLine';
 import PriceMenuDropDown from './PriceMenuDropDown';
 
 interface IDropdownFilterLinesContainerProps {
   list: IList[];
-  handleRadio: ({ name, value }: { name: string; value: string }) => void;
+  handleRadio: ({
+    name,
+    value,
+    event,
+  }: {
+    name: string;
+    value: string;
+    event: React.MouseEvent;
+  }) => void;
   filters: IInitialFilterState;
   setFilters: Dispatch<SetStateAction<IInitialFilterState>>;
+  dropdownRef: RefObject<HTMLDivElement>;
 }
 
 const DropdownFilterLinesContainer: React.FC<
   IDropdownFilterLinesContainerProps
-> = ({ list, handleRadio, filters, setFilters }) => {
+> = ({ list, handleRadio, filters, setFilters, dropdownRef }) => {
   if (list[0].group === 'price') {
-    return <PriceMenuDropDown filters={filters} setFilters={setFilters} />;
+    return (
+      <PriceMenuDropDown
+        filters={filters}
+        setFilters={setFilters}
+        dropdownRef={dropdownRef}
+      />
+    );
   }
 
   return (
-    <DropdownFilterLinesContainerWrapper>
+    <DropdownFilterLinesContainerWrapper ref={dropdownRef}>
       {list.map((item) => (
         <DropdownFilterLine
           key={item.key}

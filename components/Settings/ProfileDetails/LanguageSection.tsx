@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { TbChevronDown } from 'react-icons/tb';
 import styled from 'styled-components';
 import DropdownLanguageContainer from './DropdownLanguage/DropdownLanguageContainer';
@@ -11,13 +11,50 @@ function LanguageSection() {
   const [dropdownOpen, setDropdownOpen] = useState<boolean>(false);
   const [language, setLanguage] = useState<LanguageType>('English(English)');
 
-  const handleLanguageDropdownOpen = () => {
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  const handleLanguageDropdownOpen = (
+    event: React.MouseEvent<HTMLDivElement>
+  ) => {
+    event.stopPropagation();
     setDropdownOpen(!dropdownOpen);
   };
 
-  const handleLanguageChange = ({ text }: { text: LanguageType }) => {
+  const handleLanguageChange = ({
+    text,
+    event,
+  }: {
+    text: LanguageType;
+    event: React.MouseEvent<HTMLButtonElement>;
+  }) => {
+    event.stopPropagation();
     setLanguage(text);
   };
+
+  useEffect(() => {
+    const handleOutsideClick = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setDropdownOpen(false);
+      }
+    };
+
+    const handleEscapeKey = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setDropdownOpen(false);
+      }
+    };
+
+    window.addEventListener('click', handleOutsideClick);
+    window.addEventListener('keydown', handleEscapeKey);
+
+    return () => {
+      window.removeEventListener('click', handleOutsideClick);
+      window.removeEventListener('keydown', handleEscapeKey);
+    };
+  }, []);
 
   return (
     <LanguageSectionWrapper>
@@ -27,7 +64,7 @@ function LanguageSection() {
       <div className="language-section__selector-container">
         <div
           className="selector__chevron-container"
-          onClick={handleLanguageDropdownOpen}
+          onClick={(event) => handleLanguageDropdownOpen(event)}
         >
           <TbChevronDown
             style={dropdownOpen ? { transform: 'rotate(180deg)' } : undefined}
@@ -45,6 +82,7 @@ function LanguageSection() {
           <DropdownLanguageContainer
             language={language}
             handleLanguageChange={handleLanguageChange}
+            dropdownRef={dropdownRef}
           />
         )}
       </div>

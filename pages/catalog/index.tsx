@@ -12,20 +12,41 @@ function Catalog() {
     type: '',
     condition: '',
     price: {
-      from: 0,
-      to: 0,
+      from: '',
+      to: '',
     },
     sortby: '',
   };
   const [filters, setFilters] =
     useState<IInitialFilterState>(initialFilterState);
 
+  const handleRemoveFilter = (key: keyof IInitialFilterState) => {
+    if (key === 'price.from' || key === 'price.to') {
+      setFilters({
+        ...filters,
+        price: {
+          from: '',
+          to: '',
+        },
+      });
+      return;
+    }
+
+    setFilters((prevState) => ({
+      ...prevState,
+      [key]: '',
+    }));
+  };
+
   return (
     <CatalogWrapper>
       <div className="container">
         <h1>Woman</h1>
         <Filter filters={filters} setFilters={setFilters} />
-        <SelectedFilters filters={filters} />
+        <SelectedFilters
+          filters={filters}
+          handleRemoveFilter={handleRemoveFilter}
+        />
       </div>
     </CatalogWrapper>
   );

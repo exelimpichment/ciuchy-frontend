@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { HiChevronDown } from 'react-icons/hi';
 import styled from 'styled-components';
 import user from '../../public/user.png';
@@ -7,15 +7,42 @@ import AccountDropdownMenu from './DropdownAccountMenu/AccountDropdownMenu';
 import SellNowButton from './SellNowButton';
 
 function UserSellNow() {
-  // const router = useRouter();
-
   const [showAccountDropdownMenu, setShowAccountDropdownMenu] =
     useState<boolean>(false);
 
-  const handleAccountDropdownMenu = () => {
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  const handleAccountDropdownMenu = (
+    event: React.MouseEvent<HTMLImageElement> | React.MouseEvent
+  ) => {
+    event.stopPropagation();
     setShowAccountDropdownMenu(!showAccountDropdownMenu);
-    console.log('clicked');
   };
+
+  useEffect(() => {
+    const handleOutsideClick = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setShowAccountDropdownMenu(false);
+      }
+    };
+
+    const handleEscapeKey = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setShowAccountDropdownMenu(false);
+      }
+    };
+
+    window.addEventListener('click', handleOutsideClick);
+    window.addEventListener('keydown', handleEscapeKey);
+
+    return () => {
+      window.removeEventListener('click', handleOutsideClick);
+      window.removeEventListener('keydown', handleEscapeKey);
+    };
+  }, []);
 
   return (
     <UserSellNowWrapper>
@@ -30,6 +57,7 @@ function UserSellNow() {
         />
         {showAccountDropdownMenu && (
           <AccountDropdownMenu
+            dropdownRef={dropdownRef}
             setShowAccountDropdownMenu={setShowAccountDropdownMenu}
           />
         )}

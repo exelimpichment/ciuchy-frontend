@@ -38,16 +38,23 @@ const countries: ICountry[] = [
 
 interface DropdownCountryContainerProps {
   country: CountryType;
-  handleLocationChange: ({ text }: { text: CountryType }) => void;
+  handleLocationChange: ({
+    text,
+    event,
+  }: {
+    text: CountryType;
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>;
+  }) => void;
+  dropdownRef: React.RefObject<HTMLDivElement>;
 }
 
 const DropdownCountryContainer: React.FC<DropdownCountryContainerProps> = ({
   country,
   handleLocationChange,
+  dropdownRef,
 }) => {
   return (
-    <DropdownCountryContainerWrapper>
-      {' '}
+    <DropdownCountryContainerWrapper ref={dropdownRef}>
       <ul>
         {countries.map(({ key, name }) => (
           <DropdownCountryLine
