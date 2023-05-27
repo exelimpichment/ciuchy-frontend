@@ -22,13 +22,13 @@ function Catalog() {
 
   const handleRemoveFilter = (key: keyof IInitialFilterState) => {
     if (key === 'price.from' || key === 'price.to') {
-      setFilters({
-        ...filters,
+      setFilters((prevState) => ({
+        ...prevState,
         price: {
-          from: '',
-          to: '',
+          ...prevState.price,
+          [key === 'price.from' ? 'from' : 'to']: '',
         },
-      });
+      }));
       return;
     }
 

@@ -21,7 +21,7 @@ export default function Layout({ children }: { children: ReactElement }) {
 
   return (
     <>
-      <div className="hight-wrapper">
+      <section className="hight-wrapper">
         {router.pathname !== '/_error' && (
           <nav
             className={inter.className}
@@ -34,7 +34,7 @@ export default function Layout({ children }: { children: ReactElement }) {
         )}
         <>{children}</>
         <Footer />
-      </div>
+      </section>
     </>
   );
 }
