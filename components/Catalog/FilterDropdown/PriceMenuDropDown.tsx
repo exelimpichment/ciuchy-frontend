@@ -14,10 +14,10 @@ const PriceMenuDropDown: React.FC<IPriceMenuDropDownProps> = ({
   dropdownRef,
 }) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.name); //from
-    console.log(e.target.value);
-
-    const newPrice = { ...filters.price, [e.target.name]: e.target.value };
+    const newPrice = {
+      ...filters.price,
+      [e.target.name]: e.target.value.replace(/[^1-9]/g, ''),
+    };
     const newFilters = { ...filters, price: newPrice };
     setFilters(newFilters);
   };
@@ -27,15 +27,14 @@ const PriceMenuDropDown: React.FC<IPriceMenuDropDownProps> = ({
         <p>From</p>
         <label htmlFor="FromPrice"></label>
         <input
+          type="text"
+          autoComplete="off"
           onChange={handleChange}
           value={filters.price.from}
-          type="number"
-          autoComplete="off"
-          min="1"
-          max="250"
-          step="any"
+          maxLength={4}
           name="from"
           placeholder="$"
+          max="9999"
         />
       </div>
       <div className="price__to">
@@ -44,11 +43,9 @@ const PriceMenuDropDown: React.FC<IPriceMenuDropDownProps> = ({
         <input
           onChange={handleChange}
           value={filters.price.to}
-          type="number"
+          type="text"
           autoComplete="off"
-          min="1"
-          max="250"
-          step="any"
+          maxLength={4}
           name="to"
           placeholder="$"
         />

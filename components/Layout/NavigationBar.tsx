@@ -1,10 +1,15 @@
 import { Inter } from '@next/font/google';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import styled from 'styled-components';
 import navigationItems from '../../utils/navigationItems';
+
 const inter = Inter({ subsets: ['latin'], weight: '400' });
 
 function NavigationBar() {
+  const pathname = usePathname();
+  console.log(pathname);
+
   return (
     <>
       <Wrapper className={inter.className}>

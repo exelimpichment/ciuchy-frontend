@@ -11,7 +11,6 @@ const SelectedFilter: React.FC<SelectedFilterProps> = ({
   handleRemoveFilter,
 }) => {
   const { key, value } = item;
-  console.log(key);
 
   return (
     <SelectedFilterWrapper
