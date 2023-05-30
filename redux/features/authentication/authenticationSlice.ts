@@ -3,17 +3,49 @@ import { createSlice } from '@reduxjs/toolkit';
 
 export interface ICounterState {
   isMember: boolean;
-  user: { name: string; role: string; userId: string };
+  user: {
+    country: string;
+    dateOfBirth: string;
+    email: string;
+    gender: string;
+    holidayMode: boolean;
+    id: string;
+    image: string;
+    language: string;
+    name: string;
+    role: string;
+    rating: number;
+  };
 }
 
 export interface IUser {
+  country: string;
+  dateOfBirth: string;
+  email: string;
+  gender: string;
+  holidayMode: boolean;
+  id: string;
+  image: string;
+  language: string;
   name: string;
   role: string;
-  userId: string;
+  rating: number;
 }
 
 const initialState: ICounterState = {
-  user: { name: '', role: '', userId: '' },
+  user: {
+    country: '',
+    dateOfBirth: '',
+    email: '',
+    gender: '',
+    holidayMode: false,
+    id: '',
+    image: '',
+    language: '',
+    name: '',
+    role: '',
+    rating: 0,
+  },
   isMember: false,
 };
 

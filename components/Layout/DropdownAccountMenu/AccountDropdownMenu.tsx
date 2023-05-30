@@ -15,12 +15,10 @@ const AccountDropdownMenu = ({
 }) => {
   const dispatch = useDispatch();
   const router = useRouter();
-  const { userId } = useSelector(
-    (state: RootState) => state.authentication?.user
-  );
+  const { id } = useSelector((state: RootState) => state.authentication?.user);
 
   const profileHandler = () => {
-    router.push(`/user/${userId}`);
+    router.push(`/user/${id}`);
     setShowAccountDropdownMenu(false);
   };
   const logOutHandler = () => {
@@ -29,11 +27,11 @@ const AccountDropdownMenu = ({
   };
   const messagesHandler = () => {
     setShowAccountDropdownMenu(false);
-    router.push(`/user/${userId}/messages`);
+    router.push(`/user/${id}/messages`);
   };
   const settingsHandler = () => {
     setShowAccountDropdownMenu(false);
-    router.push(`/user/${userId}/settings`);
+    router.push(`/user/${id}/settings`);
   };
 
   const menuItems = [

@@ -2,6 +2,7 @@ import { axiosInstance } from '@/axios/axiosRequestConfig';
 import { setUser } from '@/redux/features/authentication/authenticationSlice';
 import { IInitialValues } from '@/types/authentication.types';
 import { AnyAction } from '@reduxjs/toolkit';
+import { AxiosResponse } from 'axios';
 import { NextRouter } from 'next/router';
 import { Dispatch, SetStateAction } from 'react';
 import { toast } from 'react-toastify';
@@ -32,29 +33,51 @@ export const register = async ({
 };
 
 export const login = async ({
-  email,
+  inputEmail,
   password,
   setIsLoading,
   router,
   dispatch,
 }: {
-  email: string;
+  inputEmail: string;
   password: string;
   setIsLoading: Dispatch<SetStateAction<boolean>>;
   router: NextRouter;
   dispatch: Dispatch<AnyAction>;
 }) => {
   try {
-    let response = await axiosInstance.post('auth/login', {
-      email,
+    let response: AxiosResponse = await axiosInstance.post('auth/login', {
+      inputEmail,
       password,
     });
-    console.log(response);
 
-    const { name, userId, role } = response.data.user;
-    console.log(name, userId, role);
+    const {
+      country,
+      dateOfBirth,
+      email,
+      gender,
+      holidayMode,
+      id,
+      image,
+      language,
+      name,
+      role,
+    } = response.data.user;
 
-    dispatch(setUser({ name, userId, role }));
+    dispatch(
+      setUser({
+        country,
+        dateOfBirth,
+        email,
+        gender,
+        holidayMode,
+        id,
+        image,
+        language,
+        name,
+        role,
+      })
+    );
     setIsLoading(false);
     setTimeout(() => {
       router.push('/');
@@ -75,7 +98,20 @@ export const logout = async ({
     const response = await axiosInstance.delete('auth/logout');
 
     console.log(response);
-    dispatch(setUser({ name: '', role: '', userId: '' }));
+    dispatch(
+      setUser({
+        country: '',
+        dateOfBirth: '',
+        email: '',
+        gender: '',
+        holidayMode: false,
+        id: '',
+        image: '',
+        language: '',
+        name: '',
+        role: '',
+      })
+    );
 
     toast.success(response.data.msg);
   } catch (error: any) {
@@ -90,11 +126,49 @@ export const showUser = async ({
 }) => {
   try {
     const response = await axiosInstance.get('user/showMe');
-    console.log(response);
-    const { name, userId, role } = response.data.user;
-    dispatch(setUser({ name, role, userId }));
+
+    const {
+      country,
+      dateOfBirth,
+      email,
+      gender,
+      holidayMode,
+      id,
+      image,
+      language,
+      name,
+      role,
+    } = response.data.user[0];
+
+    dispatch(
+      setUser({
+        country,
+        dateOfBirth,
+        email,
+        gender,
+        holidayMode,
+        id,
+        image,
+        language,
+        name,
+        role,
+      })
+    );
   } catch (error) {
     console.log(error);
-    dispatch(setUser({ name: '', role: '', userId: '' }));
+    dispatch(
+      setUser({
+        country: '',
+        dateOfBirth: '',
+        email: '',
+        gender: '',
+        holidayMode: false,
+        id: '',
+        image: '',
+        language: '',
+        name: '',
+        role: '',
+      })
+    );
   }
 };

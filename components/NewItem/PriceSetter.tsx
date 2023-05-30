@@ -19,12 +19,23 @@ function PriceSetter({
         <input
           onChange={handleChange}
           value={sellItemFormData.price}
-          type="number"
+          type="text"
           autoComplete="off"
-          min="1"
           step="any"
           name="price"
           placeholder="$"
+          maxLength={4}
+          max="9999"
+          // ===
+
+          // type="text"
+          // autoComplete="off"
+          // onChange={handleChange}
+          // value={filters.price.from}
+          // maxLength={4}
+          // name="from"
+          // placeholder="$"
+          // max="9999"
         />
       </div>
     </PriceSetterWrapper>

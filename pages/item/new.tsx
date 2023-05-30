@@ -25,7 +25,7 @@ const initialSellItemFormState: ISellItemForm = {
 
 const New = () => {
   const router = useRouter();
-  const { userId } = useSelector(
+  const { id, image, name } = useSelector(
     (state: RootState) => state.authentication?.user
   );
 
@@ -33,13 +33,21 @@ const New = () => {
   const [sellItemFormData, setSellItemFormData] = useState<ISellItemForm>(
     initialSellItemFormState
   );
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    console.log(e);
     const name = e.target.name;
     const value = e.target.value;
+
+    if (name === 'price') {
+      setSellItemFormData({
+        ...sellItemFormData,
+        [name]: Number(value.replace(/[^1-9]/g, '')),
+      });
+      return;
+    }
     setSellItemFormData({ ...sellItemFormData, [name]: value });
   };
 
@@ -58,14 +66,23 @@ const New = () => {
   };
 
   const handleUpload = async () => {
+    // debugger;
+    setIsLoading(true);
     let formData = new FormData();
 
-    if (selectedFiles.length < 1 || !isSellItemFormValid(sellItemFormData))
-      return;
+    if (selectedFiles.length < 1 || !isSellItemFormValid(sellItemFormData)) {
+      setIsLoading(false);
+      toast.warning('Please add all fields and images');
+    }
 
+    // append all fields
     for (const [key, value] of Object.entries(sellItemFormData)) {
       formData.append(key, String(value));
     }
+    // append user ID, user image, username
+    formData.append('owner', String(id));
+    formData.append('ownerImage', String(image));
+    formData.append('ownerName', String(name));
 
     const blobs = [];
     for (const file of selectedFiles) {
@@ -96,13 +113,15 @@ const New = () => {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
       console.log(response);
+      setIsLoading(false);
       toast.success('Item added successfully');
 
       setTimeout(() => {
-        router.push(`/user/${userId}`);
+        router.push(`/user/${id}`);
       }, 700);
       setSellItemFormData({ ...sellItemFormData, ...initialSellItemFormState });
     } catch (error) {
+      setIsLoading(false);
       console.log(error);
     }
   };
@@ -127,7 +146,7 @@ const New = () => {
           sellItemFormData={sellItemFormData}
           handleChange={handleChange}
         />
-        <ButtonPanel handleUpload={handleUpload} />
+        <ButtonPanel handleUpload={handleUpload} isLoading={isLoading} />
       </div>
       <div className="container"></div>
     </NewItemWrapper>

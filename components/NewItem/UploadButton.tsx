@@ -14,7 +14,7 @@ function UploadButton({ isLoading, text, handleUpload }: IUploadButton) {
       className="btn"
       onClick={handleUpload}
     >
-      {text}
+      {isLoading ? 'Processing' : 'Upload'}
     </UploadButtonWrapper>
   );
 }

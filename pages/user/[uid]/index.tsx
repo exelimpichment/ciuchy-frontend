@@ -2,10 +2,15 @@ import Reviews from '@/components/User/Reviews';
 import UserInfoSection from '@/components/User/UserInfoSection';
 import Wardrobe from '@/components/User/Wardrobe';
 import WardrobeReviewTogglePanel from '@/components/User/WardrobeReviewTogglePanel';
+import { IServerSideProps, IUser } from '@/types/user.types';
+import { GetServerSideProps } from 'next';
+import { ParsedUrlQuery } from 'querystring';
 import { useState } from 'react';
 import styled from 'styled-components';
 
-function UserProfile() {
+function UserProfile(data: IUser) {
+  console.log(data);
+
   const [wardrobeReviewToggle, setWardrobeReviewToggle] = useState<
     'Wardrobe' | 'Reviews'
   >('Wardrobe');
@@ -21,17 +26,33 @@ function UserProfile() {
   return (
     <UserProfileWrapper>
       <div className="container">
-        <UserInfoSection />
+        <UserInfoSection data={data} />
         <WardrobeReviewTogglePanel
           handleToggleClick={handleToggleClick}
           wardrobeReviewToggle={wardrobeReviewToggle}
         />
-        {wardrobeReviewToggle === 'Wardrobe' ? <Wardrobe /> : <Reviews />}
+        {wardrobeReviewToggle === 'Wardrobe' ? (
+          <Wardrobe data={data} />
+        ) : (
+          <Reviews />
+        )}
       </div>
     </UserProfileWrapper>
   );
 }
 
 export default UserProfile;
+
+export const getServerSideProps: GetServerSideProps<IServerSideProps> = async ({
+  params,
+}) => {
+  const { uid } = params as ParsedUrlQuery;
+  console.log(params);
+
+  const response = await fetch(`http://localhost:5001/api/v1/user/${uid}`);
+  const data = await response.json();
+
+  return { props: data };
+};
 
 const UserProfileWrapper = styled.section``;

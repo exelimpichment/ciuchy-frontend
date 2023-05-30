@@ -42,7 +42,7 @@ function Auth() {
     !isMember
       ? register({ setIsLoading, setValues, initialValues, values })
       : login({
-          email: values.email,
+          inputEmail: values.email,
           password: values.password,
           setIsLoading,
           router,

@@ -1,4 +1,5 @@
 import { RootState } from '@/redux/store';
+import { IUser } from '@/types/user.types';
 import { Rating } from '@mui/material';
 import Image from 'next/image';
 import { AiOutlineClockCircle } from 'react-icons/ai';
@@ -7,19 +8,16 @@ import { SiFacebook } from 'react-icons/si';
 import { TfiTwitterAlt } from 'react-icons/tfi';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
-import profileUrl from '../../public/user.png';
 import EditProfileButton from './EditProfileButton';
 
-function UserInfoSection() {
-  const { name } = useSelector((state: RootState) => state.authentication.user);
-
-  const rating = 4;
+function UserInfoSection({ data }: { data: IUser }) {
+  const { id } = useSelector((state: RootState) => state.authentication.user);
 
   return (
     <UserInfoWrapper>
       <div className="user-info__image-container">
         <Image
-          src={profileUrl}
+          src={data.user.image}
           width={192}
           height={192}
           alt="Profile picture"
@@ -28,12 +26,12 @@ function UserInfoSection() {
       <div className="user-info__text-container">
         <div className="user-info__inner">
           <div className="user-info__name">
-            <h1>{name}</h1>
+            <h1>{data.user.name}</h1>
             <div className="user-info__rating">
-              {rating ? (
+              {data.user.rating ? (
                 <Rating
                   name="half-rating-read"
-                  defaultValue={rating}
+                  defaultValue={data.user.rating}
                   precision={0.5}
                   readOnly
                 />
@@ -47,9 +45,11 @@ function UserInfoSection() {
               )}
             </div>
           </div>
-          <div className="user-info__button-container">
-            <EditProfileButton />
-          </div>
+          {data.user._id === id && (
+            <div className="user-info__button-container">
+              <EditProfileButton />
+            </div>
+          )}
         </div>
 
         <div className="user-info__about-container">

@@ -1,10 +1,14 @@
-import { useState } from 'react';
 import styled from 'styled-components';
 import DraftButton from './DraftButton';
 import UploadButton from './UploadButton';
 
-function ButtonPanel({ handleUpload }: { handleUpload: () => void }) {
-  const [isLoading, setIsLoading] = useState(false);
+function ButtonPanel({
+  handleUpload,
+  isLoading,
+}: {
+  handleUpload: () => void;
+  isLoading: boolean;
+}) {
   return (
     <ButtonPanelWrapper>
       <DraftButton isLoading={isLoading} text={'Draft'} />

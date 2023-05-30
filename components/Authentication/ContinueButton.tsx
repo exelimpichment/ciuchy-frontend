@@ -5,14 +5,7 @@ import styled from 'styled-components';
 
 function ContinueButton({ isLoading }: { isLoading: boolean }) {
   return (
-    <ConfirmButtonWrapper
-      type="submit"
-      disabled={isLoading}
-      className="btn"
-      onClick={() => {
-        console.log('confirm');
-      }}
-    >
+    <ConfirmButtonWrapper type="submit" disabled={isLoading} className="btn">
       {isLoading ? 'Loading...' : 'Continue'}
     </ConfirmButtonWrapper>
   );
