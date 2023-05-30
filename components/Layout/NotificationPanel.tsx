@@ -11,14 +11,12 @@ function NotificationPanel() {
   const [messageCount, setMessageCount] = useState<number>(100);
   const [likeCount, setLikeCount] = useState<number>(1);
 
-  const { userId } = useSelector(
-    (state: RootState) => state.authentication?.user
-  );
+  const { id } = useSelector((state: RootState) => state.authentication?.user);
 
   return (
     <NotificationPanelWrapper>
       <div className="notification-panel__message">
-        <Link href={`/user/${userId}/messages`} prefetch={false}>
+        <Link href={`/user/${id}/messages`} prefetch={false}>
           <CustomBadge badgeContent={messageCount}>
             <HiOutlineMail />
           </CustomBadge>

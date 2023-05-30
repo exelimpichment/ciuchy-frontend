@@ -6,11 +6,9 @@ import styled from 'styled-components';
 
 function EditProfileButton() {
   const router = useRouter();
-  const { userId } = useSelector(
-    (state: RootState) => state.authentication?.user
-  );
+  const { id } = useSelector((state: RootState) => state.authentication?.user);
   const handleEditProfileButton = () => {
-    router.push(`/user/${userId}/settings`);
+    router.push(`/user/${id}/settings`);
   };
 
   return (
