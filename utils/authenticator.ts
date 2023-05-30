@@ -62,10 +62,12 @@ export const login = async ({
       language,
       name,
       role,
+      rating,
     } = response.data.user;
 
     dispatch(
       setUser({
+        rating,
         country,
         dateOfBirth,
         email,
@@ -110,6 +112,7 @@ export const logout = async ({
         language: '',
         name: '',
         role: '',
+        rating: 0,
       })
     );
 
@@ -138,10 +141,12 @@ export const showUser = async ({
       language,
       name,
       role,
+      rating,
     } = response.data.user[0];
 
     dispatch(
       setUser({
+        rating,
         country,
         dateOfBirth,
         email,
@@ -168,6 +173,7 @@ export const showUser = async ({
         language: '',
         name: '',
         role: '',
+        rating: 0,
       })
     );
   }
