@@ -33,6 +33,7 @@ export interface IItem {
   state: string;
   createdAt: string;
   updatedAt: string;
+  ownerRating: string;
 }
 
 export interface IServerSideProps {

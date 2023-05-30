@@ -1,11 +1,15 @@
 import styled from 'styled-components';
 
-const category = 'woman';
-const brand = 'Zara';
-const type = 'Shoes';
-const condition = 'Very good';
+interface IInfoProps {
+  condition: string;
+  type: string;
+  brand: string;
+  category: string;
+}
 
-function Info() {
+const Info: React.FC<IInfoProps> = ({ condition, type, brand, category }) => {
+  console.log(condition);
+
   return (
     <InfoWrapper>
       <div className="info__line-wrapper">
@@ -29,7 +33,7 @@ function Info() {
       </div>
     </InfoWrapper>
   );
-}
+};
 
 export default Info;
 

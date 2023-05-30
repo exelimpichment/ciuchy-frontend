@@ -1,8 +1,6 @@
 import styled from 'styled-components';
 
-const price = 7.0;
-
-function Price() {
+function Price({ price }: { price: number }) {
   return (
     <PriceWrapper>
       <p>PLN {price}</p>

@@ -57,13 +57,15 @@ export const login = async ({
       email,
       gender,
       holidayMode,
-      id,
+      _id,
       image,
       language,
       name,
       role,
       rating,
     } = response.data.user;
+
+    console.log(response.data.user);
 
     dispatch(
       setUser({
@@ -73,7 +75,7 @@ export const login = async ({
         email,
         gender,
         holidayMode,
-        id,
+        id: _id,
         image,
         language,
         name,

@@ -1,18 +1,21 @@
-import Image, { StaticImageData } from 'next/image';
+import { IItem } from '@/types/user.types';
+import Image from 'next/image';
 import { useState } from 'react';
 import styled from 'styled-components';
-import img1 from '../../../public/1.png';
-import img2 from '../../../public/2.jpg';
-import img3 from '../../../public/3.jpg';
-import img4 from '../../../public/4.png';
-import img5 from '../../../public/5.png';
 import SingleImage from './SingleImage';
 
-function PhotoGallery() {
-  const images = [img1, img2, img3, img4, img5];
+function PhotoGallery({
+  images,
+  additionalItems,
+}: {
+  images: string[];
+  additionalItems: IItem[];
+}) {
+  console.log(additionalItems);
+
   const [main, setMain] = useState(images[0]);
 
-  const handleThumbnailClick = (image: StaticImageData) => {
+  const handleThumbnailClick = (image: string) => {
     setMain(image);
   };
 
@@ -24,6 +27,7 @@ function PhotoGallery() {
             src={main}
             priority={true}
             height={600}
+            width={600}
             alt="big item picture"
           />
         </div>
@@ -38,6 +42,8 @@ function PhotoGallery() {
           />
         ))}
       </div>
+
+      <div className="photo-gallery__additional-items"></div>
     </PhotoGalleryWrapper>
   );
 }
@@ -65,5 +71,11 @@ const PhotoGalleryWrapper = styled.section`
     padding: 1rem 1rem 1rem 1rem;
     justify-content: center;
     cursor: pointer;
+  }
+
+  .photo-gallery__additional-items {
+    background-color: red;
+    width: 100%;
+    height: 400px;
   }
 `;

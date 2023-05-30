@@ -42,7 +42,7 @@ export default WardrobeReviewTogglePanel;
 const WardrobeReviewTogglePanelWrapper = styled.div`
   border-bottom: 1px #d6d6d6 solid;
   min-height: 46px;
-  margin-top: 2rem;
+  margin: 2rem 0;
 
   ul {
     display: flex;

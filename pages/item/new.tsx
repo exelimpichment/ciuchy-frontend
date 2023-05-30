@@ -25,7 +25,7 @@ const initialSellItemFormState: ISellItemForm = {
 
 const New = () => {
   const router = useRouter();
-  const { id, image, name } = useSelector(
+  const { id, image, name, rating } = useSelector(
     (state: RootState) => state.authentication?.user
   );
 
@@ -83,6 +83,7 @@ const New = () => {
     formData.append('owner', String(id));
     formData.append('ownerImage', String(image));
     formData.append('ownerName', String(name));
+    formData.append('ownerRating', String(rating));
 
     const blobs = [];
     for (const file of selectedFiles) {

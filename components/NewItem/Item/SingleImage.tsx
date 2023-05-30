@@ -1,17 +1,16 @@
-import Image, { StaticImageData } from 'next/image';
+import Image from 'next/image';
 import React from 'react';
 import styled from 'styled-components';
 
 interface SingleImageProps {
-  image: StaticImageData;
-  handleThumbnailClick: (image: StaticImageData) => void;
+  image: string;
+  handleThumbnailClick: (image: string) => void;
 }
 
 const SingleImage: React.FC<SingleImageProps> = ({
   image,
   handleThumbnailClick,
 }) => {
-  console.log(image);
   return (
     <SingleImageWrapper onClick={() => handleThumbnailClick(image)}>
       <Image
