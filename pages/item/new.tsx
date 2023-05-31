@@ -149,7 +149,6 @@ const New = () => {
         />
         <ButtonPanel handleUpload={handleUpload} isLoading={isLoading} />
       </div>
-      <div className="container"></div>
     </NewItemWrapper>
   );
 };

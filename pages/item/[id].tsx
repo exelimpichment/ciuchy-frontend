@@ -27,6 +27,8 @@ export default function Item(data: {
     ownerRating,
   } = singleItem;
 
+  console.log('render');
+
   return (
     <ItemWrapper>
       <div className="container">

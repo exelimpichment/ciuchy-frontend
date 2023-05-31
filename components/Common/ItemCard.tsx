@@ -51,7 +51,7 @@ const ItemCardWrapper = styled.div`
     flex-direction: column;
 
     .item-card__title {
-      color: #c45f55;
+      color: #787878;
     }
 
     .item-card__price {

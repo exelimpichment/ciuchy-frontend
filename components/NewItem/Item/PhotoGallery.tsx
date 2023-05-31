@@ -1,6 +1,8 @@
+import ItemCard from '@/components/Common/ItemCard';
 import { IItem } from '@/types/user.types';
 import Image from 'next/image';
-import { useState } from 'react';
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import SingleImage from './SingleImage';
 
@@ -11,14 +13,15 @@ function PhotoGallery({
   images: string[];
   additionalItems: IItem[];
 }) {
-  console.log(additionalItems);
-
   const [main, setMain] = useState(images[0]);
+
+  useEffect(() => {
+    setMain(images[0]);
+  }, [images]);
 
   const handleThumbnailClick = (image: string) => {
     setMain(image);
   };
-
   return (
     <PhotoGalleryWrapper>
       <div className="photo-gallery__big-picture">
@@ -43,7 +46,15 @@ function PhotoGallery({
         ))}
       </div>
 
-      <div className="photo-gallery__additional-items"></div>
+      <Link href={`/user/${additionalItems[0].owner}`}>
+        <p>View all items</p>
+      </Link>
+
+      <div className="photo-gallery__additional-items">
+        {additionalItems.map((item) => (
+          <ItemCard key={item._id} item={item} />
+        ))}
+      </div>
     </PhotoGalleryWrapper>
   );
 }
@@ -52,6 +63,19 @@ export default PhotoGallery;
 
 const PhotoGalleryWrapper = styled.section`
   flex-grow: 1;
+
+  p {
+    font-size: 1.2rem;
+    padding: 1.3rem 7px 1.3rem 7px;
+
+    color: black;
+    cursor: pointer;
+    text-align: end;
+
+    &:hover {
+      color: rgb(117, 117, 117);
+    }
+  }
   .photo-gallery__big-picture {
     padding: 0 1rem 1rem 1rem;
   }
@@ -74,8 +98,12 @@ const PhotoGalleryWrapper = styled.section`
   }
 
   .photo-gallery__additional-items {
-    background-color: red;
-    width: 100%;
-    height: 400px;
+    --auto-grid-min-size: 16rem;
+    display: grid;
+    grid-template-columns: repeat(
+      auto-fill,
+      minmax(var(--auto-grid-min-size), 1fr)
+    );
+    grid-gap: 1rem;
   }
 `;

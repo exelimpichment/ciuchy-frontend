@@ -8,8 +8,6 @@ interface IInfoProps {
 }
 
 const Info: React.FC<IInfoProps> = ({ condition, type, brand, category }) => {
-  console.log(condition);
-
   return (
     <InfoWrapper>
       <div className="info__line-wrapper">
