@@ -1,3 +1,5 @@
+import { IItem } from './user.types';
+
 export interface ISellItemForm {
   title: string;
   description: string;
@@ -17,4 +19,12 @@ export interface ISellItemForm {
   condition: 'New' | 'Very Good' | 'Good' | 'Poor' | '';
   price: number | '';
   [key: string]: string | number | undefined;
+}
+
+export interface ShowcaseProps {
+  suggestions: {
+    bestPrice: IItem[];
+    forHim: IItem[];
+    latestItems: IItem[];
+  };
 }

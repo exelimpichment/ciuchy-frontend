@@ -9,8 +9,6 @@ import { useState } from 'react';
 import styled from 'styled-components';
 
 function UserProfile(data: IUser) {
-  console.log(data);
-
   const [wardrobeReviewToggle, setWardrobeReviewToggle] = useState<
     'Wardrobe' | 'Reviews'
   >('Wardrobe');
@@ -47,7 +45,6 @@ export const getServerSideProps: GetServerSideProps<IServerSideProps> = async ({
   params,
 }) => {
   const { uid } = params as ParsedUrlQuery;
-  console.log(params);
 
   const response = await fetch(`http://localhost:5001/api/v1/user/${uid}`);
   const data = await response.json();

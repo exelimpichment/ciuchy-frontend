@@ -6,7 +6,6 @@ import styled from 'styled-components';
 
 function BirthSection() {
   const [value, setValue] = useState<Dayjs | null>(dayjs('1996-09-19'));
-  console.log(value && value.format('YYYY-MM-DD'));
 
   const theme = createTheme({
     palette: {
@@ -21,7 +20,6 @@ function BirthSection() {
       },
     },
   });
-  console.log(theme);
 
   return (
     <BirthSectionWrapper>

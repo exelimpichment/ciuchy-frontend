@@ -17,6 +17,8 @@ interface IFilterProps {
 }
 
 const Filter: React.FC<IFilterProps> = ({ filters, setFilters }) => {
+  // const router = useRouter();
+
   const memorizedState = useMemo(
     () => ({
       Category: false,
@@ -51,7 +53,6 @@ const Filter: React.FC<IFilterProps> = ({ filters, setFilters }) => {
       }
     };
 
-    console.log({ dropdownRef });
     window.addEventListener('click', handleOutsideClick);
     window.addEventListener('keydown', handleEscapeKey);
 
@@ -82,8 +83,29 @@ const Filter: React.FC<IFilterProps> = ({ filters, setFilters }) => {
     event: React.MouseEvent;
   }) => {
     event.stopPropagation();
-    setFilters({ ...filters, [name]: value });
+    setFilters((prevState) => ({ ...prevState, [name]: value }));
+
+    // router.push({
+    //   pathname: '/catalog',
+    //   query: { ...router.query },
+    // });
   };
+
+  // useEffect(() => {
+  //   const activeFiltersArray = getActiveFiltersArray(filters)
+  //     .map(({ key, value }) => {
+  //       // if (key === 'price.from' || key === 'price.to') {
+  //       //   return `${key.split('.')[1]}=${value}`;
+  //       // }
+  //       return `${key}=${value}`;
+  //     })
+  //     .join('&');
+  //   console.log(activeFiltersArray);
+  //   activeFiltersArray.length > 0 &&
+  //     router.push(`/catalog?${activeFiltersArray}`, undefined, {
+  //       shallow: true,
+  //     });
+  // }, [filters]);
 
   return (
     <FilterWrapper>

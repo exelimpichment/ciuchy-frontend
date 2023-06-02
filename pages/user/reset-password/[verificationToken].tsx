@@ -27,7 +27,7 @@ function ResetPassword() {
         verificationToken,
         email,
       });
-      console.log(response);
+
       setIsLoading(false);
       toast.success(response?.data.msg);
       setPassword('');

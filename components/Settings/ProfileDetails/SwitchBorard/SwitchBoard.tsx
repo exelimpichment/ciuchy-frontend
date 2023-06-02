@@ -19,9 +19,6 @@ function SwitchBoard() {
     useState<IInitialValues>(initialValues);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // setChecked(!checked);
-    // console.log(e.target.checked);
-    // console.log(e.target.name);
     const key = e.target.name;
     const value = e.target.checked;
 

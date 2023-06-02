@@ -18,8 +18,6 @@ const ProfileSettingsSwitch: React.FC<ProfileSettingsSwitchProps> = ({
   togglesPosition,
   value,
 }: ProfileSettingsSwitchProps) => {
-  console.log(togglesPosition[value]);
-
   return (
     <ProfileSettingsSwitchWrapper>
       <div className="locationSection__toggle-container">

@@ -27,8 +27,6 @@ export default function Item(data: {
     ownerRating,
   } = singleItem;
 
-  console.log('render');
-
   return (
     <ItemWrapper>
       <div className="container">
@@ -54,7 +52,8 @@ export default function Item(data: {
 }
 
 const ItemWrapper = styled.div`
-  padding-top: 2rem;
+  background-color: #f2f1f2;
+  padding: 2rem 0;
   .gallery__flex-container {
     display: flex;
   }
@@ -64,11 +63,9 @@ export const getServerSideProps: GetServerSideProps<{
   singleItem: IItem;
 }> = async ({ params }) => {
   const { id } = params as ParsedUrlQuery;
-  console.log(id, '<===');
 
   const response = await fetch(`http://localhost:5001/api/v1/item/${id}`);
   const data = await response.json();
-  console.log(data);
 
   return { props: data };
 };

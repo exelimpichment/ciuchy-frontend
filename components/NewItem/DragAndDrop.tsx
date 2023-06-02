@@ -46,8 +46,6 @@ function DragAndDrop({
       toast.warning('File already uploaded');
       setSelectedFiles(uniqueList);
     }
-
-    console.log(selectedFiles);
   }, [selectedFiles, setSelectedFiles]);
 
   const dragStartHandler = (e: DragEvent<HTMLDivElement>) => {
@@ -66,7 +64,6 @@ function DragAndDrop({
 
     let files;
     files = [...e.dataTransfer.files];
-    console.log(files);
 
     if (files.length > 5) {
       files = files.slice(0, 5); // Truncate the selected files to the maximum limit

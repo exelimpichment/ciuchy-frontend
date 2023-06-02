@@ -14,8 +14,6 @@ const PriceMenuDropDown: React.FC<IPriceMenuDropDownProps> = ({
   dropdownRef,
 }) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value);
-
     const newPrice = {
       ...filters.price,
       [e.target.name]: Number(e.target.value.replace(/[^1-9]/g, '')),

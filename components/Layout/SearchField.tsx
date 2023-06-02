@@ -30,7 +30,6 @@ function SearchField() {
       const userArray: IFetchedUser[] = response.data.listOfUsers;
       setLoading(false);
       setUserList(userArray);
-      console.log({ userArray });
     } catch (error) {
       console.log(error);
       throw error;

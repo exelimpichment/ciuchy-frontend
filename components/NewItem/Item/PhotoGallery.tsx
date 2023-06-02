@@ -1,4 +1,4 @@
-import ItemCard from '@/components/Common/ItemCard';
+import PersonalizedItemCard from '@/components/Common/PersonalizedItemCard';
 import { IItem } from '@/types/user.types';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -52,7 +52,7 @@ function PhotoGallery({
 
       <div className="photo-gallery__additional-items">
         {additionalItems.map((item) => (
-          <ItemCard key={item._id} item={item} />
+          <PersonalizedItemCard key={item._id} item={item} />
         ))}
       </div>
     </PhotoGalleryWrapper>

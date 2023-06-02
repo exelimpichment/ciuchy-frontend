@@ -45,7 +45,6 @@ function GenderSection() {
       }
     };
 
-    console.log({ dropdownRef });
     window.addEventListener('click', handleOutsideClick);
     window.addEventListener('keydown', handleEscapeKey);
 

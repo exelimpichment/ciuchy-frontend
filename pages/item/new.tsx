@@ -101,19 +101,18 @@ const New = () => {
     }
 
     selectedFiles.forEach((file) => {
-      console.log(file);
       formData.append(`file`, file);
     });
 
     try {
       const url = 'http://localhost:5001/api/v1/item/addItem';
-      const response = await axios({
+      await axios({
         method: 'post',
         url,
         data: formData,
         headers: { 'Content-Type': 'multipart/form-data' },
       });
-      console.log(response);
+
       setIsLoading(false);
       toast.success('Item added successfully');
 

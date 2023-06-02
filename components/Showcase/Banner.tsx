@@ -4,19 +4,19 @@ import SellNowButton from './SellNowButton';
 
 function Banner() {
   return (
-    <Wrapper>
+    <BannerWrapperInner>
       <h2>Ready to style your wardrobe?</h2>
       <SellNowButton />
       <Link href="/t&c" className="link">
         Read about T&C
       </Link>
-    </Wrapper>
+    </BannerWrapperInner>
   );
 }
 
 export default Banner;
 
-const Wrapper = styled.div`
+const BannerWrapperInner = styled.div`
   min-height: 220px;
   width: 300px;
   background-color: #fff;

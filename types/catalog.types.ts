@@ -10,7 +10,6 @@ export interface IInitialState {
 }
 
 export interface IInitialFilterState {
-  // [key: string]: string | object;
   [key: string]: string | { from: string | number; to: string | number };
   category: string;
   brand: string;

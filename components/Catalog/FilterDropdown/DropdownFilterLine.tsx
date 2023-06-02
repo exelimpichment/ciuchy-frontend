@@ -22,10 +22,6 @@ const DropdownFilterLine: React.FC<IDropdownFilterLineProps> = ({
   handleRadio,
   filters,
 }) => {
-  // console.log(item.group);
-
-  // console.log(filters[item.group]);
-
   const radio =
     filters[item.group] === item.value ? (
       <ImRadioChecked2 />

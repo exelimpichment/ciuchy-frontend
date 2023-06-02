@@ -65,8 +65,6 @@ export const login = async ({
       rating,
     } = response.data.user;
 
-    console.log(response.data.user);
-
     dispatch(
       setUser({
         rating,
@@ -101,7 +99,6 @@ export const logout = async ({
   try {
     const response = await axiosInstance.delete('auth/logout');
 
-    console.log(response);
     dispatch(
       setUser({
         country: '',
@@ -162,7 +159,6 @@ export const showUser = async ({
       })
     );
   } catch (error) {
-    console.log(error);
     dispatch(
       setUser({
         country: '',

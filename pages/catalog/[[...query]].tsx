@@ -38,6 +38,9 @@ function Catalog() {
     }));
   };
 
+  // const router = useRouter();
+  // console.log(router);
+
   return (
     <CatalogWrapper>
       <div className="container">

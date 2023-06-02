@@ -12,8 +12,6 @@ const DropdownSearchMenu: React.FC<DropdownSearchMenuProps> = ({
   userList,
   loading,
 }) => {
-  console.log(userList);
-
   if (loading) {
     return (
       <DropdownSearchMenuWrapper>
