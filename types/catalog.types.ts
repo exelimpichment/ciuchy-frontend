@@ -1,3 +1,5 @@
+import { ChangeEvent, MouseEvent } from 'react';
+
 export interface IInitialState {
   [key: string]: boolean;
   Category: boolean;
@@ -10,15 +12,15 @@ export interface IInitialState {
 }
 
 export interface IInitialFilterState {
-  [key: string]: string | { from: string | number; to: string | number };
+  [key: string]: string | number;
   category: string;
   brand: string;
   color: string;
   type: string;
   condition: string;
-  price: {
-    from: number | string;
-    to: number | string;
-  };
+  from: number | string;
+  to: number | string;
   sortby: string;
 }
+
+export type CombinedEvent<T = HTMLElement> = ChangeEvent<T> | MouseEvent<T>;

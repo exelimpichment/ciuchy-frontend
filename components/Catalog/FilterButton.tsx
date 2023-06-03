@@ -1,4 +1,8 @@
-import { IInitialFilterState, IInitialState } from '@/types/catalog.types';
+import {
+  CombinedEvent,
+  IInitialFilterState,
+  IInitialState,
+} from '@/types/catalog.types';
 import styleSetter from '@/utils/filterStyleSetter';
 import { IList } from '@/utils/sellNowLists';
 import { Dispatch, RefObject, SetStateAction } from 'react';
@@ -28,8 +32,8 @@ interface IFilterButtonProps {
     event,
   }: {
     name: string;
-    value: string;
-    event: React.MouseEvent;
+    value: string | number;
+    event: CombinedEvent;
   }) => void;
   setFilters: Dispatch<SetStateAction<IInitialFilterState>>;
   dropdownRef: RefObject<HTMLDivElement>;

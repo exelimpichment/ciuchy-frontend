@@ -1,4 +1,9 @@
-import { IInitialFilterState, IInitialState } from '@/types/catalog.types';
+import {
+  CombinedEvent,
+  IInitialFilterState,
+  IInitialState,
+} from '@/types/catalog.types';
+import { useRouter } from 'next/router';
 import {
   Dispatch,
   SetStateAction,
@@ -17,7 +22,7 @@ interface IFilterProps {
 }
 
 const Filter: React.FC<IFilterProps> = ({ filters, setFilters }) => {
-  // const router = useRouter();
+  const router = useRouter();
 
   const memorizedState = useMemo(
     () => ({
@@ -79,33 +84,44 @@ const Filter: React.FC<IFilterProps> = ({ filters, setFilters }) => {
     event,
   }: {
     name: string;
-    value: string;
-    event: React.MouseEvent;
+    value: string | number;
+    event: CombinedEvent;
   }) => {
     event.stopPropagation();
     setFilters((prevState) => ({ ...prevState, [name]: value }));
 
-    // router.push({
-    //   pathname: '/catalog',
-    //   query: { ...router.query },
-    // });
+    router.push({
+      pathname: '/catalog',
+      query: { ...router.query, [name]: value },
+    });
   };
 
-  // useEffect(() => {
-  //   const activeFiltersArray = getActiveFiltersArray(filters)
-  //     .map(({ key, value }) => {
-  //       // if (key === 'price.from' || key === 'price.to') {
-  //       //   return `${key.split('.')[1]}=${value}`;
-  //       // }
-  //       return `${key}=${value}`;
-  //     })
-  //     .join('&');
-  //   console.log(activeFiltersArray);
-  //   activeFiltersArray.length > 0 &&
-  //     router.push(`/catalog?${activeFiltersArray}`, undefined, {
-  //       shallow: true,
-  //     });
-  // }, [filters]);
+  useEffect(() => {
+    // console.log(router.query);
+    setFilters((prevState) => {
+      const {
+        category = '',
+        brand = '',
+        color = '',
+        type = '',
+        condition = '',
+        to = '',
+        from = '',
+        sortby = '',
+      } = router.query;
+      const updatedFilters: IInitialFilterState = {
+        category: category as string,
+        brand: brand as string,
+        color: color as string,
+        type: type as string,
+        condition: condition as string,
+        from: from as string | number,
+        to: to as string | number,
+        sortby: sortby as string,
+      };
+      return { ...prevState, ...updatedFilters };
+    });
+  }, [router.query, setFilters]);
 
   return (
     <FilterWrapper>

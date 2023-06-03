@@ -1,7 +1,9 @@
+import { axiosInstance } from '@/axios/axiosRequestConfig';
 import Filter from '@/components/Catalog/Filter';
 import SelectedFilters from '@/components/Catalog/SelectedFilters';
 import { IInitialFilterState } from '@/types/catalog.types';
-import { useState } from 'react';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 function Catalog() {
@@ -11,35 +13,69 @@ function Catalog() {
     color: '',
     type: '',
     condition: '',
-    price: {
-      from: '',
-      to: '',
-    },
+    from: '',
+    to: '',
     sortby: '',
   };
   const [filters, setFilters] =
     useState<IInitialFilterState>(initialFilterState);
+  const router = useRouter();
 
-  const handleRemoveFilter = (key: keyof IInitialFilterState) => {
-    if (key === 'price.from' || key === 'price.to') {
-      setFilters((prevState) => ({
-        ...prevState,
-        price: {
-          ...prevState.price,
-          [key === 'price.from' ? 'from' : 'to']: '',
-        },
-      }));
-      return;
-    }
+  const getQueryFilters = (
+    array: { key: string; value: string | number }[],
+    keyToDelete: string
+  ) => {
+    return array.filter((item) => item.key !== keyToDelete);
+  };
 
+  const handleRemoveFilter = (key: string) => {
     setFilters((prevState) => ({
       ...prevState,
       [key]: '',
     }));
+
+    const queryArray = Object.entries(router.query).map(([key, value]) => ({
+      key,
+      value: Array.isArray(value) ? value[0] : value || '',
+    }));
+
+    const updatedQuery = getQueryFilters(queryArray, key);
+
+    const updatedQueryString = updatedQuery
+      .map((item) => `${item.key}=${encodeURIComponent(item.value)}`)
+      .join('&');
+
+    router.push({
+      pathname: '/catalog',
+      search: updatedQueryString,
+    });
   };
 
-  // const router = useRouter();
-  // console.log(router);
+  const fetchItems = async () => {
+    const queryString = Object.entries(router.query).map(([key, value]) => ({
+      key,
+      value: Array.isArray(value) ? value[0] : value || '',
+    }));
+
+    const updatedQueryString = queryString
+      .map((item) => `${item.key}=${encodeURIComponent(item.value)}`)
+      .join('&');
+
+    console.log(updatedQueryString);
+
+    try {
+      const response = await axiosInstance.get(
+        `item/getAllItems?${updatedQueryString}`
+      );
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchItems();
+  }, [router.query]);
 
   return (
     <CatalogWrapper>

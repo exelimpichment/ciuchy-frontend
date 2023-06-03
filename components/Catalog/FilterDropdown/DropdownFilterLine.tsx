@@ -1,7 +1,10 @@
 import { IInitialFilterState } from '@/types/catalog.types';
 import { IList } from '@/utils/sellNowLists';
+import { ChangeEvent, MouseEvent } from 'react';
 import { ImRadioChecked2, ImRadioUnchecked } from 'react-icons/im';
 import styled from 'styled-components';
+
+type CombinedEvent<T = HTMLElement> = ChangeEvent<T> | MouseEvent<T>;
 
 interface IDropdownFilterLineProps {
   item: IList;
@@ -12,8 +15,8 @@ interface IDropdownFilterLineProps {
     event,
   }: {
     name: string;
-    value: string;
-    event: React.MouseEvent;
+    value: string | number;
+    event: CombinedEvent;
   }) => void;
 }
 
@@ -28,6 +31,7 @@ const DropdownFilterLine: React.FC<IDropdownFilterLineProps> = ({
     ) : (
       <ImRadioUnchecked />
     );
+
   return (
     <DropdownFilterLineWrapper>
       <div className="dropdownFormLineWrapper__inner">

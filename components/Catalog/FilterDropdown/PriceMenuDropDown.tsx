@@ -1,26 +1,36 @@
 import { IInitialFilterState } from '@/types/catalog.types';
-import { Dispatch, RefObject, SetStateAction } from 'react';
+import {
+  ChangeEvent,
+  Dispatch,
+  MouseEvent,
+  RefObject,
+  SetStateAction,
+} from 'react';
 import styled from 'styled-components';
+
+type CombinedEvent<T = HTMLElement> = ChangeEvent<T> | MouseEvent<T>;
 
 interface IPriceMenuDropDownProps {
   filters: IInitialFilterState;
   setFilters: Dispatch<SetStateAction<IInitialFilterState>>;
   dropdownRef: RefObject<HTMLDivElement>;
+  handleRadio: ({
+    name,
+    value,
+    event,
+  }: {
+    name: string;
+    value: string | number;
+    event: CombinedEvent;
+  }) => void;
 }
 
 const PriceMenuDropDown: React.FC<IPriceMenuDropDownProps> = ({
   filters,
   setFilters,
   dropdownRef,
+  handleRadio,
 }) => {
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newPrice = {
-      ...filters.price,
-      [e.target.name]: Number(e.target.value.replace(/[^1-9]/g, '')),
-    };
-    const newFilters = { ...filters, price: newPrice };
-    setFilters(newFilters);
-  };
   return (
     <PriceMenuDropDownWrapper ref={dropdownRef}>
       <div className="price__from">
@@ -29,8 +39,10 @@ const PriceMenuDropDown: React.FC<IPriceMenuDropDownProps> = ({
         <input
           type="text"
           autoComplete="off"
-          onChange={handleChange}
-          value={filters.price.from}
+          onChange={(event) =>
+            handleRadio({ name: 'from', value: event.target.value, event })
+          }
+          value={filters.from}
           maxLength={4}
           name="from"
           placeholder="$"
@@ -41,8 +53,10 @@ const PriceMenuDropDown: React.FC<IPriceMenuDropDownProps> = ({
         <p>To</p>
         <label htmlFor="ToPrice"></label>
         <input
-          onChange={handleChange}
-          value={filters.price.to}
+          onChange={(event) =>
+            handleRadio({ name: 'to', value: event.target.value, event })
+          }
+          value={filters.to}
           type="text"
           autoComplete="off"
           maxLength={4}

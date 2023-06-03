@@ -1,4 +1,4 @@
-import { IInitialFilterState } from '@/types/catalog.types';
+import { CombinedEvent, IInitialFilterState } from '@/types/catalog.types';
 import { IList } from '@/utils/sellNowLists';
 import { Dispatch, RefObject, SetStateAction } from 'react';
 import styled from 'styled-components';
@@ -13,8 +13,8 @@ interface IDropdownFilterLinesContainerProps {
     event,
   }: {
     name: string;
-    value: string;
-    event: React.MouseEvent;
+    value: string | number;
+    event: CombinedEvent;
   }) => void;
   filters: IInitialFilterState;
   setFilters: Dispatch<SetStateAction<IInitialFilterState>>;
@@ -24,12 +24,13 @@ interface IDropdownFilterLinesContainerProps {
 const DropdownFilterLinesContainer: React.FC<
   IDropdownFilterLinesContainerProps
 > = ({ list, handleRadio, filters, setFilters, dropdownRef }) => {
-  if (list[0].group === 'price') {
+  if (list[0].value === 'From' || list[0].value === 'To') {
     return (
       <PriceMenuDropDown
         filters={filters}
         setFilters={setFilters}
         dropdownRef={dropdownRef}
+        handleRadio={handleRadio}
       />
     );
   }
