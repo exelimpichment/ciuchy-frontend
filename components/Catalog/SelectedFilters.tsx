@@ -34,7 +34,5 @@ export default SelectedFilters;
 const SelectedFiltersWrapper = styled.div`
   border-bottom: 1px #d6d6d6 solid;
   display: flex;
-
-  .selected-filters__clear-button {
-  }
+  margin-bottom: 2rem;
 `;

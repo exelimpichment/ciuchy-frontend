@@ -1,17 +1,25 @@
 import { CiWarning } from 'react-icons/ci';
 import styled from 'styled-components';
 
-function UnderConstruction() {
+interface IUnderConstructionProps {
+  header2?: string;
+  paragraph?: string;
+}
+
+const UnderConstruction: React.FC<IUnderConstructionProps> = ({
+  header2 = 'Under Construction',
+  paragraph = 'sorry for the disturbances',
+}) => {
   return (
     <UnderConstructionWrapper>
       <div>
         <CiWarning />
       </div>
-      <h2>Under Construction</h2>
-      <p>sorry for the disturbances</p>
+      <h2>{header2}</h2>
+      <p>{paragraph}</p>
     </UnderConstructionWrapper>
   );
-}
+};
 
 export default UnderConstruction;
 

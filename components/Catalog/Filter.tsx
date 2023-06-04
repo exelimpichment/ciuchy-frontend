@@ -97,7 +97,6 @@ const Filter: React.FC<IFilterProps> = ({ filters, setFilters }) => {
   };
 
   useEffect(() => {
-    // console.log(router.query);
     setFilters((prevState) => {
       const {
         category = '',

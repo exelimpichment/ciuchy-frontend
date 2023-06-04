@@ -17,7 +17,7 @@ function Wardrobe({ data }: { data: IUser }) {
 export default Wardrobe;
 
 const WardrobeWrapper = styled.div`
-  --auto-grid-min-size: 16rem;
+  --auto-grid-min-size: 20rem;
   display: grid;
   grid-template-columns: repeat(
     auto-fill,

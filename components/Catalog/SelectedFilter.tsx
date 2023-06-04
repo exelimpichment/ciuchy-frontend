@@ -2,7 +2,7 @@ import { RxCross2 } from 'react-icons/rx';
 import styled from 'styled-components';
 
 interface SelectedFilterProps {
-  item: { key: string; value: string | number };
+  item: { key: string; value: string | number | unknown };
   handleRemoveFilter: (key: string) => void;
 }
 
@@ -21,7 +21,7 @@ const SelectedFilter: React.FC<SelectedFilterProps> = ({
         <p className="selected-filter__title">{key.split('.')[1]}:</p>
       )}
       <p className="selected-filter__value">
-        {value}
+        {value as string}
         {(key === 'price.from' || key === 'price.to') && '$'}
       </p>
       <span className="selected-filter__svg">

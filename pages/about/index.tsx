@@ -1,3 +1,9 @@
+import UnderConstruction from '@/components/Settings/UnderConstruction/UnderConstruction';
+
 export default function About() {
-  return <p>About</p>;
+  return (
+    <div className="container">
+      <UnderConstruction />
+    </div>
+  );
 }

@@ -51,12 +51,25 @@ function PersonalizedItemCard({ item }: { item: IItem }) {
 export default PersonalizedItemCard;
 
 const PersonalizedItemCardWrapper = styled.div`
+  background-color: #fff;
+  min-width: 230px;
+  min-height: 430px;
+  padding: 0 0.5rem 0.5rem 0.5rem;
+  font-size: 1.03rem;
+
   p {
     font-size: 1rem;
     color: black;
+    padding: 1.3rem 7px 1.3rem 7px;
+
+    cursor: pointer;
+    text-align: end;
+
+    &:hover {
+      color: rgb(117, 117, 117);
+    }
   }
 
-  background-color: #fff;
   .card__user-info {
     display: flex;
     align-items: center;
@@ -67,11 +80,6 @@ const PersonalizedItemCardWrapper = styled.div`
       align-items: center;
     }
   }
-
-  min-width: 230px;
-  min-height: 430px;
-  padding: 0 0.5rem 0.5rem 0.5rem;
-  font-size: 1.03rem;
 
   .item-card__image-container {
     min-width: 100%;

@@ -66,9 +66,9 @@ const PhotoGalleryWrapper = styled.section`
 
   p {
     font-size: 1.2rem;
+    color: black;
     padding: 1.3rem 7px 1.3rem 7px;
 
-    color: black;
     cursor: pointer;
     text-align: end;
 

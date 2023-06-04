@@ -1,3 +1,4 @@
+import UnderConstruction from '@/components/Settings/UnderConstruction/UnderConstruction';
 import { BiMessageSquareAdd } from 'react-icons/bi';
 import styled from 'styled-components';
 
@@ -18,6 +19,9 @@ function Messages() {
             <div className="messages__dialog-header">
               <h2>Username</h2>
             </div>
+            <UnderConstruction
+              paragraph={'websockets-based chat will be implemented here'}
+            />
           </section>
         </div>
       </div>
