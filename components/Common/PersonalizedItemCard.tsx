@@ -3,7 +3,13 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 
-function PersonalizedItemCard({ item }: { item: IItem }) {
+function PersonalizedItemCard({
+  item,
+  lastItemRef,
+}: {
+  item: IItem;
+  lastItemRef?: (node: HTMLElement | null) => void;
+}) {
   const router = useRouter();
 
   const handleImageClick = (id: string) => {
@@ -14,7 +20,7 @@ function PersonalizedItemCard({ item }: { item: IItem }) {
   };
 
   return (
-    <PersonalizedItemCardWrapper>
+    <PersonalizedItemCardWrapper ref={lastItemRef}>
       <div
         className="card__user-info"
         onClick={() => handleUserClick(item.owner)}

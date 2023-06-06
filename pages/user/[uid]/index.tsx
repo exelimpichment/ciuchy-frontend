@@ -45,6 +45,7 @@ export const getServerSideProps: GetServerSideProps<IServerSideProps> = async ({
   params,
 }) => {
   const { uid } = params as ParsedUrlQuery;
+  console.log({ uid });
 
   const response = await fetch(`http://localhost:5001/api/v1/user/${uid}`);
   const data = await response.json();

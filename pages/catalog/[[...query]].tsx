@@ -5,10 +5,10 @@ import SelectedFilters from '@/components/Catalog/SelectedFilters';
 import { IInitialFilterState } from '@/types/catalog.types';
 import { IItem } from '@/types/user.types';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 
-function Catalog() {
+function Catalog({ data }: { data: any }) {
   const initialFilterState = {
     category: '',
     brand: '',
@@ -19,13 +19,34 @@ function Catalog() {
     to: '',
     sortby: '',
   };
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [filters, setFilters] =
     useState<IInitialFilterState>(initialFilterState);
+  const [listOfItems, setListOfItems] = useState<IItem[]>([]);
+  const [pageNmb, setPageNmb] = useState<number>(1);
+  const [hasMore, setHasMore] = useState<boolean>(true);
+
   const router = useRouter();
 
-  const [listOfItems, setListOfItems] = useState<IItem[]>([]);
-  const [pageNmb, setPageNmb] = useState<number>(0);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const observerRef = useRef<IntersectionObserver | null>(null);
+
+  const lastItemRef = useCallback(
+    (node: HTMLElement | null) => {
+      if (isLoading) return;
+      if (observerRef.current) observerRef.current.disconnect();
+      observerRef.current = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting && hasMore) {
+          setIsLoading(true);
+          fetchAdditionalItems();
+          setPageNmb(pageNmb + 1);
+        }
+      });
+      if (node) observerRef.current.observe(node);
+      console.log('fetching');
+      console.log(node);
+    },
+    [isLoading, hasMore]
+  );
 
   const getQueryFilters = (
     array: { key: string; value: string | number }[],
@@ -63,8 +84,44 @@ function Catalog() {
     [key: string]: IItem[] | number;
   }
 
-  const fetchItems = async () => {
-    const queryString = Object.entries(router.query).map(([key, value]) => ({
+  useEffect(() => {
+    setListOfItems(data.queriedList);
+  }, [data]);
+
+  const query = router.query;
+  useEffect(() => {
+    setListOfItems([]);
+    setPageNmb(1);
+    setHasMore(true);
+  }, [query]);
+
+  useEffect(() => {
+    // debugger;
+    const fetchItems = async () => {
+      const queryString = Object.entries(query).map(([key, value]) => ({
+        key,
+        value: Array.isArray(value) ? value[0] : value || '',
+      }));
+
+      const updatedQueryString = queryString
+        .map((item) => `${item.key}=${encodeURIComponent(item.value)}`)
+        .join('&');
+
+      try {
+        const response = await axiosInstance.get<IItemsQueryResponse>(
+          `item/getAllItems?${updatedQueryString}`
+        );
+        setListOfItems(response.data.queriedList);
+        console.log(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchItems();
+  }, [query]);
+
+  const fetchAdditionalItems = async () => {
+    const queryString = Object.entries(query).map(([key, value]) => ({
       key,
       value: Array.isArray(value) ? value[0] : value || '',
     }));
@@ -72,23 +129,20 @@ function Catalog() {
     const updatedQueryString = queryString
       .map((item) => `${item.key}=${encodeURIComponent(item.value)}`)
       .join('&');
-
-    console.log(updatedQueryString);
-
     try {
       const response = await axiosInstance.get<IItemsQueryResponse>(
-        `item/getAllItems?${updatedQueryString}`
+        `item/getAllItems?${updatedQueryString}&page=${pageNmb + 1}`
       );
-      setListOfItems(response.data.queriedList);
-      console.log(response.data);
+      setListOfItems((prev) => [...prev, ...response.data.queriedList]);
+      setIsLoading(false);
+      if (response.data.queriedList.length < 12) {
+        setHasMore(false);
+      }
     } catch (error) {
       console.log(error);
+      setIsLoading(false);
     }
   };
-
-  useEffect(() => {
-    fetchItems();
-  }, [router.query]);
 
   return (
     <CatalogWrapper>
@@ -99,10 +153,16 @@ function Catalog() {
           filters={filters}
           handleRemoveFilter={handleRemoveFilter}
         />
-        <QueriedItems listOfItems={listOfItems} />
+        <QueriedItems listOfItems={listOfItems} lastItemRef={lastItemRef} />
         {isLoading && (
           <div className="catalog__loading-container">
             <p className="loading-container__paragraph">Loading ...</p>
+          </div>
+        )}
+
+        {!hasMore && (
+          <div className="catalog__loading-container">
+            <p className="loading-container__paragraph">No more items</p>
           </div>
         )}
       </div>
@@ -111,6 +171,35 @@ function Catalog() {
 }
 
 export default Catalog;
+
+export const getServerSideProps = async ({
+  query,
+}: {
+  query: { [key: string]: string | string[] | undefined };
+}) => {
+  const queryString = Object.keys(query)
+    .map((key) => `${key}=${encodeURIComponent(query[key] as string)}`)
+    .join('&');
+
+  interface IItemsQueryResponse {
+    numHits: number;
+    queriedList: IItem[];
+    [key: string]: IItem[] | number;
+  }
+
+  try {
+    const response = await axiosInstance.get<IItemsQueryResponse>(
+      `item/getAllItems`
+    );
+    const data = response.data;
+    console.log(data);
+
+    return { props: { data } };
+  } catch (error) {
+    console.log(error);
+    return { props: { data: null } };
+  }
+};
 
 const CatalogWrapper = styled.div`
   h1 {
