@@ -1,13 +1,17 @@
+import { RootState } from '@/redux/store';
 import { TiTick } from 'react-icons/ti';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
-const tempEmail = 'oldestspy@gmail.com';
-
 function EmailPhoneSection() {
+  const { email } = useSelector(
+    (state: RootState) => state.authentication?.user
+  );
+
   return (
     <EmailPhoneSectionWrapper>
       <div className="facebook__title-container">
-        <p className="facebook__title">{tempEmail}</p>
+        <p className="facebook__title">{email}</p>
         <p
           className="facebook__title"
           style={{ color: 'rgb(117, 117, 117)', fontSize: '0.9rem' }}

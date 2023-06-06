@@ -1,5 +1,11 @@
+import UnderConstruction from '@/components/Settings/UnderConstruction/UnderConstruction';
+
 function termsAndConditions() {
-  return <div>termsAndConditions</div>;
+  return (
+    <div className="container">
+      <UnderConstruction />
+    </div>
+  );
 }
 
 export default termsAndConditions;

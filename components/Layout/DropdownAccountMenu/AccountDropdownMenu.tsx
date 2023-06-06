@@ -1,5 +1,4 @@
 import { RootState } from '@/redux/store';
-import { logout } from '@/utils/authenticator';
 import { useRouter } from 'next/router';
 import { Dispatch, SetStateAction } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -17,28 +16,15 @@ const AccountDropdownMenu = ({
   const router = useRouter();
   const { id } = useSelector((state: RootState) => state.authentication?.user);
 
-  const profileHandler = () => {
-    router.push(`/user/${id}`);
+  const dropdownCloseHandle = () => {
     setShowAccountDropdownMenu(false);
-  };
-  const logOutHandler = () => {
-    setShowAccountDropdownMenu(false);
-    setTimeout(() => logout({ dispatch }), 400);
-  };
-  const messagesHandler = () => {
-    setShowAccountDropdownMenu(false);
-    router.push(`/user/${id}/messages`);
-  };
-  const settingsHandler = () => {
-    setShowAccountDropdownMenu(false);
-    router.push(`/user/${id}/settings`);
   };
 
   const menuItems = [
-    { key: 0, value: 'Profile', onClick: () => profileHandler() },
-    { key: 1, value: 'Messages', onClick: () => messagesHandler() },
-    { key: 2, value: 'Settings', onClick: () => settingsHandler() },
-    { key: 3, value: 'Log Out', onClick: () => logOutHandler() },
+    { key: 0, value: 'Profile', href: `/user/${id}` },
+    { key: 1, value: 'Messages', href: `/user/${id}/messages` },
+    { key: 2, value: 'Settings', href: `/user/${id}/settings` },
+    { key: 3, value: 'Log Out', href: 'placeholder' },
   ];
 
   return (
@@ -48,7 +34,8 @@ const AccountDropdownMenu = ({
         <DropdownAccountMenuLine
           key={item.key}
           text={item.value}
-          onClick={item.onClick}
+          href={item.href}
+          dropdownCloseHandle={dropdownCloseHandle}
         />
       ))}
     </AccountDropdownMenuWrapper>

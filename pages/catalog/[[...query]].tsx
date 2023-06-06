@@ -30,24 +30,6 @@ function Catalog({ data }: { data: any }) {
 
   const observerRef = useRef<IntersectionObserver | null>(null);
 
-  const lastItemRef = useCallback(
-    (node: HTMLElement | null) => {
-      if (isLoading) return;
-      if (observerRef.current) observerRef.current.disconnect();
-      observerRef.current = new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting && hasMore) {
-          setIsLoading(true);
-          fetchAdditionalItems();
-          setPageNmb(pageNmb + 1);
-        }
-      });
-      if (node) observerRef.current.observe(node);
-      console.log('fetching');
-      console.log(node);
-    },
-    [isLoading, hasMore]
-  );
-
   const getQueryFilters = (
     array: { key: string; value: string | number }[],
     keyToDelete: string
@@ -86,6 +68,7 @@ function Catalog({ data }: { data: any }) {
 
   useEffect(() => {
     setListOfItems(data.queriedList);
+    console.log(data.queriedList);
   }, [data]);
 
   const query = router.query;
@@ -112,7 +95,6 @@ function Catalog({ data }: { data: any }) {
           `item/getAllItems?${updatedQueryString}`
         );
         setListOfItems(response.data.queriedList);
-        console.log(response.data);
       } catch (error) {
         console.log(error);
       }
@@ -120,7 +102,9 @@ function Catalog({ data }: { data: any }) {
     fetchItems();
   }, [query]);
 
-  const fetchAdditionalItems = async () => {
+  const fetchAdditionalItems = useCallback(async () => {
+    console.log('fetch additional');
+
     const queryString = Object.entries(query).map(([key, value]) => ({
       key,
       value: Array.isArray(value) ? value[0] : value || '',
@@ -142,7 +126,23 @@ function Catalog({ data }: { data: any }) {
       console.log(error);
       setIsLoading(false);
     }
-  };
+  }, [query, pageNmb, setListOfItems, setIsLoading, setHasMore]);
+
+  const lastItemRef = useCallback(
+    (node: HTMLElement | null) => {
+      if (isLoading) return;
+      if (observerRef.current) observerRef.current.disconnect();
+      observerRef.current = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting && hasMore) {
+          setIsLoading(true);
+          fetchAdditionalItems();
+          setPageNmb(pageNmb + 1);
+        }
+      });
+      if (node) observerRef.current.observe(node);
+    },
+    [isLoading, hasMore, pageNmb, fetchAdditionalItems]
+  );
 
   return (
     <CatalogWrapper>
@@ -189,10 +189,9 @@ export const getServerSideProps = async ({
 
   try {
     const response = await axiosInstance.get<IItemsQueryResponse>(
-      `item/getAllItems`
+      `item/getAllItems?${queryString}`
     );
     const data = response.data;
-    console.log(data);
 
     return { props: { data } };
   } catch (error) {

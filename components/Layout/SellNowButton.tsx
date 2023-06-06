@@ -1,26 +1,17 @@
-import { useRouter } from 'next/router';
+import Link from 'next/link';
 import styled from 'styled-components';
 
-// modify it and use in multiple places with props etc.
-
 function SellNowButton() {
-  const router = useRouter();
   return (
-    <Wrapper
-      type="button"
-      className="btn"
-      onClick={() => {
-        router.push('/item/new');
-      }}
-    >
-      Sell now
+    <Wrapper href="/item/new">
+      <p>Sell now</p>
     </Wrapper>
   );
 }
 
 export default SellNowButton;
 
-const Wrapper = styled.button`
+const Wrapper = styled(Link)`
   background-color: #c45f55;
   margin-left: 20px;
   padding: 0 8px;
@@ -29,8 +20,11 @@ const Wrapper = styled.button`
   border-radius: 4px;
   color: white;
   font-weight: 500;
-  height: 29px;
-
+  height: 32px;
+  width: 87px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   &:hover {
     background-color: #a7655f;
   }
